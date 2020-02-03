@@ -7,5 +7,5 @@ import org.springframework.boot.runApplication
 class OdeonApplication
 
 fun main(args: Array<String>) {
-	runApplication<OdeonApplication>(*args)
+    runApplication<OdeonApplication>(*args)
 }
