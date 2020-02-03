@@ -21,7 +21,7 @@ import com.fasterxml.jackson.annotation.JsonProperty
 /**
  * The reference to a remote image hosted on Spotify.
  */
-internal data class SpotifyImage(
+data class SpotifyImage(
 
     /**
      * The source URL of the image.

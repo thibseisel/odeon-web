@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonProperty
 /**
  * Metadata of a track from the Spotify API.
  */
-internal class SpotifyTrack(
+class SpotifyTrack(
 
     /**
      * The unique identifier of this track on Spotify servers.

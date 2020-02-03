@@ -16,7 +16,6 @@
 
 package com.github.thibseisel.music.spotify
 
-import com.fasterxml.jackson.annotation.JsonAlias
 import com.fasterxml.jackson.annotation.JsonProperty
 
 /**
@@ -25,7 +24,7 @@ import com.fasterxml.jackson.annotation.JsonProperty
  * the error response follows [RFC 6749][https://tools.ietf.org/html/rfc6749]
  * on the OAuth 2.0 Authorization Framework.
  */
-internal data class OAuthError(
+data class OAuthError(
 
     /**
      * A high level description of the error as specified
@@ -45,7 +44,7 @@ internal data class OAuthError(
 /**
  * An unsuccessful response from the Spotify API.
  */
-internal data class SpotifyError(
+data class SpotifyError(
 
     /**
      * The HTTP status code that is also returned in the response header.

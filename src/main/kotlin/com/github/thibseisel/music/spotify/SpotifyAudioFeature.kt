@@ -21,7 +21,7 @@ import com.fasterxml.jackson.annotation.JsonProperty
 /**
  * Audio features of a specific track from the Spotify API.
  */
-internal class SpotifyAudioFeature(
+class SpotifyAudioFeature(
 
     /**
      * The unique identifier of the analyzed track in Spotify servers.

@@ -21,7 +21,7 @@ import com.fasterxml.jackson.annotation.JsonProperty
 /**
  * Metadata of an artist from the Spotify API.
  */
-internal class SpotifyArtist(
+class SpotifyArtist(
 
     /**
      * The unique identifier of this artist on Spotify servers.
