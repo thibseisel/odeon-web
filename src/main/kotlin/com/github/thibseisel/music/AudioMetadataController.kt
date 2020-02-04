@@ -1,12 +1,15 @@
 package com.github.thibseisel.music
 
+import com.github.thibseisel.music.client.SpotifyService
 import com.github.thibseisel.music.spotify.SpotifyAudioFeature
 import kotlinx.coroutines.delay
 import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/api")
-class AudioMetadataController {
+class AudioMetadataController(
+    private val service: SpotifyService
+) {
 
     @GetMapping("/search")
     suspend fun searchTrack(
@@ -24,27 +27,12 @@ class AudioMetadataController {
     suspend fun getAudioFeature(
         @PathVariable("id") trackId: String
     ): SpotifyAudioFeature {
-        delay(1000)
-        return SpotifyAudioFeature(
-            id = "7f0vVL3xi4i78Rv5Ptn2s1",
-            key = 2,
-            mode = 1,
-            tempo = 170.057f,
-            signature = 4,
-            loudness = -4.56f,
-            acousticness = 0.0125f,
-            danceability = 0.522f,
-            energy = 0.923f,
-            instrumentalness = 0.017f,
-            liveness = 0.0854f,
-            speechiness = 0.0539f,
-            valence = 0.595f
-        )
+        return service.findAudioFeature(trackId)!!
     }
 
     @GetMapping("/audio-features")
     suspend fun getSeveralAudioFeatures(
-        @RequestParam("track_ids") trackIds: List<String>
+        @RequestParam("ids") trackIds: List<String>
     ): List<SpotifyAudioFeature?> {
         delay(1000)
         return trackIds.map { null }
