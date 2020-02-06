@@ -16,12 +16,13 @@
 
 package com.github.thibseisel.music.spotify
 
+import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonProperty
 
 /**
  * The reference to a remote image hosted on Spotify.
  */
-data class SpotifyImage(
+data class SpotifyImage @JsonCreator constructor(
 
     /**
      * The source URL of the image.

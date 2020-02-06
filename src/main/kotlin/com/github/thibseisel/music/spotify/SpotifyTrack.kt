@@ -16,13 +16,13 @@
 
 package com.github.thibseisel.music.spotify
 
-import com.fasterxml.jackson.annotation.JsonAlias
+import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonProperty
 
 /**
  * Metadata of a track from the Spotify API.
  */
-class SpotifyTrack(
+class SpotifyTrack @JsonCreator constructor(
 
     /**
      * The unique identifier of this track on Spotify servers.
@@ -46,19 +46,19 @@ class SpotifyTrack(
      * The number of the track.
      * If an album has several discs, the track number is the number on the specified disc.
      */
-    @JsonProperty( "track_number")
+    @JsonProperty("track_number")
     val trackNumber: Int,
 
     /**
      * The track length in milliseconds.
      */
-    @JsonProperty( "duration_ms")
+    @JsonProperty("duration_ms")
     val duration: Int,
 
     /**
      * Whether or not the track has explicit lyrics ( true = yes it does; false = no it does not OR unknown).
      */
-    @JsonProperty( "explicit")
+    @JsonProperty("explicit")
     val explicit: Boolean
 ) {
     override fun toString(): String = "SpotifyTrack[id=$id, name=$name]"

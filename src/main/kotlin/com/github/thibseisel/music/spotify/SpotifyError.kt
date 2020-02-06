@@ -16,35 +16,13 @@
 
 package com.github.thibseisel.music.spotify
 
+import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonProperty
-
-/**
- * Whenever the application makes requests related to authentication or authorization to Web API,
- * such as retrieving an access token or refreshing an access token,
- * the error response follows [RFC 6749][https://tools.ietf.org/html/rfc6749]
- * on the OAuth 2.0 Authorization Framework.
- */
-data class OAuthError(
-
-    /**
-     * A high level description of the error as specified
-     * in [RFC 6749 Section 5.2][https://tools.ietf.org/html/rfc6749#section-5.2].
-     */
-    @JsonProperty("error")
-    val error: String,
-
-    /**
-     * A more detailed description of the error as specified
-     * in [RFC 6749 Section 4.1.2.1][https://tools.ietf.org/html/rfc6749#section-4.1.2.1].
-     */
-    @JsonProperty("error_description")
-    val description: String?
-)
 
 /**
  * An unsuccessful response from the Spotify API.
  */
-data class SpotifyError(
+data class SpotifyError @JsonCreator constructor(
 
     /**
      * The HTTP status code that is also returned in the response header.

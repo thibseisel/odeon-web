@@ -16,12 +16,13 @@
 
 package com.github.thibseisel.music.spotify
 
+import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonProperty
 
 /**
  * Metadata of an artist from the Spotify API.
  */
-class SpotifyArtist(
+class SpotifyArtist @JsonCreator constructor(
 
     /**
      * The unique identifier of this artist on Spotify servers.
