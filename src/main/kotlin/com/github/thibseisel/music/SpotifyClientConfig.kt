@@ -18,7 +18,6 @@ class SpotifyClientConfig {
     }
 
     @Bean
-    @Throws(Exception::class)
     fun configure(http: ServerHttpSecurity): SecurityWebFilterChain {
         http.oauth2Client(Customizer.withDefaults())
         return http.build()
