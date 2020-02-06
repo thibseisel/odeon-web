@@ -73,5 +73,5 @@ class SpotifyTrack @JsonCreator constructor(
     @JsonProperty("artists")
     val artists: List<SpotifyArtist>
 ) {
-    override fun toString(): String = "SpotifyTrack[id=$id, name=$name]"
+    override fun toString(): String = "spotify:track:$id ($name)"
 }

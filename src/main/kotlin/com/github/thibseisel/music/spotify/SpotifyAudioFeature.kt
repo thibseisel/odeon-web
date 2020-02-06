@@ -153,4 +153,6 @@ class SpotifyAudioFeature @JsonCreator constructor(
      */
     @JsonProperty("valence")
     val valence: Float
-)
+) {
+    override fun toString(): String = "spotify:audio_features:$id"
+}

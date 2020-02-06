@@ -19,10 +19,7 @@ package com.github.thibseisel.music.spotify
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonProperty
 
-/**
- * Metadata of an artist from the Spotify API.
- */
-class SpotifyArtist @JsonCreator constructor(
+open class SpotifyArtist(
 
     /**
      * The unique identifier of this artist on Spotify servers.
@@ -34,7 +31,27 @@ class SpotifyArtist @JsonCreator constructor(
      * The name of this artist.
      */
     @JsonProperty("name")
-    val name: String,
+    val name: String
+) {
+    override fun toString(): String = "spotify:artist:$id ($name)"
+}
+
+/**
+ * Metadata of an artist from the Spotify API.
+ */
+class FullSpotifyArtist @JsonCreator constructor(
+
+    /**
+     * The unique identifier of this artist on Spotify servers.
+     */
+    @JsonProperty("id")
+    id: String,
+
+    /**
+     * The name of this artist.
+     */
+    @JsonProperty("name")
+    name: String,
 
     /**
      * The popularity of the artist.
@@ -57,7 +74,6 @@ class SpotifyArtist @JsonCreator constructor(
      */
     @JsonProperty("images")
     val images: List<SpotifyImage>
-) {
-    override fun toString(): String = "SpotifyArtist[id=$id, name=$name]"
-}
+
+) : SpotifyArtist(id, name)
 

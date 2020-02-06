@@ -55,5 +55,5 @@ class SpotifyAlbum @JsonCreator constructor(
     @JsonProperty("images")
     val images: List<SpotifyImage>
 ) {
-    override fun toString(): String = "SpotifyAlbum[$id=id, name$name]"
+    override fun toString(): String = "spotify:album:$id ($name)"
 }

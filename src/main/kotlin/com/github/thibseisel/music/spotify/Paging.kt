@@ -12,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty
  *
  * @param T The type of the items in the collection.
  */
-internal class Paging<out T> @JsonCreator constructor(
+class Paging<out T> @JsonCreator constructor(
 
     /**
      * The requested data.

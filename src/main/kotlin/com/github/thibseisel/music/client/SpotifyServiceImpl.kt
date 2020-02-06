@@ -17,7 +17,7 @@ internal class SpotifyServiceImpl(
 
     override suspend fun search(query: String, offset: Int, limit: Int): List<SpotifyTrack> {
         try {
-            val pageOfResults = http.get()
+            val searchResults = http.get()
                 .uri {
                     it.path("/search")
                     it.queryParam("type", "track")
@@ -34,9 +34,9 @@ internal class SpotifyServiceImpl(
                         SpotifyService.ApiException(response.statusCode(), message)
                     }
                 }
-                .awaitBody<Paging<SpotifyTrack>>()
+                .awaitBody<SpotifySearchResult>()
 
-            return pageOfResults.items
+            return searchResults.tracks.items
 
         } catch (genericFailure: WebClientResponseException) {
             handleSpotifyFailure(genericFailure)
