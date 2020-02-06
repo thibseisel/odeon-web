@@ -17,9 +17,21 @@ class AudioMetadataController(
 
     @GetMapping("/search")
     suspend fun searchTrack(
-        @RequestParam("q") query: String?
+        @RequestParam("q") query: String,
+        @RequestParam("offset", defaultValue = "0") offset: Int,
+        @RequestParam("limit", defaultValue = "10") limit: Int
     ): List<SearchResult> {
-        throw ResponseStatusException(HttpStatus.NOT_IMPLEMENTED, "Search is not implemented yet.")
+        val trackResults = service.search(query, offset, limit)
+        return trackResults.map { track ->
+            val album = track.album
+            SearchResult(
+                id = track.id,
+                title = track.name,
+                artist = track.artists.first().name,
+                album = album.name,
+                artworkUrl = album.images.minBy { (it.width ?: 0) * (it.height ?: 0) }?.url
+            )
+        }
     }
 
     @GetMapping("/audio-features/{id}")

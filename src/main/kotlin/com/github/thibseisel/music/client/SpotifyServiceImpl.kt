@@ -1,9 +1,8 @@
 package com.github.thibseisel.music.client
 
-import com.github.thibseisel.music.spotify.SpotifyAudioFeature
-import com.github.thibseisel.music.spotify.SpotifyTrack
-import kotlinx.coroutines.flow.Flow
-import org.springframework.beans.factory.annotation.Qualifier
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.github.thibseisel.music.spotify.*
+import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.stereotype.Component
 import org.springframework.web.reactive.function.client.WebClient
@@ -12,11 +11,36 @@ import org.springframework.web.reactive.function.client.awaitBody
 
 @Component
 internal class SpotifyServiceImpl(
-    private val http: WebClient
+    private val http: WebClient,
+    private val mapper: ObjectMapper
 ) : SpotifyService {
 
-    override fun search(query: String): Flow<SpotifyTrack> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override suspend fun search(query: String, offset: Int, limit: Int): List<SpotifyTrack> {
+        try {
+            val pageOfResults = http.get()
+                .uri {
+                    it.path("/search")
+                    it.queryParam("type", "track")
+                    it.queryParam("q", query)
+                    it.queryParam("offset", offset.toString())
+                    it.queryParam("limit", limit.toString())
+                    it.build()
+                }
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .onStatus(HttpStatus::isError) { response ->
+                    val payload = response.bodyToMono(SpotifyError::class.java)
+                    payload.map { (_, message) ->
+                        SpotifyService.ApiException(response.statusCode(), message)
+                    }
+                }
+                .awaitBody<Paging<SpotifyTrack>>()
+
+            return pageOfResults.items
+
+        } catch (genericFailure: WebClientResponseException) {
+            handleSpotifyFailure(genericFailure)
+        }
     }
 
     override suspend fun findTrack(id: String): SpotifyTrack? {
@@ -26,10 +50,11 @@ internal class SpotifyServiceImpl(
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
                 .awaitBody()
+
         } catch (trackNotFound: WebClientResponseException.NotFound) {
             return null
         } catch (genericFailure: WebClientResponseException) {
-            TODO("Handle error")
+            handleSpotifyFailure(genericFailure)
         }
     }
 
@@ -43,13 +68,13 @@ internal class SpotifyServiceImpl(
         } catch (featureNotFound: WebClientResponseException.NotFound) {
             return null
         } catch (genericFailure: WebClientResponseException) {
-            TODO("Handle error")
+            handleSpotifyFailure(genericFailure)
         }
     }
 
     override suspend fun getSeveralAudioFeatures(trackIds: List<String>): List<SpotifyAudioFeature?> {
         try {
-            return http.get()
+            val wrapper = http.get()
                 .uri {
                     it.path("/audio-features")
                     it.queryParam("ids", trackIds.joinToString(","))
@@ -57,9 +82,16 @@ internal class SpotifyServiceImpl(
                 }
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
-                .awaitBody()
+                .awaitBody<JsonWrapper<SpotifyAudioFeature?>>()
+            return wrapper.data
+
         } catch (genericFailure: WebClientResponseException) {
-            TODO("Handle error")
+            handleSpotifyFailure(genericFailure)
         }
+    }
+
+    private fun handleSpotifyFailure(httpException: WebClientResponseException): Nothing {
+        val errorPayload = mapper.readValue(httpException.responseBodyAsString, SpotifyError::class.java)
+        throw SpotifyService.ApiException(httpException.statusCode, errorPayload.message)
     }
 }

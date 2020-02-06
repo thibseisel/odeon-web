@@ -59,7 +59,19 @@ class SpotifyTrack @JsonCreator constructor(
      * Whether or not the track has explicit lyrics ( true = yes it does; false = no it does not OR unknown).
      */
     @JsonProperty("explicit")
-    val explicit: Boolean
+    val explicit: Boolean,
+
+    /**
+     * The album this track is part of.
+     */
+    @JsonProperty("album")
+    val album: SpotifyAlbum,
+
+    /**
+     * The artist that produced this track.
+     */
+    @JsonProperty("artists")
+    val artists: List<SpotifyArtist>
 ) {
     override fun toString(): String = "SpotifyTrack[id=$id, name=$name]"
 }
