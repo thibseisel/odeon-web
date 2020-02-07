@@ -1,3 +1,11 @@
+export interface SearchResult {
+    id: string;
+    title: string;
+    album: string;
+    artist: string;
+    artworkUrl?: string;
+}
+
 export interface Track {
     /**
      * The identifier of that track on the server.

@@ -1,5 +1,6 @@
 import { InMemoryDbService, RequestInfo } from 'angular-in-memory-web-api';
 import { Observable } from "rxjs";
+import { Track, Pitch, MusicalMode } from './track-models';
 
 const SAMPLE_SEARCH_RESULTS = [
     {
@@ -53,10 +54,44 @@ const SAMPLE_SEARCH_RESULTS = [
     }
 ];
 
-export class InMemoryService implements InMemoryDbService {
+const SAMPLE_TRACKS: Track[] = [
+    {
+        id: "3eSyMBd7ERw68NVB3jlRmW",
+        name: "Pressure",
+        artist: "Muse",
+        album: "Simulation Theory",
+        trackNo: 3,
+        duration: 0,
+        popularity: 80,
+        features: {
+            key: Pitch.A,
+            mode: MusicalMode.MINOR,
+            tempo: 120,
+            signature: 4,
+            loudness: -6.97,
+            energy: 0.91,
+            danceability: 0.41,
+            valence: 0.54,
+            acousticness: 0.02,
+            instrumentalness: 0.14,
+            liveness: 0.19,
+            speechiness: 0.03
+        }
+    }
+];
+
+/**
+ * Configures Angular's HttpClient to return pre-defined JSON HTTP responses instead of connecting to a backend.
+ * This should be imported in the root module to take effect.
+ * 
+ * This comes handy during development when a viable backend is not ready yet.
+ */
+export class InMemoryAudioService implements InMemoryDbService {
 
     createDb(reqInfo?: RequestInfo): {} | Observable<{}> | Promise<{}> {
-        return SAMPLE_SEARCH_RESULTS;
+        return {
+            "search": SAMPLE_SEARCH_RESULTS,
+            "tracks": SAMPLE_TRACKS
+        };
     }
-
 }
