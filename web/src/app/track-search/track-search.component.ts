@@ -6,10 +6,7 @@ import { debounceTime } from 'rxjs/operators';
 @Component({
   selector: 'app-track-search',
   templateUrl: './track-search.component.html',
-  styles: [`
-  .search-result {
-    cursor: pointer;
-  }`]
+  styleUrls: ['./track-search.component.scss']
 })
 export class TrackSearchComponent implements OnInit, OnDestroy {
   private textChanges = new Subject<string>();

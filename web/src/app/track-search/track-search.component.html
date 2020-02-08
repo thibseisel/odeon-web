@@ -1,9 +1,13 @@
-<label for="track-search">Find tracks</label>
-<input #input (keyup)="updateQuery(input.value)" (keyup.enter)="submitQuery(input.value)" id="track-search"
-    type="search" placeholder="Spotify query" />
+<mat-form-field class="top-search-input">
+    <mat-label>Search tracks</mat-label>
+    <input #input matInput (keyup)="updateQuery(input.value)" (keyup.enter)="submitQuery(input.value)" type="search" />
+</mat-form-field>
 
-<ul>
-    <li *ngFor="let track of results" (click)="select(track)" class="search-result">
-        {{ track.title }} - {{ track.artist }}
-    </li>
-</ul>
+<mat-action-list>
+    <mat-list-item *ngFor="let track of results; last as last" (click)="select(track)">
+        <img matListAvatar [src]="track.artworkUrl" />
+        <h3 matLine>{{ track.title }}</h3>
+        <p matLine>{{ track.artist }}</p>
+        <mat-divider [inset]="true" *ngIf="!last"></mat-divider>
+    </mat-list-item>
+</mat-action-list>

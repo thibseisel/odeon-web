@@ -1,4 +1,4 @@
-<div *ngIf="track">
-    <h2>{{ track!.name }}</h2>
-    <p>{{ track!.artist }}</p>
-</div>
+<mat-card *ngIf="track">
+    <mat-card-title>{{ track!.name }}</mat-card-title>
+    <mat-card-subtitle>{{ track!.artist }}</mat-card-subtitle>
+</mat-card>
