@@ -10,27 +10,27 @@ export interface Track {
     /**
      * The identifier of that track on the server.
      */
-    id: string,
+    id: string;
     /**
      * The title of the track.
      */
-    name: string,
-    artist: string,
-    album: string,
+    name: string;
+    artist: string;
+    album: string;
     /**
      * The number of the track.
      * If an album has several discs, the track number is the number on the specified disc.
      */
-    trackNo: number,
+    trackNo: number;
     /**
      * The track length in milliseconds.
      */
-    duration: number,
+    duration: number;
     /**
      * Popularity score, from 0 to 100.
      */
-    popularity: number,
-    artworkUrl?: string,
+    popularity: number;
+    artworkUrl?: string;
 
     features: AudioFeature;
 }
@@ -58,41 +58,41 @@ export interface AudioFeature {
      * The estimated overall key of the track.
      * Value is `undefined` if the key is unknown.
      */
-    key?: Pitch,
+    key?: Pitch;
     /**
      * Mode indicates the modality (major or minor) of a track,
      * the type of scale from which its melodic content is derived.
      */
-    mode: MusicalMode,
+    mode: MusicalMode;
     /**
      * The overall estimated tempo of a track in beats per minute (BPM).
      * In musical terminology, tempo is the speed or pace of a given piece
      * and derives directly from the average beat duration.
      */
-    tempo: number,
+    tempo: number;
     /**
      * An estimated overall time signature of a track.
      * The time signature (meter) is a notational convention to specify how many beats are in each bar (or measure).
      */
-    signature: number,
+    signature: number;
     /**
      * The overall loudness of a track in decibels (dB).
      * Loudness values are averaged across the entire track and are useful for comparing relative loudness of tracks.
      * Loudness is the quality of a sound that is the primary psychological correlate of physical strength (amplitude).
      * Values typical range between `-60` and `0` dB.
      */
-    loudness: number,
+    loudness: number;
     /**
      * A confidence measure from `0.0` to `1.0` of whether the track is acoustic.
      * `1.0` represents high confidence the track is acoustic.
      */
-    acousticness: number,
+    acousticness: number;
     /**
      * Danceability describes how suitable a track is for dancing based on a combination of musical elements
      * including tempo, rhythm stability, beat strength, and overall regularity.
      * A value of `0.0` is least danceable and `1.0` is most danceable.
      */
-    danceability: number,
+    danceability: number;
     /**
      * Energy is a measure from `0.0` to `1.0` and represents a perceptual measure of intensity and activity.
      * Typically, energetic tracks feel fast, loud, and noisy.
@@ -101,21 +101,21 @@ export interface AudioFeature {
      * Perceptual features contributing to this attribute include dynamic range, perceived loudness, timbre, onset rate,
      * and general entropy.
      */
-    energy: number,
+    energy: number;
     /**
      * Predicts whether a track contains no vocals.
      * “Ooh” and “aah” sounds are treated as instrumental in this context.
      * Rap or spoken word tracks are clearly “vocal”.
-     * The closer the instrumentalness value is to `1.0`, the greater likelihood the track contains no vocal content. Values above 0.5 are intended to represent instrumental tracks,
-     * but confidence is higher as the value approaches `1.0`.
+     * The closer the instrumentalness value is to `1.0`, the greater likelihood the track contains no vocal content.
+     * Values above 0.5 are intended to represent instrumental tracks, but confidence is higher as the value approaches `1.0`.
      */
-    instrumentalness: number,
+    instrumentalness: number;
     /**
      * Detects the presence of an audience in the recording.
      * Higher liveness values represent an increased probability that the track was performed live.
      * A value above `0.8` provides strong likelihood that the track is live.
      */
-    liveness: number,
+    liveness: number;
     /**
      * Speechiness detects the presence of spoken words in a track.
      * The more exclusively speech-like the recording (e.g. talk show, audio book, poetry),
@@ -125,7 +125,7 @@ export interface AudioFeature {
      * either in sections or layered, including such cases as rap music.
      * Values below `0.33` most likely represent music and other non-speech-like tracks.
      */
-    speechiness: number,
+    speechiness: number;
     /**
      * A measure from `0.0` to `1.0` describing the musical positiveness conveyed by a track.
      * Tracks with high valence sound more positive (e.g. happy, cheerful, euphoric),

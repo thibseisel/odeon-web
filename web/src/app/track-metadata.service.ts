@@ -18,7 +18,7 @@ export class TrackMetadataService {
 
   /**
    * Lists tracks that match the provided query.
-   * 
+   *
    * @param query The query that describes the search criteria.
    * @returns An asynchronous list of tracks that match the query.
    */
@@ -29,18 +29,18 @@ export class TrackMetadataService {
 
       return this.http.get<SearchResult[]>(`${this.baseUrl}/search`, { params: queryParams }).pipe(
         catchError(err => {
-          console.error("Request failed", err)
-          return of([])
+          console.error('Request failed', err);
+          return of([]);
         })
       );
     } else {
-      return of([])
+      return of([]);
     }
   }
 
   /**
    * Retrieve the detail of a specific track.
-   * 
+   *
    * @param trackId The unique identifier of the desired track on the server.
    * @returns The detail of the track, exposed as an asynchronous stream.
    */

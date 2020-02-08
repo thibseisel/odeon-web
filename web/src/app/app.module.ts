@@ -1,7 +1,7 @@
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientInMemoryWebApiModule } from "angular-in-memory-web-api";
+import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { environment } from 'src/environments/environment';
 import { AppMaterialModule } from './app-material.module';
 import { AppRoutingModule } from './app-routing.module';

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output, OnInit, OnDestroy } from '@angular/core';
-import { SearchResult } from "../track-models";
+import { SearchResult } from '../track-models';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
