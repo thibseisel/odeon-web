@@ -1,4 +1,4 @@
-<div *ngIf="asyncTrack | async as track">
-    <h2>{{ track.name }}</h2>
-    <p>{{ track.artist }}</p>
+<div *ngIf="track">
+    <h2>{{ track!.name }}</h2>
+    <p>{{ track!.artist }}</p>
 </div>

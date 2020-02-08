@@ -1,25 +1,26 @@
-import { Component } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
-import { concatMap, debounceTime } from 'rxjs/operators';
-import { TrackMetadataService } from '../track-metadata.service';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { SearchResult } from "../track-models";
 
 @Component({
   selector: 'app-track-search',
   templateUrl: './track-search.component.html',
-  styles: []
+  styles: [`
+  .search-result {
+    cursor: pointer;
+  }`]
 })
 export class TrackSearchComponent {
-  private query = new Subject<string>()
+  @Input() results: SearchResult[] = [];
+  @Output() onquery = new EventEmitter<string>();
+  @Output() ontrackselected = new EventEmitter<SearchResult>();
 
-  public asyncResults: Observable<SearchResult[]> = this.query.pipe(
-    debounceTime(300),
-    concatMap((query) => this.source.rawTrackSearch(query))
-  )
-
-  constructor(private source: TrackMetadataService) { }
+  constructor() { }
 
   public onQueryChanged(userQuery: string) {
-    this.query.next(userQuery)
+    this.onquery.emit(userQuery);
+  }
+
+  public select(track: SearchResult) {
+    this.ontrackselected.emit(track);
   }
 }

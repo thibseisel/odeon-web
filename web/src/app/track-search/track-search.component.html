@@ -2,7 +2,7 @@
 <input #input (keyup)="onQueryChanged(input.value)" id="track-search" type="search" placeholder="Spotify query" />
 
 <ul>
-    <li *ngFor="let track of asyncResults | async">
-        <a [routerLink]="['/tracks', track.id]">{{ track.title }} - {{ track.artist }}</a>
+    <li *ngFor="let track of results" (click)="select(track)" class="search-result">
+        {{ track.title }} - {{ track.artist }}
     </li>
 </ul>

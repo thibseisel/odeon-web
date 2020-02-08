@@ -9,10 +9,12 @@ import { TrackSearchComponent } from './track-search/track-search.component';
 import { environment } from 'src/environments/environment';
 import { InMemoryAudioService } from './audio.inmemory.service';
 import { TrackDetailComponent } from './track-detail/track-detail.component';
+import { TrackMetadataComponent } from './track-metadata/track-metadata.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    TrackMetadataComponent,
     TrackSearchComponent,
     TrackDetailComponent
   ],

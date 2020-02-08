@@ -1,0 +1,8 @@
+<section>
+    <app-track-search [results]="results$ | async" (onquery)="submitQuery($event)"
+        (ontrackselected)="loadTrackDetail($event)">
+    </app-track-search>
+</section>
+<section>
+    <app-track-detail [track]="track$ | async"></app-track-detail>
+</section>

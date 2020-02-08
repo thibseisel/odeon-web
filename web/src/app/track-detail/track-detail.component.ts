@@ -1,9 +1,4 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
-import { Observable } from 'rxjs';
-import { concatMap } from 'rxjs/operators';
-import { mapIfDefined as mapToDefined } from '../rx-operators';
-import { TrackMetadataService } from '../track-metadata.service';
+import { Component, Input } from '@angular/core';
 import { Track } from '../track-models';
 
 @Component({
@@ -12,14 +7,7 @@ import { Track } from '../track-models';
   styles: []
 })
 export class TrackDetailComponent {
+  @Input() track?: Track;
 
-  public asyncTrack: Observable<Track> = this.routes.paramMap.pipe(
-    mapToDefined((urlParams: ParamMap) => urlParams.get('id')),
-    concatMap((trackId) => this.source.getTrackMetadata(trackId))
-  );
-
-  constructor(
-    private source: TrackMetadataService,
-    private routes: ActivatedRoute
-  ) { }
+  constructor() { }
 }

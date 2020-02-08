@@ -1,18 +1,12 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { TrackSearchComponent } from './track-search/track-search.component';
-import { TrackDetailComponent } from './track-detail/track-detail.component';
+import { RouterModule, Routes } from '@angular/router';
+import { TrackMetadataComponent } from './track-metadata/track-metadata.component';
 
 
 const routes: Routes = [
   {
-    path: 'tracks/:id',
-    component: TrackDetailComponent
-  },
-  {
     path: '',
-    pathMatch: 'full',
-    component: TrackSearchComponent
+    component: TrackMetadataComponent
   }
 ];
 
