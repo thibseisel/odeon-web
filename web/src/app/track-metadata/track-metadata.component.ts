@@ -14,7 +14,6 @@ export class TrackMetadataComponent {
   private displayedTrackId = new Subject<string>();
 
   public results$: Observable<SearchResult[]> = this.userQuery.pipe(
-    debounceTime(300),
     concatMap((query) => this.source.rawTrackSearch(query))
   );
 
