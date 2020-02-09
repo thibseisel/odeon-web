@@ -3,7 +3,7 @@ export interface SearchResult {
     title: string;
     album: string;
     artist: string;
-    artworkUrl?: string;
+    artwork_url?: string;
 }
 
 export interface Track {
