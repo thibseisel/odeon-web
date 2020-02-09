@@ -1,4 +1,4 @@
-<div class="dashboard-content" fxLayout="row" fxLayout="space-around" fxLayoutGap="16px">
+<div class="dashboard-content" fxLayout="row" fxLayoutGap="16px">
     <mat-card fxFlex="33" class="search-card">
         <app-track-search [results]="results$ | async" (onquery)="submitQuery($event)"
             (ontrackselected)="loadTrackDetail($event)">
