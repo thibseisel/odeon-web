@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { concatMap, debounceTime } from 'rxjs/operators';
+import { concatMap } from 'rxjs/operators';
 import { TrackMetadataService } from '../track-metadata.service';
 import { SearchResult, Track } from '../track-models';
 
 @Component({
-  selector: 'app-track-metadata',
-  templateUrl: './track-metadata.component.html',
-  styles: []
+  selector: 'app-dashboard',
+  templateUrl: './dashboard.component.html',
+  styleUrls: ['./dashboard.component.scss']
 })
-export class TrackMetadataComponent {
+export class DashboardComponent {
   private userQuery = new Subject<string>();
   private displayedTrackId = new Subject<string>();
 

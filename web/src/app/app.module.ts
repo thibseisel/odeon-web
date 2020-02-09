@@ -7,14 +7,14 @@ import { AppMaterialModule } from './app-material.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { InMemoryAudioService } from './audio.inmemory.service';
+import { DashboardComponent } from './dashboard/dashboard.component';
 import { TrackDetailComponent } from './track-detail/track-detail.component';
-import { TrackMetadataComponent } from './track-metadata/track-metadata.component';
 import { TrackSearchComponent } from './track-search/track-search.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TrackMetadataComponent,
+    DashboardComponent,
     TrackSearchComponent,
     TrackDetailComponent
   ],
