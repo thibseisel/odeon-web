@@ -3,6 +3,8 @@
 }
 
 .search-card {
+    position: sticky;
+    top: 0;
     max-height: calc(100vh - 32px);
     padding: 0;
 }
