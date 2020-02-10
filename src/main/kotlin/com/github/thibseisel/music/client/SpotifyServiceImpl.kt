@@ -28,12 +28,6 @@ internal class SpotifyServiceImpl(
                 }
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
-                .onStatus(HttpStatus::isError) { response ->
-                    val payload = response.bodyToMono(SpotifyError::class.java)
-                    payload.map { (_, message) ->
-                        SpotifyService.ApiException(response.statusCode(), message)
-                    }
-                }
                 .awaitBody<SpotifySearchResult>()
 
             return searchResults.tracks.items
