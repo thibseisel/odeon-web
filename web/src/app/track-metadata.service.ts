@@ -1,7 +1,8 @@
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable, of } from "rxjs";
-import { catchError } from "rxjs/operators";
+import { Observable, of, zip } from "rxjs";
+import { catchError, map } from "rxjs/operators";
+import { AudioFeature, RemoteTrack } from "./remote-models";
 import { SearchResult, Track } from "./track-models";
 
 @Injectable({
@@ -46,6 +47,26 @@ export class TrackMetadataService {
    */
   public getTrackMetadata(trackId: string): Observable<Track> {
     const trackUrl = `${this.baseUrl}/tracks/${trackId}`;
-    return this.http.get<Track>(trackUrl);
+    const featureUrl = `${this.baseUrl}/audio-features/${trackId}`;
+
+    const asyncTrack = this.http.get<RemoteTrack>(trackUrl);
+    const asyncFeature = this.http.get<AudioFeature>(featureUrl);
+
+    return zip(asyncTrack, asyncFeature).pipe(
+      map(([track, feature]) => this.combineToTrack(track, feature))
+    );
+  }
+
+  private combineToTrack(track: RemoteTrack, feature: AudioFeature): Track {
+    return {
+      id: track.id,
+      name: track.name,
+      artist: track.artists[0]?.name,
+      album: track.album.name,
+      trackNo: track.track_number,
+      duration: track.duration,
+      popularity: track.popularity,
+      features: feature
+    }
   }
 }

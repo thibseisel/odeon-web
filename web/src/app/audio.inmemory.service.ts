@@ -1,6 +1,24 @@
 import { InMemoryDbService, RequestInfo } from "angular-in-memory-web-api";
 import { Observable } from "rxjs";
-import { Track, Pitch, MusicalMode, SearchResult } from "./track-models";
+import { AudioFeature, MusicalMode, Pitch, RemoteTrack } from './remote-models';
+import { SearchResult } from "./track-models";
+
+/**
+ * Configures Angular's HttpClient to return pre-defined JSON HTTP responses instead of connecting to a backend.
+ * This should be imported in the root module to take effect.
+ *
+ * This comes handy during development when a viable backend is not ready yet.
+ */
+export class InMemoryAudioService implements InMemoryDbService {
+
+    createDb(reqInfo?: RequestInfo): {} | Observable<{}> | Promise<{}> {
+        return {
+            "search": SAMPLE_SEARCH_RESULTS,
+            "tracks": SAMPLE_TRACKS,
+            "audio-features": SAMPLE_FEATURES
+        };
+    }
+}
 
 const SAMPLE_SEARCH_RESULTS: SearchResult[] = [
     {
@@ -54,44 +72,46 @@ const SAMPLE_SEARCH_RESULTS: SearchResult[] = [
     }
 ];
 
-const SAMPLE_TRACKS: Track[] = [
+const SAMPLE_TRACKS: RemoteTrack[] = [
     {
         id: "3eSyMBd7ERw68NVB3jlRmW",
         name: "Pressure",
-        artist: "Muse",
-        album: "Simulation Theory",
-        trackNo: 3,
+        disc_number: 1,
+        track_number: 3,
         duration: 0,
         popularity: 80,
-        features: {
-            key: Pitch.A,
-            mode: MusicalMode.MINOR,
-            tempo: 120,
-            signature: 4,
-            loudness: -6.97,
-            energy: 0.91,
-            danceability: 0.41,
-            valence: 0.54,
-            acousticness: 0.02,
-            instrumentalness: 0.14,
-            liveness: 0.19,
-            speechiness: 0.03
+        artists: [{
+            id: "",
+            name: "Muse"
+        }],
+        album: {
+            id: "",
+            name: "Simulation Theory",
+            release_date: "2018",
+            release_date_precision: "year",
+            images: [{
+                url: "https://i.scdn.co/image/ab67616d000048514cb163c1d111f77307c842b6",
+                width: 64,
+                height: 64
+            }]
         }
     }
 ];
 
-/**
- * Configures Angular's HttpClient to return pre-defined JSON HTTP responses instead of connecting to a backend.
- * This should be imported in the root module to take effect.
- *
- * This comes handy during development when a viable backend is not ready yet.
- */
-export class InMemoryAudioService implements InMemoryDbService {
-
-    createDb(reqInfo?: RequestInfo): {} | Observable<{}> | Promise<{}> {
-        return {
-            search: SAMPLE_SEARCH_RESULTS,
-            tracks: SAMPLE_TRACKS
-        };
+const SAMPLE_FEATURES: AudioFeature[] = [
+    {
+        id: "3eSyMBd7ERw68NVB3jlRmW",
+        key: Pitch.B,
+        mode: MusicalMode.MINOR,
+        tempo: 136,
+        signature: 4,
+        loudness: -3.68,
+        energy: 0.842,
+        valence: 0.724,
+        danceability: 0.622,
+        acousticness: 0.0034,
+        instrumentalness: 0.0001,
+        liveness: 0.075,
+        speechiness: 0.0609
     }
-}
+];
