@@ -1,13 +1,13 @@
-import { Component } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
-import { concatMap } from 'rxjs/operators';
-import { TrackMetadataService } from '../track-metadata.service';
-import { SearchResult, Track } from '../track-models';
+import { Component } from "@angular/core";
+import { Observable, Subject } from "rxjs";
+import { concatMap } from "rxjs/operators";
+import { TrackMetadataService } from "../track-metadata.service";
+import { SearchResult, Track } from "../track-models";
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  selector: "app-dashboard",
+  templateUrl: "./dashboard.component.html",
+  styleUrls: ["./dashboard.component.scss"]
 })
 export class DashboardComponent {
   private userQuery = new Subject<string>();

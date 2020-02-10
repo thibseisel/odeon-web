@@ -1,8 +1,8 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { TrackMetadataComponent } from './track-metadata.component';
+import { TrackMetadataComponent } from "./track-metadata.component";
 
-describe('TrackMetadataComponent', () => {
+describe("TrackMetadataComponent", () => {
   let component: TrackMetadataComponent;
   let fixture: ComponentFixture<TrackMetadataComponent>;
 
@@ -19,7 +19,7 @@ describe('TrackMetadataComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

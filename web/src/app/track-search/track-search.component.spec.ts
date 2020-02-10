@@ -1,8 +1,8 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { TrackSearchComponent } from './track-search.component';
+import { TrackSearchComponent } from "./track-search.component";
 
-describe('TrackSearchComponent', () => {
+describe("TrackSearchComponent", () => {
   let component: TrackSearchComponent;
   let fixture: ComponentFixture<TrackSearchComponent>;
 
@@ -19,7 +19,7 @@ describe('TrackSearchComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

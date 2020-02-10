@@ -1,8 +1,8 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { TrackDetailComponent } from './track-detail.component';
+import { TrackDetailComponent } from "./track-detail.component";
 
-describe('TrackDetailComponent', () => {
+describe("TrackDetailComponent", () => {
   let component: TrackDetailComponent;
   let fixture: ComponentFixture<TrackDetailComponent>;
 
@@ -19,7 +19,7 @@ describe('TrackDetailComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

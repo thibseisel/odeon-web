@@ -1,18 +1,18 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { catchError } from 'rxjs/operators';
-import { SearchResult, Track } from './track-models';
+import { HttpClient, HttpParams } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { Observable, of } from "rxjs";
+import { catchError } from "rxjs/operators";
+import { SearchResult, Track } from "./track-models";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class TrackMetadataService {
 
   /**
    * The root path of all endpoints.
    */
-  private readonly baseUrl = '/api';
+  private readonly baseUrl = "/api";
 
   constructor(private http: HttpClient) { }
 
@@ -25,11 +25,11 @@ export class TrackMetadataService {
   public rawTrackSearch(query: string): Observable<SearchResult[]> {
     if (query.length > 0) {
       const queryParams = new HttpParams();
-      queryParams.set('q', query);
+      queryParams.set("q", query);
 
       return this.http.get<SearchResult[]>(`${this.baseUrl}/search`, { params: queryParams }).pipe(
         catchError(err => {
-          console.error('Request failed', err);
+          console.error("Request failed", err);
           return of([]);
         })
       );

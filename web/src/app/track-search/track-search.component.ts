@@ -1,12 +1,12 @@
-import { Component, EventEmitter, Input, Output, OnInit, OnDestroy } from '@angular/core';
-import { SearchResult } from '../track-models';
-import { Subject } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
+import { Component, EventEmitter, Input, Output, OnInit, OnDestroy } from "@angular/core";
+import { SearchResult } from "../track-models";
+import { Subject } from "rxjs";
+import { debounceTime } from "rxjs/operators";
 
 @Component({
-  selector: 'app-track-search',
-  templateUrl: './track-search.component.html',
-  styleUrls: ['./track-search.component.scss']
+  selector: "app-track-search",
+  templateUrl: "./track-search.component.html",
+  styleUrls: ["./track-search.component.scss"]
 })
 export class TrackSearchComponent implements OnInit, OnDestroy {
   private textChanges = new Subject<string>();
