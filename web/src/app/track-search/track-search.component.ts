@@ -18,7 +18,14 @@ export class TrackSearchComponent implements OnInit, OnDestroy {
     this._results = results;
   }
 
+  /**
+   * Emits the user's search query whenever it has changed.
+   */
   @Output() onquery = new EventEmitter<string>();
+
+  /**
+   * Notify when a result has been selected in the result list.
+   */
   @Output() ontrackselected = new EventEmitter<SearchResult>();
 
   /**

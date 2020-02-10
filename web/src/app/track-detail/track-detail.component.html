@@ -1,14 +1,17 @@
 <mat-card *ngIf="track">
-    <mat-card-header>
+    <mat-card-title-group>
+        <img mat-card-lg-image [src]="track!.artworkUrl"/>
         <mat-card-title>{{ track!.name }}</mat-card-title>
         <mat-card-subtitle>{{ track!.artist }}</mat-card-subtitle>
-    </mat-card-header>
+    </mat-card-title-group>
     <mat-divider></mat-divider>
     <mat-card-content>
+        <div class="cartridge-list">
+            <app-odeon-cartridge class="cartridge-list__item" color="primary-dark">{{ track!.features.signature }} beats</app-odeon-cartridge>
+            <app-odeon-cartridge class="cartridge-list__item" color="primary">{{ track!.features.tempo | number: '1.0-0' }} BPM</app-odeon-cartridge>
+            <app-odeon-cartridge class="cartridge-list__item" color="secondary">{{ track!.features.loudness | number: '1.1-2' }} dB</app-odeon-cartridge>
+        </div>
         <mat-list>
-            <mat-list-item>Tempo: {{ track!.features.tempo }}</mat-list-item>
-            <mat-list-item>Signature: {{ track!.features.signature }}</mat-list-item>
-            <mat-list-item>Loudness: {{ track!.features.loudness }}</mat-list-item>
             <mat-list-item>Energy: {{ track!.features.energy | percent: '1.2-2' }}</mat-list-item>
             <mat-list-item>Danceability: {{ track!.features.danceability | percent: '1.2-2' }}</mat-list-item>
             <mat-list-item>Valence: {{ track!.features.valence | percent: '1.2-2' }}</mat-list-item>

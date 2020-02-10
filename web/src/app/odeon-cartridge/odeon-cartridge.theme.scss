@@ -1,0 +1,36 @@
+// Import library functions for theme creation.
+@import '~@angular/material/theming';
+
+// Define a mixin that accepts a theme and outputs the theme-specific styles.
+@mixin odeon-cartridge-theme($theme) {
+    $primary-palette: map-get($theme, primary);
+    $secondary-palette: map-get($theme, accent);
+    $foreground-palette: map-get($theme, foreground);
+    $background-palette: map-get($theme, background);
+
+    // Define any styles affected by the theme.
+    .cartridge {
+        color: mat-color($foreground-palette, text);
+        background-color: mat-color($background-palette, hover);
+    }
+
+    .cartridge.cartridge--primary {
+        background-color: mat-color($primary-palette);
+    }
+
+    .cartridge.cartridge--primary-dark {
+        background-color: mat-color($primary-palette, darker);
+    }
+
+    .cartridge.cartridge--secondary {
+        background-color: mat-color($secondary-palette);
+    }
+}
+
+@mixin odeon-cartridge-typography($config) {
+    .cartridge {
+        font-family: mat-font-family($config, body-2);
+        font-weight: mat-font-weight($config, body-2);
+        font-size: mat-font-size($config, body-2);
+    }
+}

@@ -10,13 +10,15 @@ import { InMemoryAudioService } from "./audio.inmemory.service";
 import { DashboardComponent } from "./dashboard/dashboard.component";
 import { TrackDetailComponent } from "./track-detail/track-detail.component";
 import { TrackSearchComponent } from "./track-search/track-search.component";
+import { OdeonCartridgeComponent } from './odeon-cartridge/odeon-cartridge.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
     TrackSearchComponent,
-    TrackDetailComponent
+    TrackDetailComponent,
+    OdeonCartridgeComponent
   ],
   imports: [
     BrowserModule,
