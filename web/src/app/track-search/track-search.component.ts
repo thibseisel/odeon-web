@@ -1,7 +1,7 @@
-import { Component, EventEmitter, Input, Output, OnInit, OnDestroy } from "@angular/core";
-import { SearchResult } from "../track-models";
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from "@angular/core";
 import { Subject } from "rxjs";
-import { debounceTime } from "rxjs/operators";
+import { debounceTime, tap } from "rxjs/operators";
+import { SearchResult } from "../track-models";
 
 @Component({
   selector: "app-track-search",
@@ -11,13 +11,27 @@ import { debounceTime } from "rxjs/operators";
 export class TrackSearchComponent implements OnInit, OnDestroy {
   private textChanges = new Subject<string>();
 
-  @Input() results: SearchResult[] = [];
+  private _results: SearchResult[] = [];
+  get results() { return this._results; }
+  @Input() set results(results: SearchResult[]) {
+    this.isLoading = false;
+    this._results = results;
+  }
+
   @Output() onquery = new EventEmitter<string>();
   @Output() ontrackselected = new EventEmitter<SearchResult>();
 
+  /**
+   * Whether a query is currently is progress.
+   */
+  public isLoading = false
+
   ngOnInit() {
     this.textChanges
-      .pipe(debounceTime(300))
+      .pipe(
+        debounceTime(300),
+        tap(() => this.isLoading = true)
+      )
       .subscribe((query) => this.onquery.emit(query));
   }
 

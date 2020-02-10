@@ -6,6 +6,7 @@ import { MatInputModule } from "@angular/material/input";
 import { MatListModule } from "@angular/material/list";
 import { MatDividerModule } from "@angular/material/divider";
 import { MatCardModule } from "@angular/material/card";
+import { MatProgressBarModule } from "@angular/material/progress-bar";
 
 /**
  * Groups imports of modules from @angular/material.
@@ -23,7 +24,8 @@ import { MatCardModule } from "@angular/material/card";
         MatInputModule,
         MatListModule,
         MatDividerModule,
-        MatCardModule
+        MatCardModule,
+        MatProgressBarModule
     ],
     exports: [
         BrowserAnimationsModule,
@@ -32,7 +34,8 @@ import { MatCardModule } from "@angular/material/card";
         MatInputModule,
         MatListModule,
         MatDividerModule,
-        MatCardModule
+        MatCardModule,
+        MatProgressBarModule
     ]
 })
 export class AppMaterialModule { }
