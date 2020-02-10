@@ -12,18 +12,18 @@
     .cartridge {
         color: mat-color($foreground-palette, text);
         background-color: mat-color($background-palette, hover);
-    }
 
-    .cartridge.cartridge--primary {
-        background-color: mat-color($primary-palette);
-    }
+        &.cartridge--primary {
+            background-color: mat-color($primary-palette);
+        }
 
-    .cartridge.cartridge--primary-dark {
-        background-color: mat-color($primary-palette, darker);
-    }
+        &.cartridge--primary-dark {
+            background-color: mat-color($primary-palette, darker);
+        }
 
-    .cartridge.cartridge--secondary {
-        background-color: mat-color($secondary-palette);
+        &.cartridge--secondary {
+            background-color: mat-color($secondary-palette);
+        } 
     }
 }
 
