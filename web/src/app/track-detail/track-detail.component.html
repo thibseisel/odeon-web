@@ -9,13 +9,13 @@
             <mat-list-item>Tempo: {{ track!.features.tempo }}</mat-list-item>
             <mat-list-item>Signature: {{ track!.features.signature }}</mat-list-item>
             <mat-list-item>Loudness: {{ track!.features.loudness }}</mat-list-item>
-            <mat-list-item>Energy: {{ track!.features.energy | percent }}</mat-list-item>
-            <mat-list-item>Danceability: {{ track!.features.danceability | percent }}</mat-list-item>
-            <mat-list-item>Valence: {{ track!.features.valence | percent }}</mat-list-item>
-            <mat-list-item>Acousticness: {{ track!.features.acousticness | percent }}</mat-list-item>
-            <mat-list-item>Instrumentalness: {{ track!.features.instrumentalness | percent }}</mat-list-item>
-            <mat-list-item>Liveness: {{ track!.features.liveness | percent }}</mat-list-item>
-            <mat-list-item>Speechiness: {{ track!.features.speechiness | percent }}</mat-list-item>
+            <mat-list-item>Energy: {{ track!.features.energy | percent: '1.2-2' }}</mat-list-item>
+            <mat-list-item>Danceability: {{ track!.features.danceability | percent: '1.2-2' }}</mat-list-item>
+            <mat-list-item>Valence: {{ track!.features.valence | percent: '1.2-2' }}</mat-list-item>
+            <mat-list-item>Acousticness: {{ track!.features.acousticness | percent: '1.2-2' }}</mat-list-item>
+            <mat-list-item>Instrumentalness: {{ track!.features.instrumentalness | percent: '1.2-2' }}</mat-list-item>
+            <mat-list-item>Liveness: {{ track!.features.liveness | percent: '1.2-2' }}</mat-list-item>
+            <mat-list-item>Speechiness: {{ track!.features.speechiness | percent: '1.2-2' }}</mat-list-item>
         </mat-list>
     </mat-card-content>
 </mat-card>
