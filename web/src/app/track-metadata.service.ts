@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, of, zip } from "rxjs";
 import { catchError, map } from "rxjs/operators";
-import { AudioFeature, RemoteTrack } from "./remote-models";
+import { AudioFeature, RemoteTrack, ImageSpec } from "./remote-models";
 import { SearchResult, Track } from "./track-models";
 
 @Injectable({
@@ -63,6 +63,8 @@ export class TrackMetadataService {
   }
 
   private combineToTrack(track: RemoteTrack, feature: AudioFeature): Track {
+    const largestArtwork = this.findLargestImageIn(track.album.images);
+
     return {
       id: track.id,
       name: track.name,
@@ -71,7 +73,28 @@ export class TrackMetadataService {
       trackNo: track.track_number,
       duration: track.duration,
       popularity: track.popularity,
+      artworkUrl: largestArtwork?.url,
       features: feature
+    };
+  }
+
+  private findLargestImageIn(images: ImageSpec[]): ImageSpec | null {
+    function area(image: ImageSpec): number {
+      if (image.width && image.height) {
+        return image.width * image.height;
+      } else {
+        return 0;
+      }
+    }
+
+    if (images.length > 0) {
+      return images.reduce((largest, image) => {
+        const largestArea = area(largest);
+        const imageArea = area(image);
+        return (imageArea > largestArea) ? image : largest;
+      });
+    } else {
+      return null;
     }
   }
 }
