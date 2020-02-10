@@ -17,7 +17,7 @@ export class DashboardComponent {
     concatMap((query) => this.source.rawTrackSearch(query))
   );
 
-  public track$: Observable<Track> = this.displayedTrackId.pipe(
+  public track$: Observable<Track | null> = this.displayedTrackId.pipe(
     concatMap((id) => this.source.getTrackMetadata(id))
   );
 

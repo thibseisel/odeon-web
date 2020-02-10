@@ -44,8 +44,9 @@ export class TrackMetadataService {
    *
    * @param trackId The unique identifier of the desired track on the server.
    * @returns The detail of the track, exposed as an asynchronous stream.
+   * The returned value will be null if there is no track with the requested id.
    */
-  public getTrackMetadata(trackId: string): Observable<Track> {
+  public getTrackMetadata(trackId: string): Observable<Track | null> {
     const trackUrl = `${this.baseUrl}/tracks/${trackId}`;
     const featureUrl = `${this.baseUrl}/audio-features/${trackId}`;
 
@@ -53,7 +54,11 @@ export class TrackMetadataService {
     const asyncFeature = this.http.get<AudioFeature>(featureUrl);
 
     return zip(asyncTrack, asyncFeature).pipe(
-      map(([track, feature]) => this.combineToTrack(track, feature))
+      map(([track, feature]) => this.combineToTrack(track, feature)),
+      catchError((httpError) => {
+        console.error(`Loading track detail failed for id=${trackId}`, httpError);
+        return of(null);
+      })
     );
   }
 
