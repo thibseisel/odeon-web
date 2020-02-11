@@ -25,8 +25,7 @@ export class TrackMetadataService {
    */
   public rawTrackSearch(query: string): Observable<SearchResult[]> {
     if (query.length > 0) {
-      const queryParams = new HttpParams();
-      queryParams.set("q", query);
+      const queryParams = new HttpParams().set("q", query);
 
       return this.http.get<SearchResult[]>(`${this.baseUrl}/search`, { params: queryParams }).pipe(
         catchError(err => {
