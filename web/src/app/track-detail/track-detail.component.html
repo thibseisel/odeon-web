@@ -1,24 +1,54 @@
 <mat-card *ngIf="track">
-    <mat-card-title-group>
-        <img mat-card-lg-image [src]="track!.artworkUrl"/>
-        <mat-card-title>{{ track!.name }}</mat-card-title>
-        <mat-card-subtitle>{{ track!.artist }}</mat-card-subtitle>
-    </mat-card-title-group>
-    <mat-divider></mat-divider>
-    <mat-card-content>
-        <div class="cartridge-list">
-            <app-odeon-cartridge class="cartridge-list__item" color="primary-dark">{{ track!.features.signature }} beats</app-odeon-cartridge>
-            <app-odeon-cartridge class="cartridge-list__item" color="primary">{{ track!.features.tempo | number: '1.0-0' }} BPM</app-odeon-cartridge>
-            <app-odeon-cartridge class="cartridge-list__item" color="secondary">{{ track!.features.loudness | number: '1.1-2' }} dB</app-odeon-cartridge>
+
+    <div class="info-header">
+        <img class="info-header__artwork" [src]="track!.artworkUrl"/>
+        <div class="info-header__metadata">
+            <h1 class="info-header__title">{{ track!.name }}</h1>
+            <p class="info-header__subtitle mat-body-2">{{ track!.artist }}</p>
+            <div class="info-header__cartridge-list">
+                <app-odeon-cartridge class="cartridge-list__item" color="primary-dark">{{ track!.features.signature }} beats</app-odeon-cartridge>
+                <app-odeon-cartridge class="cartridge-list__item" color="primary">{{ track!.features.tempo | number: '1.0-0' }} BPM</app-odeon-cartridge>
+                <app-odeon-cartridge class="cartridge-list__item" color="secondary">{{ track!.features.loudness | number: '1.1-2' }} dB</app-odeon-cartridge>
+            </div>
         </div>
-        <mat-list>
-            <mat-list-item>Energy: {{ track!.features.energy | percent: '1.2-2' }}</mat-list-item>
-            <mat-list-item>Danceability: {{ track!.features.danceability | percent: '1.2-2' }}</mat-list-item>
-            <mat-list-item>Valence: {{ track!.features.valence | percent: '1.2-2' }}</mat-list-item>
-            <mat-list-item>Acousticness: {{ track!.features.acousticness | percent: '1.2-2' }}</mat-list-item>
-            <mat-list-item>Instrumentalness: {{ track!.features.instrumentalness | percent: '1.2-2' }}</mat-list-item>
-            <mat-list-item>Liveness: {{ track!.features.liveness | percent: '1.2-2' }}</mat-list-item>
-            <mat-list-item>Speechiness: {{ track!.features.speechiness | percent: '1.2-2' }}</mat-list-item>
-        </mat-list>
-    </mat-card-content>
+    </div>
+    
+    <mat-divider></mat-divider>
+    
+    <div class="feature-list">
+        <div class="feature">
+            <span class="feature__label mat-subheading-1">Energy</span>
+            <mat-progress-bar class="feature__progress" mode="determinate" [value]="track!.features.energy * 100"></mat-progress-bar>
+            <span class="feature__value mat-caption">{{ track!.features.energy | percent: '1.2-2' }}</span>
+        </div>
+        <div class="feature">
+            <span class="feature__label mat-subheading-1">Danceability</span>
+            <mat-progress-bar class="feature__progress" mode="determinate" [value]="track!.features.danceability * 100"></mat-progress-bar>
+            <span class="feature__value mat-caption">{{ track!.features.danceability | percent: '1.2-2' }}</span>
+        </div>
+        <div class="feature">
+            <span class="feature__label mat-subheading-1">Valence</span>
+            <mat-progress-bar class="feature__progress" mode="determinate" [value]="track!.features.valence * 100"></mat-progress-bar>
+            <span class="feature__value mat-caption">{{ track!.features.valence | percent: '1.2-2' }}</span>
+        </div>
+    </div>
+
+    <div class="feature-list">
+        <div class="ambiant-feature">
+            <span class="ambiant-feature__label mat-subheading-1">Acousticness</span>
+            <span class="ambiant-feature__value mat-caption">{{ track!.features.acousticness | percent: '1.2-2' }}</span>
+        </div>
+        <div class="ambiant-feature">
+            <span class="ambiant-feature__label mat-subheading-1">Instrumentalness</span>
+            <span class="ambiant-feature__value mat-caption">{{ track!.features.instrumentalness | percent: '1.2-2' }}</span>
+        </div>
+        <div class="ambiant-feature">
+            <span class="ambiant-feature__label mat-subheading-1">Liveness</span>
+            <span class="ambiant-feature__value mat-caption">{{ track!.features.liveness | percent: '1.2-2' }}</span>
+        </div>
+        <div class="ambiant-feature">
+            <span class="ambiant-feature__label mat-subheading-1">Speechiness</span>
+            <span class="ambiant-feature__value mat-caption">{{ track!.features.speechiness | percent: '1.2-2' }}</span>
+        </div>
+    </div>
 </mat-card>

@@ -1,8 +1,99 @@
-.cartridge-list {
+.info-header {
     display: flex;
     flex-flow: row nowrap;
+    margin-bottom: 16px;
+
+    .info-header__artwork {
+        width: 128px;
+        height: 128px;
+    }
+
+    .info-header__metadata {
+        display: flex;
+        flex-flow: column nowrap;
+        margin-left: 32px;
+        flex-grow: 1;
+    }
+
+    .info-header__title {
+        margin: 0 0 8px 0;
+        font-weight: 500;
+    }
+
+    .info-header__subtitle {
+        margin: -4px 0 16px 0;
+    }
+
+    .info-header__cartridge-list {
+        display: flex;
+        flex-flow: row wrap;
+        margin-left: -8px;
+    }
+
+    .cartridge-list__item {
+        margin: 4px;
+
+        &:first-child {
+            margin-left: 0px;
+        }
+
+        &:last-child {
+            margin-right: 0px;
+        }
+    }
 }
 
-.cartridge-list__item {
-    margin: 4px;
+.feature-list {
+    display: flex;
+    flex-flow: column nowrap;
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
+.feature {
+    display: inline-flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    min-height: 36px;
+
+    .feature__label {
+        width: 128px;
+        margin: 0 16px 0 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .feature__progress {
+        margin-left: 16px;
+        margin-right: 16px;
+        flex-grow: 1;
+    }
+
+    .feature__value {
+        width: 64px;
+        text-align: end;
+    }
+}
+
+.ambiant-feature {
+    display: inline-flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    min-height: 36px;
+
+    .ambiant-feature__label {
+        width: 128px;
+        margin: 0 16px 0 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        flex-grow: 1;
+    }
+
+    .ambiant-feature__value {
+        width: 64px;
+        margin-left: 16px;
+        text-align: end;
+    }
 }
