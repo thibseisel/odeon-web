@@ -1,0 +1,7 @@
+{
+    "/api": {
+        "target": "https://odeon-web.herokuapp.com",
+        "secure": false,
+        "changeOrigin": true
+    }
+}
