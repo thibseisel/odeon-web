@@ -1,7 +1,9 @@
 package com.github.thibseisel.music
 
 import com.github.thibseisel.music.client.SpotifyService
+import com.github.thibseisel.music.spotify.FullSpotifyTrack
 import com.github.thibseisel.music.spotify.SpotifyAudioFeature
+import com.github.thibseisel.music.spotify.SpotifyTrack
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -32,6 +34,12 @@ class AudioMetadataController(
                 artworkUrl = album.images.minBy { (it.width ?: 0) * (it.height ?: 0) }?.url
             )
         }
+    }
+
+    @GetMapping("/tracks/{id}")
+    suspend fun getTrack(@RequestParam("id") id: String): FullSpotifyTrack {
+        return service.findTrack(id)
+            ?: throw ResponseStatusException(HttpStatus.NOT_FOUND)
     }
 
     @GetMapping("/audio-features/{id}")

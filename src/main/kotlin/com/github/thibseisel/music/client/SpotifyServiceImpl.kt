@@ -2,7 +2,6 @@ package com.github.thibseisel.music.client
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.github.thibseisel.music.spotify.*
-import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.stereotype.Component
 import org.springframework.web.reactive.function.client.WebClient
@@ -37,7 +36,7 @@ internal class SpotifyServiceImpl(
         }
     }
 
-    override suspend fun findTrack(id: String): SpotifyTrack? {
+    override suspend fun findTrack(id: String): FullSpotifyTrack? {
         try {
             return http.get()
                 .uri("/tracks/{id}", id)

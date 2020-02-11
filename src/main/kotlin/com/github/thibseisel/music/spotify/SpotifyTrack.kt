@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonProperty
 /**
  * Metadata of a track from the Spotify API.
  */
-class SpotifyTrack @JsonCreator constructor(
+open class SpotifyTrack @JsonCreator constructor(
 
     /**
      * The unique identifier of this track on Spotify servers.
@@ -75,3 +75,59 @@ class SpotifyTrack @JsonCreator constructor(
 ) {
     override fun toString(): String = "spotify:track:$id ($name)"
 }
+
+class FullSpotifyTrack @JsonCreator constructor(
+
+    /**
+     * The unique identifier of this track on Spotify servers.
+     */
+    @JsonProperty("id")
+    id: String,
+
+    /**
+     * The name of the track.
+     */
+    @JsonProperty("name")
+    name: String,
+
+    /**
+     * The disc number (usually 1 unless the album consists of more than one disc).
+     */
+    @JsonProperty("disc_number")
+    discNumber: Int,
+
+    /**
+     * The number of the track.
+     * If an album has several discs, the track number is the number on the specified disc.
+     */
+    @JsonProperty("track_number")
+    trackNumber: Int,
+
+    /**
+     * The track length in milliseconds.
+     */
+    @JsonProperty("duration_ms")
+    duration: Int,
+
+    /**
+     * Whether or not the track has explicit lyrics ( true = yes it does; false = no it does not OR unknown).
+     */
+    @JsonProperty("explicit")
+    explicit: Boolean,
+
+    /**
+     * The album this track is part of.
+     */
+    @JsonProperty("album")
+    album: SpotifyAlbum,
+
+    /**
+     * The artist that produced this track.
+     */
+    @JsonProperty("artists")
+    artists: List<SpotifyArtist>,
+
+    @JsonProperty("popularity")
+    val popularity: Int
+
+) : SpotifyTrack(id, name, discNumber, trackNumber, duration, explicit, album, artists)
