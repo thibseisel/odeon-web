@@ -24,11 +24,7 @@ import { OdeonCartridgeComponent } from './odeon-cartridge/odeon-cartridge.compo
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    AppMaterialModule,
-    environment.production ? [] : HttpClientInMemoryWebApiModule.forRoot(InMemoryAudioService, {
-      apiBase: "api/",
-      delay: 300,
-    }),
+    AppMaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]
