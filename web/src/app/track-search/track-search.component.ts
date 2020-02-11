@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from "@angular/core";
 import { Subject } from "rxjs";
-import { debounceTime, tap } from "rxjs/operators";
+import { debounceTime, tap, distinctUntilChanged } from "rxjs/operators";
 import { SearchResult } from "../track-models";
 
 @Component({
@@ -36,6 +36,7 @@ export class TrackSearchComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.textChanges
       .pipe(
+        distinctUntilChanged(),
         debounceTime(300),
         tap(() => this.isLoading = true)
       )
