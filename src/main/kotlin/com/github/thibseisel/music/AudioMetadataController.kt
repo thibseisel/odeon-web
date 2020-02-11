@@ -37,7 +37,9 @@ class AudioMetadataController(
     }
 
     @GetMapping("/tracks/{id}")
-    suspend fun getTrack(@RequestParam("id") id: String): FullSpotifyTrack {
+    suspend fun getTrack(
+        @PathVariable("id") id: String
+    ): FullSpotifyTrack {
         return service.findTrack(id)
             ?: throw ResponseStatusException(HttpStatus.NOT_FOUND)
     }
