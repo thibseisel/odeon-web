@@ -6,7 +6,7 @@ import { environment } from "src/environments/environment";
 import { AppMaterialModule } from "./app-material.module";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
-import { InMemoryAudioService } from "./audio.inmemory.service";
+import { InMemoryAudioService } from "./audio.inmemoryservice";
 import { DashboardComponent } from "./dashboard/dashboard.component";
 import { TrackDetailComponent } from "./track-detail/track-detail.component";
 import { TrackSearchComponent } from "./track-search/track-search.component";
