@@ -11,8 +11,8 @@ import { SearchState } from "../track-search/track-search.component";
   styleUrls: ["./dashboard.component.scss"]
 })
 export class DashboardComponent {
-  private userQuery = new Subject<string>();
-  private displayedTrackId = new Subject<string>();
+  private readonly userQuery = new Subject<string>();
+  private readonly displayedTrackId = new Subject<string>();
 
   public results$: Observable<SearchState> = this.userQuery.pipe(
     switchMap((query) => this.source.rawTrackSearch(query).pipe(
@@ -31,7 +31,7 @@ export class DashboardComponent {
     tap((state) => console.log("Updating state", state))
   );
 
-  public track$: Observable<Track | null> = this.displayedTrackId.pipe(
+  public readonly track$: Observable<Track | null> = this.displayedTrackId.pipe(
     switchMap((id) => this.source.getTrackMetadata(id))
   );
 

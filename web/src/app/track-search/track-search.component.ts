@@ -9,7 +9,7 @@ import { SearchResult } from "../track-models";
   styleUrls: ["./track-search.component.scss"]
 })
 export class TrackSearchComponent implements OnInit, OnDestroy {
-  private textChanges = new Subject<string>();
+  private readonly textChanges = new Subject<string>();
 
   /**
    * The current state of the search.
@@ -20,12 +20,12 @@ export class TrackSearchComponent implements OnInit, OnDestroy {
   /**
    * Emits the user's search query whenever it has changed.
    */
-  @Output() onquery = new EventEmitter<string>();
+  @Output() readonly onquery = new EventEmitter<string>();
 
   /**
    * Notify when a result has been selected in the result list.
    */
-  @Output() ontrackselected = new EventEmitter<SearchResult>();
+  @Output() readonly ontrackselected = new EventEmitter<SearchResult>();
 
   ngOnInit() {
     this.textChanges
@@ -53,7 +53,10 @@ export class TrackSearchComponent implements OnInit, OnDestroy {
   }
 }
 
+/**
+ * Describes the state hold by the search component.
+ */
 export interface SearchState {
-  loading: boolean;
-  results?: SearchResult[];
+  readonly loading: boolean;
+  readonly results?: SearchResult[];
 }
