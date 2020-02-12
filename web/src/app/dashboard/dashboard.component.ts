@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { Observable, Subject } from "rxjs";
-import { concatMap } from "rxjs/operators";
+import { switchMap } from "rxjs/operators";
 import { TrackMetadataService } from "../track-metadata.service";
 import { SearchResult, Track } from "../track-models";
 
@@ -14,11 +14,11 @@ export class DashboardComponent {
   private displayedTrackId = new Subject<string>();
 
   public results$: Observable<SearchResult[]> = this.userQuery.pipe(
-    concatMap((query) => this.source.rawTrackSearch(query))
+    switchMap((query) => this.source.rawTrackSearch(query))
   );
 
   public track$: Observable<Track | null> = this.displayedTrackId.pipe(
-    concatMap((id) => this.source.getTrackMetadata(id))
+    switchMap((id) => this.source.getTrackMetadata(id))
   );
 
   constructor(private source: TrackMetadataService) { }
