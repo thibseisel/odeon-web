@@ -36,7 +36,7 @@ export interface ImageSpec {
  * It contains key called `items` (whose value is an array of the requested objects)
  * along with other keys like previous, next and limit that can be useful in future calls.
  */
-export interface Paging<T extends Object> {
+export interface Paging<T extends object> {
     /** The requested data. */
     items: T[];
     /** The maximum number of items in the response. */
