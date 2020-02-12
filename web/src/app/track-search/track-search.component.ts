@@ -11,12 +11,11 @@ import { SearchResult } from "../track-models";
 export class TrackSearchComponent implements OnInit, OnDestroy {
   private textChanges = new Subject<string>();
 
-  private _results: SearchResult[] = [];
-  get results() { return this._results; }
-  @Input() set results(results: SearchResult[]) {
-    this.isLoading = false;
-    this._results = results;
-  }
+  /**
+   * The current state of the search.
+   * This is marked as nullable to indicate that the initial value of the async pipe is null.
+   */
+  @Input() state: SearchState | null = null;
 
   /**
    * Emits the user's search query whenever it has changed.
@@ -28,17 +27,11 @@ export class TrackSearchComponent implements OnInit, OnDestroy {
    */
   @Output() ontrackselected = new EventEmitter<SearchResult>();
 
-  /**
-   * Whether a query is currently is progress.
-   */
-  public isLoading = false
-
   ngOnInit() {
     this.textChanges
       .pipe(
         distinctUntilChanged(),
-        debounceTime(300),
-        tap(() => this.isLoading = true)
+        debounceTime(500)
       )
       .subscribe((query) => this.onquery.emit(query));
   }
@@ -58,4 +51,9 @@ export class TrackSearchComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.textChanges.complete();
   }
+}
+
+export interface SearchState {
+  loading: boolean;
+  results?: SearchResult[];
 }

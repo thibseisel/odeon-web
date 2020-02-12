@@ -1,8 +1,9 @@
 import { Component } from "@angular/core";
-import { Observable, Subject } from "rxjs";
-import { switchMap } from "rxjs/operators";
+import { Observable, Subject, BehaviorSubject } from "rxjs";
+import { map, scan, startWith, switchMap, tap } from "rxjs/operators";
 import { TrackMetadataService } from "../track-metadata.service";
 import { SearchResult, Track } from "../track-models";
+import { SearchState } from "../track-search/track-search.component";
 
 @Component({
   selector: "app-dashboard",
@@ -13,8 +14,21 @@ export class DashboardComponent {
   private userQuery = new Subject<string>();
   private displayedTrackId = new Subject<string>();
 
-  public results$: Observable<SearchResult[]> = this.userQuery.pipe(
-    switchMap((query) => this.source.rawTrackSearch(query))
+  public results$: Observable<SearchState> = this.userQuery.pipe(
+    switchMap((query) => this.source.rawTrackSearch(query).pipe(
+      map((results) => {
+        return { loading: false, results: results };
+      }),
+      startWith({ loading: true, results: undefined })
+    )),
+    startWith({ loading: false, results: [] }),
+    scan((current: SearchState, next: SearchState) => {
+      return {
+        loading: next.loading,
+        results: next?.results ?? current.results
+      }
+    }),
+    tap((state) => console.log("Updating state", state))
   );
 
   public track$: Observable<Track | null> = this.displayedTrackId.pipe(

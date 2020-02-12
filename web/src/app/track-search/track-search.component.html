@@ -4,9 +4,9 @@
         <input matInput #input (keyup)="updateQuery(input.value)" (keyup.enter)="submitQuery(input.value)"
             placeholder="Title of a track or name of its artist" />
     </mat-form-field>
-    <mat-progress-bar mode="indeterminate" [class.search-progress--hidden]="!isLoading"></mat-progress-bar>
+    <mat-progress-bar mode="indeterminate" [class.search-progress--hidden]="!state?.loading"></mat-progress-bar>
     <mat-action-list class="result-list">
-        <mat-list-item *ngFor="let track of results; last as last" (click)="select(track)">
+        <mat-list-item *ngFor="let track of state?.results; last as last" (click)="select(track)">
             <img matListAvatar [src]="track.artwork_url" />
             <h3 matLine>{{ track.title }}</h3>
             <p matLine>{{ track.artist }}</p>
