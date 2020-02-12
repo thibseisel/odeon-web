@@ -6,7 +6,7 @@
             <h1 class="info-header__title">{{ track!.name }}</h1>
             <p class="info-header__subtitle mat-body-2">{{ track!.artist }}</p>
             <div class="info-header__cartridge-list">
-                <app-odeon-cartridge class="cartridge-list__item" color="primary-dark">{{ track!.features.signature }} beats</app-odeon-cartridge>
+                <app-odeon-cartridge class="cartridge-list__item" color="primary-dark">{{ track!.features.time_signature }} beats</app-odeon-cartridge>
                 <app-odeon-cartridge class="cartridge-list__item" color="primary">{{ track!.features.tempo | number: '1.0-0' }} BPM</app-odeon-cartridge>
                 <app-odeon-cartridge class="cartridge-list__item" color="secondary">{{ track!.features.loudness | number: '1.1-2' }} dB</app-odeon-cartridge>
             </div>

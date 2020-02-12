@@ -104,7 +104,7 @@ const SAMPLE_FEATURES: AudioFeature[] = [
         key: Pitch.B,
         mode: MusicalMode.MINOR,
         tempo: 136,
-        signature: 4,
+        time_signature: 4,
         loudness: -3.68,
         energy: 0.842,
         valence: 0.724,

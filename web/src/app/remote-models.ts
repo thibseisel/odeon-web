@@ -110,7 +110,7 @@ export interface AudioFeature {
      * An estimated overall time signature of a track.
      * The time signature (meter) is a notational convention to specify how many beats are in each bar (or measure).
      */
-    signature: number;
+    time_signature: number;
 
     /**
      * The overall loudness of a track in decibels (dB).
