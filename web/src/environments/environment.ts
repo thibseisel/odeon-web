@@ -6,7 +6,7 @@ import { EnvironmentConfig } from "./EnvironmentConfig";
 
 export const environment: EnvironmentConfig = {
   production: false,
-  useMockServer: true
+  apiBase: "http://localhost:3000"
 };
 
 /*

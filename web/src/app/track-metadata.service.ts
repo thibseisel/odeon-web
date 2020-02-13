@@ -4,6 +4,7 @@ import { Observable, of, zip } from "rxjs";
 import { catchError, map } from "rxjs/operators";
 import { AudioFeature, RemoteTrack, ImageSpec } from "./remote-models";
 import { SearchResult, Track } from "./track-models";
+import { environment } from "../environments/environment";
 
 @Injectable({
   providedIn: "root"
@@ -13,7 +14,7 @@ export class TrackMetadataService {
   /**
    * The root path of all endpoints.
    */
-  private readonly baseUrl = "/api";
+  private readonly baseUrl = environment.apiBase;
 
   constructor(private http: HttpClient) { }
 

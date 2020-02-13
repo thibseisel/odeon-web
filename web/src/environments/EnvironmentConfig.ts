@@ -9,7 +9,8 @@ export interface EnvironmentConfig {
     production: boolean;
 
     /**
-     * Whether HTTP calls should be mocked to return pre-defined data.
+     * The base URL used to access the server's REST API.
+     * The specified path should *not* end with a "/" character.
      */
-    useMockServer: boolean;
+    apiBase: string;
 }
