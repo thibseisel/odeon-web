@@ -57,6 +57,18 @@ export class TrackSearchComponent implements OnInit, OnDestroy {
  * Describes the state hold by the search component.
  */
 export interface SearchState {
+  
+  /**
+   * Whether a search is currently pending.
+   */
   readonly loading: boolean;
+
+  /**
+   * The results of the last performed search.
+   * This may not present if no search results are available yet.
+   * 
+   * When the loading is true, those results are not up-to-date with the latest submitted search query
+   * and only represent the result of a previous search.
+   */
   readonly results?: SearchResult[];
 }

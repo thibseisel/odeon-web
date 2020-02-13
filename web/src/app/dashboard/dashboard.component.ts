@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { Observable, Subject, BehaviorSubject } from "rxjs";
-import { map, scan, startWith, switchMap, tap } from "rxjs/operators";
+import { map, scan, startWith, switchMap, tap, debounceTime } from "rxjs/operators";
 import { TrackMetadataService } from "../track-metadata.service";
 import { SearchResult, Track } from "../track-models";
 import { SearchState } from "../track-search/track-search.component";
@@ -14,21 +14,21 @@ export class DashboardComponent {
   private readonly userQuery = new Subject<string>();
   private readonly displayedTrackId = new Subject<string>();
 
-  public results$: Observable<SearchState> = this.userQuery.pipe(
-    switchMap((query) => this.source.rawTrackSearch(query).pipe(
-      map((results) => {
-        return { loading: false, results: results };
-      }),
-      startWith({ loading: true, results: undefined })
-    )),
+  /**
+   * The state of the search component over time.
+   * The result set is initially empty and the progress indicator is not shown.
+   * 
+   * Whenever the search query has changed an asynchronous search is performed,
+   * displaying a progress indicator until results are available.
+   * If querying the results takes less than 300 milliseconds then the progress indicator is not shown.
+   */
+  public readonly results$: Observable<SearchState> = this.userQuery.pipe(
+    switchMap((query) => this.performTrackSearch(query)),
     startWith({ loading: false, results: [] }),
-    scan((current: SearchState, next: SearchState) => {
-      return {
-        loading: next.loading,
-        results: next?.results ?? current.results
-      }
-    }),
-    tap((state) => console.log("Updating state", state))
+    scan((current: SearchState, next: SearchState) => <SearchState>{
+      loading: next.loading,
+      results: next.results ?? current.results
+    })
   );
 
   public readonly track$: Observable<Track | null> = this.displayedTrackId.pipe(
@@ -43,5 +43,18 @@ export class DashboardComponent {
 
   public loadTrackDetail(track: SearchResult) {
     this.displayedTrackId.next(track.id);
+  }
+
+  private performTrackSearch(query: string): Observable<SearchState> {
+    function toSearchState(results: SearchResult[]): SearchState {
+      return { loading: false, results: results };
+    }
+
+    const asyncResults = this.source.rawTrackSearch(query);
+    return asyncResults.pipe(
+      map(toSearchState),
+      startWith({ loading: true }),
+      debounceTime(300)
+    );
   }
 }
