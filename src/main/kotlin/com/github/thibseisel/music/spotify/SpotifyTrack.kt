@@ -28,7 +28,7 @@ open class SpotifyTrack @JsonCreator constructor(
      * The unique identifier of this track on Spotify servers.
      */
     @JsonProperty("id")
-    val id: String,
+    override val id: String,
 
     /**
      * The name of the track.
@@ -53,7 +53,7 @@ open class SpotifyTrack @JsonCreator constructor(
      * The track length in milliseconds.
      */
     @JsonProperty("duration_ms")
-    val duration: Int,
+    val duration: Long,
 
     /**
      * Whether or not the track has explicit lyrics ( true = yes it does; false = no it does not OR unknown).
@@ -72,7 +72,8 @@ open class SpotifyTrack @JsonCreator constructor(
      */
     @JsonProperty("artists")
     val artists: List<SpotifyArtist>
-) {
+
+) : SpotifyEntity {
     override fun toString(): String = "spotify:track:$id ($name)"
 }
 
@@ -107,7 +108,23 @@ class FullSpotifyTrack @JsonCreator constructor(
      * The track length in milliseconds.
      */
     @JsonProperty("duration_ms")
-    duration: Int,
+    duration: Long,
+
+    /**
+     * The popularity of the track.
+     * The value will be between 0 and 100, with 100 being the most popular.
+     *
+     * The popularity is calculated by algorithm and is based, in the most part,
+     * on the total number of plays the track has had and how recent those plays are.
+     *
+     * Generally speaking, songs that are played a lot now will have a higher popularity
+     * than songs that were played a lot in the past.
+     * Duplicate tracks (e.g. the same track from a single and an album) are rated independently.
+     * Artist and album popularity is derived mathematically from track popularity.
+     * Note that the popularity value may lag actual popularity by a few days: the value is not updated in real time.
+     */
+    @JsonProperty("popularity")
+    val popularity: Int,
 
     /**
      * Whether or not the track has explicit lyrics ( true = yes it does; false = no it does not OR unknown).
@@ -125,9 +142,6 @@ class FullSpotifyTrack @JsonCreator constructor(
      * The artist that produced this track.
      */
     @JsonProperty("artists")
-    artists: List<SpotifyArtist>,
-
-    @JsonProperty("popularity")
-    val popularity: Int
+    artists: List<SpotifyArtist>
 
 ) : SpotifyTrack(id, name, discNumber, trackNumber, duration, explicit, album, artists)

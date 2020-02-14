@@ -36,29 +36,27 @@ internal class SpotifyServiceImpl(
         }
     }
 
-    override suspend fun findTrack(id: String): FullSpotifyTrack? {
+    override suspend fun findArtist(id: String): FullSpotifyArtist? =
+        findEntity("artists/{id}", id)
+
+    override suspend fun findAlbum(id: String): FullSpotifyAlbum? =
+        findEntity("albums/{id}", id)
+
+    override suspend fun findTrack(id: String): FullSpotifyTrack? =
+        findEntity("tracks/{id}", id)
+
+    override suspend fun findAudioFeature(trackId: String): SpotifyAudioFeature? =
+        findEntity("audio-features/{id}", trackId)
+
+    private suspend inline fun <reified T : SpotifyEntity> findEntity(endpoint: String, id: String): T? {
         try {
             return http.get()
-                .uri("/tracks/{id}", id)
+                .uri(endpoint, id)
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
                 .awaitBody()
 
-        } catch (trackNotFound: WebClientResponseException.NotFound) {
-            return null
-        } catch (genericFailure: WebClientResponseException) {
-            handleSpotifyFailure(genericFailure)
-        }
-    }
-
-    override suspend fun findAudioFeature(trackId: String): SpotifyAudioFeature? {
-        try {
-            return http.get()
-                .uri("/audio-features/{id}", trackId)
-                .accept(MediaType.APPLICATION_JSON)
-                .retrieve()
-                .awaitBody()
-        } catch (featureNotFound: WebClientResponseException.NotFound) {
+        } catch (entityNotFound: WebClientResponseException.NotFound) {
             return null
         } catch (genericFailure: WebClientResponseException) {
             handleSpotifyFailure(genericFailure)

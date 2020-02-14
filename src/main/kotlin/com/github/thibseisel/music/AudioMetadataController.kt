@@ -1,9 +1,7 @@
 package com.github.thibseisel.music
 
 import com.github.thibseisel.music.client.SpotifyService
-import com.github.thibseisel.music.spotify.FullSpotifyTrack
-import com.github.thibseisel.music.spotify.SpotifyAudioFeature
-import com.github.thibseisel.music.spotify.SpotifyTrack
+import com.github.thibseisel.music.spotify.*
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -36,28 +34,34 @@ class AudioMetadataController(
         }
     }
 
+    @GetMapping("/artists/{id}")
+    suspend fun getArtist(
+        @PathVariable("id") id: String
+    ) : FullSpotifyArtist = service.findArtist(id)
+        ?: throw ResponseStatusException(HttpStatus.NOT_FOUND)
+
+    @GetMapping("/albums/{id}")
+    suspend fun getAlbum(
+        @PathVariable("id") id: String
+    ) : FullSpotifyAlbum = service.findAlbum(id)
+        ?: throw ResponseStatusException(HttpStatus.NOT_FOUND)
+
     @GetMapping("/tracks/{id}")
     suspend fun getTrack(
         @PathVariable("id") id: String
-    ): FullSpotifyTrack {
-        return service.findTrack(id)
-            ?: throw ResponseStatusException(HttpStatus.NOT_FOUND)
-    }
+    ): FullSpotifyTrack = service.findTrack(id)
+        ?: throw ResponseStatusException(HttpStatus.NOT_FOUND)
 
     @GetMapping("/audio-features/{id}")
     suspend fun getAudioFeature(
         @PathVariable("id") trackId: String
-    ): SpotifyAudioFeature {
-        return service.findAudioFeature(trackId)
-            ?: throw ResponseStatusException(HttpStatus.NOT_FOUND)
-    }
+    ): SpotifyAudioFeature = service.findAudioFeature(trackId)
+        ?: throw ResponseStatusException(HttpStatus.NOT_FOUND)
 
     @GetMapping("/audio-features")
     suspend fun getSeveralAudioFeatures(
         @RequestParam("ids") trackIds: List<String>
-    ): List<SpotifyAudioFeature?> {
-        return service.getSeveralAudioFeatures(trackIds)
-    }
+    ): List<SpotifyAudioFeature?> = service.getSeveralAudioFeatures(trackIds)
 
     @ExceptionHandler
     fun handle(httpException: ResponseStatusException): ResponseEntity<ErrorPayload> {

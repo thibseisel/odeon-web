@@ -25,14 +25,15 @@ open class SpotifyArtist(
      * The unique identifier of this artist on Spotify servers.
      */
     @JsonProperty("id")
-    val id: String,
+    override val id: String,
 
     /**
      * The name of this artist.
      */
     @JsonProperty("name")
     val name: String
-) {
+
+) : SpotifyEntity {
     override fun toString(): String = "spotify:artist:$id ($name)"
 }
 

@@ -28,7 +28,7 @@ class SpotifyAudioFeature @JsonCreator constructor(
      * The unique identifier of the analyzed track in Spotify servers.
      */
     @JsonProperty("id")
-    val id: String,
+    override val id: String,
 
     /**
      * The estimated overall key of the track.
@@ -77,6 +77,8 @@ class SpotifyAudioFeature @JsonCreator constructor(
     /**
      * An estimated overall time signature of a track.
      * The time signature (meter) is a notational convention to specify how many beats are in each bar (or measure).
+     * It ranges from `3` to `7`, indicating time signatures of "3/4" to "7/4".
+     * Exceptionally, a value of 1 indicates a rather complex or changing time signature.
      */
     @JsonProperty("time_signature")
     val signature: Int,
@@ -153,6 +155,7 @@ class SpotifyAudioFeature @JsonCreator constructor(
      */
     @JsonProperty("valence")
     val valence: Float
-) {
+
+) : SpotifyEntity {
     override fun toString(): String = "spotify:audio_features:$id"
 }
