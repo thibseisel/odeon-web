@@ -6,19 +6,29 @@
       "disc_number": 1,
       "track_number": 3,
       "duration": 0,
-      "popularity": 80,
+      "popularity": 67,
       "artists": [
         {
-          "id": "",
+          "id": "12Chz98pHFMPJEknJQMWvI",
           "name": "Muse"
         }
       ],
       "album": {
-        "id": "",
+        "id": "5OZgDtx180ZZPMpm36J2zC",
         "name": "Simulation Theory",
-        "release_date": "2018",
-        "release_date_precision": "year",
+        "release_date": "2018-11-09",
+        "release_date_precision": "day",
         "images": [
+          {
+            "url": "https://i.scdn.co/image/ab67616d0000b2734cb163c1d111f77307c842b6",
+            "width": 640,
+            "height": 640
+          },
+          {
+            "url": "https://i.scdn.co/image/ab67616d00001e024cb163c1d111f77307c842b6",
+            "width": 300,
+            "height": 300
+          },
           {
             "url": "https://i.scdn.co/image/ab67616d000048514cb163c1d111f77307c842b6",
             "width": 64,
@@ -71,6 +81,7 @@
       "disc_number": 1,
       "track_number": 2,
       "duration_ms": 240213,
+      "popularity": 72,
       "explicit": false,
       "album": {
         "id": "0lw68yx3MhKflWFqCsGkIs",
@@ -100,8 +111,7 @@
           "id": "12Chz98pHFMPJEknJQMWvI",
           "name": "Muse"
         }
-      ],
-      "popularity": 72
+      ]
     }
   ],
   "audio-features": [
