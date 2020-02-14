@@ -37,16 +37,16 @@ internal class SpotifyServiceImpl(
     }
 
     override suspend fun findArtist(id: String): FullSpotifyArtist? =
-        findEntity<FullSpotifyArtist>("/artists/{id}", id)
+        findEntity("/artists/{id}", id)
 
     override suspend fun findAlbum(id: String): FullSpotifyAlbum? =
-        findEntity<FullSpotifyAlbum>("/albums/{id}", id)
+        findEntity("/albums/{id}", id)
 
     override suspend fun findTrack(id: String): FullSpotifyTrack? =
-        findEntity<FullSpotifyTrack>("/tracks/{id}", id)
+        findEntity("/tracks/{id}", id)
 
     override suspend fun findAudioFeature(trackId: String): SpotifyAudioFeature? =
-        findEntity<SpotifyAudioFeature>("/audio-features/{id}", trackId)
+        findEntity("/audio-features/{id}", trackId)
 
     private suspend inline fun <reified T : SpotifyEntity> findEntity(endpoint: String, id: String): T? {
         try {
