@@ -1,7 +1,7 @@
 <mat-card *ngIf="track">
 
     <div class="info-header">
-        <img class="info-header__artwork" [src]="track!.artworkUrl"/>
+        <img class="info-header__artwork" [src]="track!.artworkUrl" />
         <div class="info-header__metadata">
             <h1 class="info-header__title">{{ track!.name }}</h1>
             <p class="info-header__subtitle mat-body-2">{{ track!.artist }}</p>
@@ -11,6 +11,7 @@
                 <app-odeon-cartridge class="cartridge-list__item" color="secondary">{{ track!.features.loudness | number: '1.1-2' }} dB</app-odeon-cartridge>
             </div>
         </div>
+        <p class="info-header__tone mat-body-2">{{ tone }}</p>
     </div>
     
     <mat-divider></mat-divider>
