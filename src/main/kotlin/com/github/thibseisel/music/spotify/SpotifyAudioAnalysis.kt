@@ -183,6 +183,12 @@ class SpotifySegment @JsonCreator constructor(
     val start: Float,
 
     /**
+     * The duration (in seconds) of the segment.
+     */
+    @JsonProperty("duration")
+    val duration: Float,
+
+    /**
      * The confidence, from `0.0`to `1.0`, of the reliability of the segmentation.
      * Segments of the song which are difficult to logically segment (e.g. noise)
      * may correspond to low values in this field.
