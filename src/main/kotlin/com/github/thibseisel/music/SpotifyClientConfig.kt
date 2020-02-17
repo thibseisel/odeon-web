@@ -34,7 +34,10 @@ class SpotifyClientConfig {
 
         return WebClient.builder()
             .baseUrl(SPOTIFY_BASE_URL)
+            .codecs { it.defaultCodecs().maxInMemorySize(ONE_MEGABYTE) }
             .filter(oauth)
             .build()
     }
 }
+
+private const val ONE_MEGABYTE = 1024 * 1024
