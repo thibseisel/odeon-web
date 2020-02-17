@@ -35,23 +35,7 @@ class SpotifyAudioAnalysis @JsonCreator constructor(
      * Each section contains its own descriptions of tempo, key, mode, time signature and loudness.
      */
     @JsonProperty("sections")
-    val sections: List<SpotifySection>,
-
-    /**
-     * Audio segments attempts to subdivide a song into many segments,
-     * with each segment containing a roughly consistent sound throughout its duration.
-     */
-    @JsonProperty("segments")
-    val segments: List<SpotifySegment>,
-
-    /**
-     * A tatum represents the lowest regular pulse train that a listener
-     * intuitively infers from the timing of perceived musical events (segments).
-     *
-     * Tatums are subdivisions of _beats_.
-     */
-    @JsonProperty("tatums")
-    val tatums: List<SpotifyTimeInterval>
+    val sections: List<SpotifySection>
 )
 
 /**
@@ -172,95 +156,4 @@ class SpotifySection @JsonCreator constructor(
      */
     @JsonProperty("time_signature_confidence")
     val signatureConfidence: Float
-)
-
-class SpotifySegment @JsonCreator constructor(
-
-    /**
-     * The duration (in seconds) of the segment.
-     */
-    @JsonProperty("start")
-    val start: Float,
-
-    /**
-     * The duration (in seconds) of the segment.
-     */
-    @JsonProperty("duration")
-    val duration: Float,
-
-    /**
-     * The confidence, from `0.0`to `1.0`, of the reliability of the segmentation.
-     * Segments of the song which are difficult to logically segment (e.g. noise)
-     * may correspond to low values in this field.
-     */
-    @JsonProperty("confidence")
-    val confidence: Float,
-
-    /**
-     * The onset loudness of the segment in decibels (dB).
-     * Combined with [loudnessMax] and [loudnessMaxTime], these components can be used to describe the "attack"
-     * of the segment.
-     */
-    @JsonProperty("loudness_start")
-    val loudnessStart: Float,
-
-    /**
-     * The peak loudness of the segment in decibels (dB).
-     * Combined with [loudnessStart] and [loudnessMaxTime], these components can be used to describe the "attack"
-     * of the segment.
-     */
-    @JsonProperty("loudness_max")
-    val loudnessMax: Float,
-
-    /**
-     * The segment-relative offset of the segment peak loudness in seconds.
-     * Combined with [loudnessStart] and [loudnessMax], these components can be used to describe the "attack"
-     * of the segment.
-     */
-    @JsonProperty("loudness_max_time")
-    val loudnessMaxTime: Float,
-
-    /**
-     * The offset loudness of the segment in decibels (dB).
-     * This value should be equivalent to the [loudnessStart] of the following segment.
-     */
-    @JsonProperty("loudness_end")
-    val loudnessEnd: Float,
-
-    /**
-     * A "chroma" vector representing the pitch content of the segment, corresponding to the 12 pitch classes
-     * C, C#, D to B, with values ranging from `0.0` to `1.0` that describe the relative dominance
-     * of every pitch in the chromatic scale.
-     *
-     * For example a C Major chord would likely be represented by large values of C, E and G (i.e. classes 0, 4 and 7).
-     * Vectors are normalized to 1 by their strongest dimension, therefore noisy sounds are likely represented
-     * by values that are all close to `1`, while pure tones are described by one value at `1` (the pitch)
-     * and others near `0`.
-     */
-    @JsonProperty("pitches")
-    val pitches: FloatArray,
-
-    /**
-     * Timbre is the quality of a music note or sound that distinguishes different types of musical instruments
-     * or voices. It is a complex notion also referred to as sound color, texture, or tone quality,
-     * and is derived from the shape of a segment's spectro-temporal surface,
-     * independently or pitches and loudness.
-     * The timbre feature is a vector that includes 12 unbounded values roughly centered around `0`.
-     * Those values are high level abstractions of the spectral surface, ordered by degree of importance.
-     *
-     * For completeness however, the first dimension represents the average loudness of the segment,
-     * second emphasizes brightness,
-     * third is more closely correlated to the flatness of a sound,
-     * forth to sounds with a stronger attack; etc.
-     *
-     * The actual timbre of the segment is best described as a linear combination of these 12 basis functions weighted
-     * by the coefficient values:
-     * ```
-     * timbre = c1 × b1 + c2 × b2 + ... + c12 × b12
-     * ```
-     * where `c1` to `c12` represent the 12 coefficients and `b1` to `b12` the 12 basis functions.
-     * Timbre vectors are best used in comparison with each other.
-     */
-    @JsonProperty("timbre")
-    val timbre: FloatArray
 )
