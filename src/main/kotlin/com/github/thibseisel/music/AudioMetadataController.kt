@@ -63,6 +63,12 @@ class AudioMetadataController(
         @RequestParam("ids") trackIds: List<String>
     ): List<SpotifyAudioFeature?> = service.getSeveralAudioFeatures(trackIds)
 
+    @GetMapping("/audio-analysis/{id}")
+    suspend fun getAudioAnalysis(
+        @PathVariable("id") trackId: String
+    ): SpotifyAudioAnalysis = service.findAudioAnalysis(trackId)
+        ?: throw ResponseStatusException(HttpStatus.NOT_FOUND)
+
     @ExceptionHandler
     fun handle(httpException: ResponseStatusException): ResponseEntity<ErrorPayload> {
         val errorStatus = httpException.status

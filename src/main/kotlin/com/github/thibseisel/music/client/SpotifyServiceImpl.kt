@@ -2,6 +2,7 @@ package com.github.thibseisel.music.client
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.github.thibseisel.music.spotify.*
+import com.github.thibseisel.music.spotify.SpotifyAudioAnalysis
 import org.springframework.http.MediaType
 import org.springframework.stereotype.Component
 import org.springframework.web.reactive.function.client.WebClient
@@ -76,6 +77,21 @@ internal class SpotifyServiceImpl(
                 .awaitBody<JsonWrapper<SpotifyAudioFeature?>>()
             return wrapper.data
 
+        } catch (genericFailure: WebClientResponseException) {
+            handleSpotifyFailure(genericFailure)
+        }
+    }
+
+    override suspend fun findAudioAnalysis(trackId: String): SpotifyAudioAnalysis? {
+        try {
+            return http.get()
+                .uri("/audio-analysis/{id}", trackId)
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .awaitBody()
+
+        } catch (entityNotFound: WebClientResponseException.NotFound) {
+            return null
         } catch (genericFailure: WebClientResponseException) {
             handleSpotifyFailure(genericFailure)
         }

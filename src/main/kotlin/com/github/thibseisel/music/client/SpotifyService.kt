@@ -1,6 +1,7 @@
 package com.github.thibseisel.music.client
 
 import com.github.thibseisel.music.spotify.*
+import com.github.thibseisel.music.spotify.SpotifyAudioAnalysis
 import org.springframework.http.HttpStatus
 
 /**
@@ -13,6 +14,7 @@ interface SpotifyService {
     suspend fun findTrack(id: String): FullSpotifyTrack?
     suspend fun findAudioFeature(trackId: String): SpotifyAudioFeature?
     suspend fun getSeveralAudioFeatures(trackIds: List<String>): List<SpotifyAudioFeature?>
+    suspend fun findAudioAnalysis(trackId: String): SpotifyAudioAnalysis?
 
     /**
      * Throw when a Spotify API HTTP call failed.
