@@ -89,7 +89,7 @@ val buildAngular by tasks.registering(Exec::class) {
 
 	workingDir = file(webDir)
 
-	val buildCommand = "npm run build"
+	val buildCommand = "npm run build -- --prod"
 	if (isRunningOnWindows()) {
 		commandLine("cmd", "/C", buildCommand)
 	} else {
