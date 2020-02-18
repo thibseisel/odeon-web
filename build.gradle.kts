@@ -41,3 +41,44 @@ tasks.withType<KotlinCompile> {
 		jvmTarget = "1.8"
 	}
 }
+
+val os = System.getProperty("os.name") ?: throw GradleException("Unable to detect OS name.")
+val isWindows = os.contains("Windows", ignoreCase = true)
+val webDir = "$rootDir/web"
+
+tasks.register<Exec>("checkNpmIsInstalled") {
+	description = "Checks that NPM (Node Package Manager) is installed."
+
+	workingDir = file(webDir)
+
+	if (isWindows) {
+		commandLine("cmd", "/C", "npm -v")
+	} else {
+		commandLine("sh", "-c", "npm -v")
+	}
+}
+
+tasks["build"].dependsOn("checkNpmIsInstalled")
+
+tasks.register<Exec>("installAngularDependencies") {
+	description = "Installs dependencies required to build the Angular front-end application via NPM."
+	dependsOn("checkNpmIsInstalled")
+
+	inputs.file("$webDir/package.json")
+	outputs.dir("$webDir/node_modules")
+
+	workingDir = file(webDir)
+	commandLine("cmd", "/C", "npm install")
+}
+
+tasks.register<Exec>("buildAngular") {
+	description = "Builds the Angular front-end application with Angular CLI."
+
+	shouldRunAfter("installAngularDependencies")
+
+	inputs.dir(webDir)
+	outputs.dir("$webDir/dist")
+
+	workingDir = file(webDir)
+	commandLine("cmd", "/C", "npm run build -- --prod")
+}
