@@ -42,43 +42,57 @@ tasks.withType<KotlinCompile> {
 	}
 }
 
-val os = System.getProperty("os.name") ?: throw GradleException("Unable to detect OS name.")
-val isWindows = os.contains("Windows", ignoreCase = true)
+fun isRunningOnWindows(): Boolean {
+	val osName = System.getProperty("os.name")
+			?: throw GradleException("Unable to detect current Operating System.")
+	return osName.contains("Windows", ignoreCase = true)
+}
+
 val webDir = "$rootDir/web"
 
-tasks.register<Exec>("checkNpmIsInstalled") {
+val requireNpm by tasks.registering(Exec::class) {
 	description = "Checks that NPM (Node Package Manager) is installed."
 
 	workingDir = file(webDir)
 
-	if (isWindows) {
-		commandLine("cmd", "/C", "npm -v")
+	val detectionCommand = "npm -v"
+	if (isRunningOnWindows()) {
+		commandLine("cmd", "/C", detectionCommand)
 	} else {
-		commandLine("sh", "-c", "npm -v")
+		commandLine("sh", "-c", detectionCommand)
 	}
 }
 
-tasks["build"].dependsOn("checkNpmIsInstalled")
-
-tasks.register<Exec>("installAngularDependencies") {
+val installAngularDependencies by tasks.registering(Exec::class) {
 	description = "Installs dependencies required to build the Angular front-end application via NPM."
-	dependsOn("checkNpmIsInstalled")
+	dependsOn(requireNpm)
 
 	inputs.file("$webDir/package.json")
 	outputs.dir("$webDir/node_modules")
 
 	workingDir = file(webDir)
-	commandLine("cmd", "/C", "npm install")
+	val installCommand = "npm install"
+	if (isRunningOnWindows()) {
+		commandLine("cmd", "/C", installCommand)
+	} else {
+		commandLine("sh", "-c", installCommand)
+	}
 }
 
 tasks.register<Exec>("buildAngular") {
 	description = "Builds the Angular front-end application with Angular CLI."
+	dependsOn(installAngularDependencies)
 
-	shouldRunAfter("installAngularDependencies")
-
-	inputs.dir(webDir)
+	inputs.file("$webDir/package-lock.json")
+	inputs.dir("$webDir/src")
 	outputs.dir("$webDir/dist")
 
 	workingDir = file(webDir)
-	commandLine("cmd", "/C", "npm run build -- --prod")
+
+	val buildCommand = "npm run build -- --prod"
+	if (isRunningOnWindows()) {
+		commandLine("cmd", "/C", buildCommand)
+	} else {
+		commandLine("sh", "-c", buildCommand)
+	}
 }
