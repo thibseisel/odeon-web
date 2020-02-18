@@ -79,7 +79,7 @@ val installAngularDependencies by tasks.registering(Exec::class) {
 	}
 }
 
-tasks.register<Exec>("buildAngular") {
+val buildAngular by tasks.registering(Exec::class) {
 	description = "Builds the Angular front-end application with Angular CLI."
 	dependsOn(installAngularDependencies)
 
@@ -89,10 +89,20 @@ tasks.register<Exec>("buildAngular") {
 
 	workingDir = file(webDir)
 
-	val buildCommand = "npm run build -- --prod"
+	val buildCommand = "npm run build"
 	if (isRunningOnWindows()) {
 		commandLine("cmd", "/C", buildCommand)
 	} else {
 		commandLine("sh", "-c", buildCommand)
 	}
 }
+
+val copyCompiledAngularApp by tasks.registering(Copy::class) {
+	description = "Copy compiled Angular app to server public resources."
+	dependsOn(buildAngular)
+
+	from("$webDir/dist/odeon-web")
+	into("$buildDir/resources/main/public")
+}
+
+tasks["bootJar"].dependsOn(copyCompiledAngularApp)
