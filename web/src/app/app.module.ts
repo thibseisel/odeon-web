@@ -4,24 +4,17 @@ import { BrowserModule } from "@angular/platform-browser";
 import { AppMaterialModule } from "./app-material.module";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
-import { DashboardComponent } from "./dashboard/dashboard.component";
-import { OdeonCartridgeComponent } from './odeon-cartridge/odeon-cartridge.component';
-import { TrackDetailComponent } from "./track-detail/track-detail.component";
-import { TrackSearchComponent } from "./track-search/track-search.component";
+import { TrackAnalysisModule } from "./track-analysis/track-analysis.module";
 
 @NgModule({
   declarations: [
-    AppComponent,
-    DashboardComponent,
-    TrackSearchComponent,
-    TrackDetailComponent,
-    OdeonCartridgeComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
-    HttpClientModule,
     AppRoutingModule,
-    AppMaterialModule
+    AppMaterialModule,
+    TrackAnalysisModule
   ],
   providers: [],
   bootstrap: [AppComponent]
