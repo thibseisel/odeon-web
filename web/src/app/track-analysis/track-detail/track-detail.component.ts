@@ -30,11 +30,11 @@ function codeToKeyName(key: number | undefined): string {
     case 0:
       return "C";
     case 1:
-      return "C#";
+      return "Db";
     case 2:
       return "D";
     case 3:
-      return "D#";
+      return "Eb";
     case 4:
       return "E";
     case 5:
@@ -44,11 +44,11 @@ function codeToKeyName(key: number | undefined): string {
     case 7:
       return "G";
     case 8:
-      return "G#";
+      return "Ab";
     case 9:
       return "A";
     case 10:
-      return "A#";
+      return "Bb";
     case 11:
       return "B";
     default:
