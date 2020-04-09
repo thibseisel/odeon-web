@@ -5,6 +5,7 @@ import { AppMaterialModule } from "./app-material.module";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { TrackAnalysisModule } from "./track-analysis/track-analysis.module";
+import { PlaylistAnalysisModule } from "./playlist-analysis/playlist-analysis.module";
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { TrackAnalysisModule } from "./track-analysis/track-analysis.module";
     BrowserModule,
     AppRoutingModule,
     AppMaterialModule,
-    TrackAnalysisModule
+    TrackAnalysisModule,
+    PlaylistAnalysisModule
   ],
   providers: [],
   bootstrap: [AppComponent]
