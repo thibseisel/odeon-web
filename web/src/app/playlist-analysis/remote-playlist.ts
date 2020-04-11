@@ -28,11 +28,16 @@ export interface RemotePlaylist {
     readonly owner: string;
 
     /**
+     * The URL to view this playlist of Spotify.
+     */
+    readonly link: string;
+
+    /**
      * Images for the playlist.
      * The array may be empty or contain up to three images.
      * The images are returned by size in descending order.
      * 
      * _Note: if returned, the source URL for the image (`url`) is temporary and will expire in less than a day._
      */
-    readonly images: ImageSpec[];
+    readonly images: ReadonlyArray<ImageSpec>;
 }
