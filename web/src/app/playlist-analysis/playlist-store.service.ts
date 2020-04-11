@@ -25,13 +25,10 @@ export class PlaylistStoreService {
   public searchPlaylists(query: string): Observable<RemotePlaylist[]> {
     if (query.length > 0) {
       const playlistQueryParams = new HttpParams({
-        fromObject: {
-          type: "playlist",
-          q: query
-        }
+        fromObject: { q: query }
       })
 
-      return this.http.get<RemotePlaylist[]>(`${this.baseUrl}/search`, { params: playlistQueryParams }).pipe(
+      return this.http.get<RemotePlaylist[]>(`${this.baseUrl}/playlists`, { params: playlistQueryParams }).pipe(
         catchError(err => {
           console.error(`Failed to search for a playlist containing ${query}`, err)
           return of([])
