@@ -1,0 +1,11 @@
+<mat-toolbar>
+    <span class="toolbar-search">
+        <input #input (keyup)="updateQuery(input.value)"
+            type="search"
+            placeholder="Name of a Spotify playlist" />
+    </span>
+</mat-toolbar>
+
+<ul>
+    <li *ngFor="let playlist of playlists$ | async">{{ playlist.name }}</li>
+</ul>

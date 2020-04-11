@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from "@angular/common/http";
 import { AppMaterialModule } from "../app-material.module";
-import { PlaylistSearchComponent } from '../playlist-search/playlist-search.component';
+import { PlaylistHomeComponent } from './playlist-home/playlist-home.component';
 
 @NgModule({
-  declarations: [PlaylistSearchComponent],
+  declarations: [PlaylistHomeComponent],
   imports: [
     CommonModule,
     HttpClientModule,
