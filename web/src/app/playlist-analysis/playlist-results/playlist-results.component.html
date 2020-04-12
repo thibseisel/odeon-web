@@ -1,0 +1,11 @@
+<div class="playlist-grid">
+    <div class="playlist-grid__item" *ngFor="let playlist of playlists$ | async">
+        <mat-card mat-ripple (click)="select(playlist)">
+            <mat-card-title-group>
+                <mat-card-title>{{ playlist.name }}</mat-card-title>
+                <mat-card-subtitle>{{ playlist.description }}</mat-card-subtitle>
+            </mat-card-title-group>
+            <img mat-card-xl-image [src]="playlist.images[0].url" />
+        </mat-card>
+    </div>
+</div>

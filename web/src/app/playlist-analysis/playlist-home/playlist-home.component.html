@@ -6,6 +6,6 @@
     </span>
 </mat-toolbar>
 
-<ul>
-    <li *ngFor="let playlist of playlists$ | async">{{ playlist.name }}</li>
-</ul>
+<div class="container">
+    <router-outlet></router-outlet>
+</div>

@@ -1,4 +1,3 @@
-import { HttpClientModule } from "@angular/common/http";
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { AppMaterialModule } from "./app-material.module";
@@ -13,10 +12,10 @@ import { PlaylistAnalysisModule } from "./playlist-analysis/playlist-analysis.mo
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     AppMaterialModule,
     TrackAnalysisModule,
-    PlaylistAnalysisModule
+    PlaylistAnalysisModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,15 @@
+.playlist-grid {
+    display: flex;
+    flex-flow: row wrap;
+    align-content: flex-start;
+
+    margin-top: 8px;
+    margin-bottom: 8px;
+    overflow-y: auto;
+
+    .playlist-grid__item {
+        flex: 0 1 0;
+        margin: 8px;
+        cursor: pointer;
+    }
+}
