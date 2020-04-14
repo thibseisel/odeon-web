@@ -25,7 +25,7 @@ export class PlaylistStoreService {
   public searchPlaylists(query: string): Observable<RemotePlaylist[]> {
     if (query.length > 0) {
       const playlistQueryParams = new HttpParams({
-        fromObject: { q: query }
+        fromObject: { name: query }
       })
 
       return this.http.get<RemotePlaylist[]>(`${this.baseUrl}/playlists`, { params: playlistQueryParams }).pipe(

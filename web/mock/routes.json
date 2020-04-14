@@ -1,0 +1,3 @@
+{
+    "/playlists?name=:name": "/playlists?name_like=:name"
+}
