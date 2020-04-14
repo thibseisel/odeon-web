@@ -6,6 +6,7 @@ import { RemotePlaylist } from "./remote-playlist";
 import { catchError, concatMap, map } from "rxjs/operators";
 import { Track } from "../track-analysis/track-models";
 import { RemoteTrack, AudioFeature, ImageSpec } from "../track-analysis/remote-models";
+import { PlaylistResult } from "./playlist-models";
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,7 @@ export class PlaylistStoreService {
    * @param query Part of the name of the playlist that should be used as the search criteria.
    * @returns An asynchronous list of playlists that match the query.
    */
-  public searchPlaylists(query: string): Observable<RemotePlaylist[]> {
+  public searchPlaylists(query: string): Observable<PlaylistResult[]> {
     if (query.length > 0) {
       const playlistQueryParams = new HttpParams({
         fromObject: { name: query }
@@ -32,11 +33,22 @@ export class PlaylistStoreService {
         catchError(err => {
           console.error(`Failed to search for a playlist containing ${query}`, err)
           return of([])
-        })
+        }),
+        map((remoteModels: RemotePlaylist[]) => this.toPlaylistResult(remoteModels))
       )
     } else {
       return of([]);
     }
+  }
+
+  private toPlaylistResult(remotePlaylists: RemotePlaylist[]): PlaylistResult[] {
+    return remotePlaylists.map(remote => ({
+      id: remote.id,
+      name: remote.name,
+      description: remote.description,
+      trackCount: remote.number_of_tracks,
+      images: remote.images
+    }))
   }
 
   /**

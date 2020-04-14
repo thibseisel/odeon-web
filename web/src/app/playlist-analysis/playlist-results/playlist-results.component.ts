@@ -4,6 +4,7 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { PlaylistStoreService } from '../playlist-store.service';
 import { Observable, empty } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+import { PlaylistResult } from "../playlist-models";
 
 @Component({
   selector: 'app-playlist-results',
@@ -12,7 +13,7 @@ import { switchMap } from 'rxjs/operators';
 })
 export class PlaylistResultsComponent implements OnInit {
 
-  public playlists$!: Observable<readonly RemotePlaylist[]>;
+  public playlists$!: Observable<readonly PlaylistResult[]>;
 
   constructor(
     private router: Router,
