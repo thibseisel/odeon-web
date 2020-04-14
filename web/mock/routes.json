@@ -1,3 +1,4 @@
 {
-    "/playlists?name=:name": "/playlists?name_like=:name"
+    "/playlists?name=:name": "/playlists?name_like=:name",
+    "/playlists/:id/tracks": "/:id"
 }

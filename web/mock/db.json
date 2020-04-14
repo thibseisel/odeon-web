@@ -193,6 +193,238 @@
       ]
     }
   ],
+  "37i9dQZF1DWZnlcbl9Edex": [
+    {
+      "id": "2DlHlPMa4M17kufBvI2lEN",
+      "name": "Chop Suey!",
+      "disc_number": 1,
+      "track_number": 6,
+      "duration_ms": 210240,
+      "popularity": 79,
+      "explicit": false,
+      "album": {
+        "id": "6jWde94ln40epKIQCd8XUh",
+        "name": "Toxicity",
+        "release_date": "2001-09-04",
+        "release_date_precision": "day",
+        "images": [
+          {
+            "height": 640,
+            "url": "https://i.scdn.co/image/ab67616d0000b27330d45198d0c9e8841f9a9578",
+            "width": 640
+          },
+          {
+            "height": 300,
+            "url": "https://i.scdn.co/image/ab67616d00001e0230d45198d0c9e8841f9a9578",
+            "width": 300
+          },
+          {
+            "height": 64,
+            "url": "https://i.scdn.co/image/ab67616d0000485130d45198d0c9e8841f9a9578",
+            "width": 64
+          }
+        ]
+      },
+      "artists": [
+        {
+          "id": "5eAWCfyUhZtHHtBdNk56l1",
+          "name": "System Of A Down"
+        }
+      ]
+    },
+    {
+      "id": "272RnVOeeuc8xE6jCpbRAe",
+      "name": "Boneshaker",
+      "disc_number": 1,
+      "track_number": 1,
+      "duration_ms": 210103,
+      "explicit": false,
+      "popularity": 45,
+      "album": {
+        "id": "3exqV2MhKWetLhgfc7RPBO",
+        "name": "Boneshaker",
+        "release_date": "2019-10-25",
+        "release_date_precision": "day",
+        "images": [
+          {
+            "height": 640,
+            "url": "https://i.scdn.co/image/ab67616d0000b2730b08421d532524e82068010f",
+            "width": 640
+          },
+          {
+            "height": 300,
+            "url": "https://i.scdn.co/image/ab67616d00001e020b08421d532524e82068010f",
+            "width": 300
+          },
+          {
+            "height": 64,
+            "url": "https://i.scdn.co/image/ab67616d000048510b08421d532524e82068010f",
+            "width": 64
+          }
+        ]
+      },
+      "artists": [
+        {
+          "id": "6urzdpGY5yUimWZsgJUoTb",
+          "name": "Airbourne"
+        }
+      ]
+    },
+    {
+      "id": "4NPIkDt08kLz70gHOrO5uU",
+      "name": "What's up, people?!",
+      "disc_number": 1,
+      "track_number": 10,
+      "duration_ms": 250226,
+      "popularity": 57,
+      "explicit": false,
+      "album": {
+        "id": "43KD7ooLIEkXriTaZA4drI",
+        "name": "Bu-ikikaesu",
+        "release_date": "2007-03-14",
+        "release_date_precision": "day",
+        "images": [
+          {
+            "height": 640,
+            "url": "https://i.scdn.co/image/ab67616d0000b273ce7b647fbb4e137ba39ad271",
+            "width": 640
+          },
+          {
+            "height": 300,
+            "url": "https://i.scdn.co/image/ab67616d00001e02ce7b647fbb4e137ba39ad271",
+            "width": 300
+          },
+          {
+            "height": 64,
+            "url": "https://i.scdn.co/image/ab67616d00004851ce7b647fbb4e137ba39ad271",
+            "width": 64
+          }
+        ]
+      },
+      "artists": [
+        {
+          "id": "3AMut7lAb1JjINkn8Fmkhu",
+          "name": "MAXIMUM THE HORMONE"
+        }
+      ]
+    }
+  ],
+  "37i9dQZF1DX9uKNf5jGX6m": [
+    {
+      "id": "6kAwnVIencquZ72t4X46Lh",
+      "name": "Afternoon Spirits",
+      "disc_number": 1,
+      "track_number": 4,
+      "duration_ms": 211583,
+      "popularity": 64,
+      "explicit": false,
+      "album": {
+        "id": "0aovJaJL5ehp9AtwcSJtce",
+        "name": "Legend Of Zea",
+        "release_date": "2019-02-15",
+        "release_date_precision": "day",
+        "images": [
+          {
+            "height": 640,
+            "url": "https://i.scdn.co/image/ab67616d0000b2734618a129c2c5ac00e62ab839",
+            "width": 640
+          },
+          {
+            "height": 300,
+            "url": "https://i.scdn.co/image/ab67616d00001e024618a129c2c5ac00e62ab839",
+            "width": 300
+          },
+          {
+            "height": 64,
+            "url": "https://i.scdn.co/image/ab67616d000048514618a129c2c5ac00e62ab839",
+            "width": 64
+          }
+        ]
+      },
+      "artists": [
+        {
+          "id": "2GW7BMmmFwI0cDvop6sOWg",
+          "name": "Cora Zea"
+        }
+      ]
+    },
+    {
+      "id": "214O1Gcgv9lCWJoley3Ttg",
+      "name": "The Light of Day",
+      "disc_number": 1,
+      "track_number": 1,
+      "duration_ms": 167386,
+      "popularity": 64,
+      "explicit": false,
+      "album": {
+        "id": "7mMVxWIPhNEyozLDXxqw71",
+        "name": "The Light of Day",
+        "release_date": "2019-01-24",
+        "release_date_precision": "day",
+        "images": [
+          {
+            "height": 640,
+            "url": "https://i.scdn.co/image/ab67616d0000b2731bf68b9bccd326c5a0b97784",
+            "width": 640
+          },
+          {
+            "height": 300,
+            "url": "https://i.scdn.co/image/ab67616d00001e021bf68b9bccd326c5a0b97784",
+            "width": 300
+          },
+          {
+            "height": 64,
+            "url": "https://i.scdn.co/image/ab67616d000048511bf68b9bccd326c5a0b97784",
+            "width": 64
+          }
+        ]
+      },
+      "artists": [
+        {
+          "id": "2WuwBckoWivO9e7DgRFt6F",
+          "name": "Chymeris"
+        }
+      ]
+    },
+    {
+      "id": "4LGW9dwnuR8a3G1GWcAubi",
+      "name": "Sleeping Trees",
+      "disc_number": 1,
+      "track_number": 2,
+      "duration_ms": 183689,
+      "popularity": 63,
+      "explicit": false,
+      "album": {
+        "id": "6hZoc7bZWQxSUg0DyPMYIa",
+        "name": "Forest Wisdom",
+        "release_date": "2019-05-28",
+        "release_date_precision": "day",
+        "images": [
+          {
+            "height": 640,
+            "url": "https://i.scdn.co/image/ab67616d0000b27332133009a5997afc0b9e1ed5",
+            "width": 640
+          },
+          {
+            "height": 300,
+            "url": "https://i.scdn.co/image/ab67616d00001e0232133009a5997afc0b9e1ed5",
+            "width": 300
+          },
+          {
+            "height": 64,
+            "url": "https://i.scdn.co/image/ab67616d0000485132133009a5997afc0b9e1ed5",
+            "width": 64
+          }
+        ]
+      },
+      "artists": [
+        {
+          "id": "0UWgEdhywZEON8EtIBYGoL",
+          "name": "John Ocean"
+        }
+      ]
+    }
+  ],
   "search": [
     {
       "id": "4VqPOruhp5EdPBeR92t6lQ",
