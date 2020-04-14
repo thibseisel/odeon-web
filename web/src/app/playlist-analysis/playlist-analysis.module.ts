@@ -5,6 +5,7 @@ import { HttpClientModule } from "@angular/common/http";
 import { AppMaterialModule } from "../app-material.module";
 import { PlaylistHomeComponent } from './playlist-home/playlist-home.component';
 import { PlaylistResultsComponent } from './playlist-results/playlist-results.component';
+import { PlaylistDetailComponent } from './playlist-detail/playlist-detail.component';
 
 const playlistRoutes: Routes = [
   {
@@ -14,13 +15,17 @@ const playlistRoutes: Routes = [
       {
         path: "",
         component: PlaylistResultsComponent
+      },
+      {
+        path: ":id",
+        component: PlaylistDetailComponent
       }
     ]
   }
 ]
 
 @NgModule({
-  declarations: [PlaylistHomeComponent, PlaylistResultsComponent],
+  declarations: [PlaylistHomeComponent, PlaylistResultsComponent, PlaylistDetailComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(playlistRoutes),

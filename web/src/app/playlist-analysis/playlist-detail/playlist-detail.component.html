@@ -1,0 +1,19 @@
+<section class="playlist-detail" *ngIf="tracks$ | async as tracks">
+    <mat-card class="playlist-detail__info">
+        <mat-card-title>Title</mat-card-title>
+        <mat-card-subtitle>Description</mat-card-subtitle>
+    </mat-card>
+    <mat-card class="playlist-detail__tracks">
+        <mat-list>
+            <mat-list-item *ngFor="let track of tracks; last as last">
+                <img mat-list-avatar [src]="track.artworkUrl" />
+                <h3 mat-line>{{ track.name }}</h3>
+                <p mat-line>{{ track.artist }}</p>
+                <mat-divider *ngIf="!last"></mat-divider>
+            </mat-list-item>
+        </mat-list>
+    </mat-card>
+    <mat-card class="playlist-detail__stats">
+    
+    </mat-card>
+</section>
