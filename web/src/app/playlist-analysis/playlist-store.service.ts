@@ -70,7 +70,7 @@ export class PlaylistStoreService {
         const asyncFeatures = this.http.get<AudioFeature[]>(severalFeaturesUrl, { params: httpParams })
 
         return zip(asyncTracks, asyncFeatures).pipe(
-          map(([tracks, features]) => this.combineToTracks(tracks, features))
+          map(([remoteTracks, features]) => this.combineToTracks(remoteTracks, features))
         )
       })
     )

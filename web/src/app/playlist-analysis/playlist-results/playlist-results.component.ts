@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RemotePlaylist } from '../remote-playlist';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { PlaylistStoreService } from '../playlist-store.service';
-import { Observable, empty } from 'rxjs';
+import { Observable, EMPTY } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { PlaylistResult } from "../playlist-models";
 
@@ -28,7 +28,7 @@ export class PlaylistResultsComponent implements OnInit {
         if (query) {
           return this.service.searchPlaylists(query)
         } else {
-          return empty()
+          return EMPTY
         }
       })
     )
