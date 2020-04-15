@@ -1,5 +1,6 @@
 import { Component, Input } from "@angular/core"
 import { Track } from "../track-models"
+import { Pitch, MusicalMode } from "../remote-models"
 
 @Component({
   selector: "app-track-detail",
@@ -21,35 +22,35 @@ export class TrackDetailComponent {
   }
 }
 
-function codeToMode(mode: number): string {
-  return (mode > 0) ? "M" : "m"
+function codeToMode(mode: MusicalMode): string {
+  return (mode === MusicalMode.MAJOR) ? "M" : "m"
 }
 
-function codeToKeyName(key: number | undefined): string {
+function codeToKeyName(key: Pitch | undefined): string {
   switch (key) {
-    case 0:
+    case Pitch.C:
       return "C"
-    case 1:
+    case Pitch.D_FLAT:
       return "Db"
-    case 2:
+    case Pitch.D:
       return "D"
-    case 3:
+    case Pitch.E_FLAT:
       return "Eb"
-    case 4:
+    case Pitch.E:
       return "E"
-    case 5:
+    case Pitch.F:
       return "F"
-    case 6:
+    case Pitch.F_SHARP:
       return "F#"
-    case 7:
+    case Pitch.G:
       return "G"
-    case 8:
+    case Pitch.A_FLAT:
       return "Ab"
-    case 9:
+    case Pitch.A:
       return "A"
-    case 10:
+    case Pitch.B_FLAT:
       return "Bb"
-    case 11:
+    case Pitch.B:
       return "B"
     default:
       return "?"
