@@ -3,17 +3,31 @@ import { PlaylistStoreService } from '../playlist-store.service'
 import { ActivatedRoute, ParamMap } from '@angular/router'
 import { Observable, throwError, of } from 'rxjs'
 import { switchMap } from 'rxjs/operators'
-import { Track } from 'src/app/track-analysis/track-models'
 import { PieSeries } from "./chart-data"
+import { Playlist } from "../playlist-models"
 
 @Component({
   selector: 'app-playlist-detail',
   templateUrl: './playlist-detail.component.html',
   styleUrls: ["./playlist-detail.component.scss"]
 })
-export class PlaylistDetailComponent implements OnInit {
+export class PlaylistDetailComponent {
 
-  public tracks$!: Observable<ReadonlyArray<Track>>
+  constructor(
+    private service: PlaylistStoreService,
+    private currentRoute: ActivatedRoute
+  ) { }
+
+  public playlist$: Observable<Playlist> = this.currentRoute.paramMap.pipe(
+    switchMap((routeParams: ParamMap) => {
+      const playlistId = routeParams.get("id")
+      if (playlistId) {
+        return this.service.getPlaylistDetail(playlistId)
+      } else {
+        return throwError("Playlist id is mandatory, but none is specified.")
+      }
+    })
+  )
 
   public pitchPieData$: Observable<PieSeries> = of([
     { name: "C", value: 12 },
@@ -34,22 +48,4 @@ export class PlaylistDetailComponent implements OnInit {
     { name: "Major", value: 58 },
     { name: "minor", value: 42 }
   ])
-
-  constructor(
-    private service: PlaylistStoreService,
-    private currentRoute: ActivatedRoute
-  ) { }
-
-  ngOnInit(): void {
-    this.tracks$ = this.currentRoute.paramMap.pipe(
-      switchMap((routeParams: ParamMap) => {
-        const playlistId = routeParams.get("id")
-        if (playlistId) {
-          return this.service.getPlaylistTracks(playlistId)
-        } else {
-          return throwError("Playlist id is mandatory, but none is specified.")
-        }
-      })
-    )
-  }
 }
