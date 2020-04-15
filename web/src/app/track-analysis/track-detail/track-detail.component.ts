@@ -1,5 +1,5 @@
-import { Component, Input } from "@angular/core";
-import { Track } from "../track-models";
+import { Component, Input } from "@angular/core"
+import { Track } from "../track-models"
 
 @Component({
   selector: "app-track-detail",
@@ -7,51 +7,51 @@ import { Track } from "../track-models";
   styleUrls: ["./track-detail.component.scss"]
 })
 export class TrackDetailComponent {
-  @Input() track?: Track;
+  @Input() track?: Track
 
-  public get tone(): string | null {
+  public get tone(): string | undefined {
     if (this.track) {
-      const key = this.track.features.key;
-      const mode = this.track.features.mode;
-      return `${codeToKeyName(key)}${codeToMode(mode)}`;
+      const key = this.track.features.key
+      const mode = this.track.features.mode
+      return `${codeToKeyName(key)}${codeToMode(mode)}`
 
     } else {
-      return null;
+      return undefined
     }
   }
 }
 
 function codeToMode(mode: number): string {
-  return (mode > 0) ? "M" : "m";
+  return (mode > 0) ? "M" : "m"
 }
 
 function codeToKeyName(key: number | undefined): string {
   switch (key) {
     case 0:
-      return "C";
+      return "C"
     case 1:
-      return "Db";
+      return "Db"
     case 2:
-      return "D";
+      return "D"
     case 3:
-      return "Eb";
+      return "Eb"
     case 4:
-      return "E";
+      return "E"
     case 5:
-      return "F";
+      return "F"
     case 6:
-      return "F#";
+      return "F#"
     case 7:
-      return "G";
+      return "G"
     case 8:
-      return "Ab";
+      return "Ab"
     case 9:
-      return "A";
+      return "A"
     case 10:
-      return "Bb";
+      return "Bb"
     case 11:
-      return "B";
+      return "B"
     default:
-      return "?";
+      return "?"
   }
 }

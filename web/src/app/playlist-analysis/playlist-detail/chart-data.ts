@@ -1,9 +1,9 @@
 /**
  * The format of inputs accepted by a Pie Chart (`ngx-charts-pie-chart`).
  */
-export type PieSeries = Array<{ 
-    name: string, 
-    value: number 
+export type PieSeries = Array<{
+    name: string,
+    value: number
 }>
 
 /**

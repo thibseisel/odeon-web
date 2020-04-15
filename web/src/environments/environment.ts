@@ -1,4 +1,4 @@
-import { EnvironmentConfig } from "./EnvironmentConfig";
+import { EnvironmentConfig } from "./EnvironmentConfig"
 
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
@@ -7,7 +7,7 @@ import { EnvironmentConfig } from "./EnvironmentConfig";
 export const environment: EnvironmentConfig = {
   production: false,
   apiBase: "http://localhost:3000"
-};
+}
 
 /*
  * For easier debugging in development mode, you can import the following file

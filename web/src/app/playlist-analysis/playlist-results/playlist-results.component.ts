@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { RemotePlaylist } from '../remote-playlist';
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { PlaylistStoreService } from '../playlist-store.service';
-import { Observable, EMPTY } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
-import { PlaylistResult } from "../playlist-models";
+import { Component, OnInit } from '@angular/core'
+import { RemotePlaylist } from '../remote-playlist'
+import { ActivatedRoute, ParamMap, Router } from '@angular/router'
+import { PlaylistStoreService } from '../playlist-store.service'
+import { Observable, EMPTY } from 'rxjs'
+import { switchMap } from 'rxjs/operators'
+import { PlaylistResult } from "../playlist-models"
 
 @Component({
   selector: 'app-playlist-results',
@@ -13,7 +13,7 @@ import { PlaylistResult } from "../playlist-models";
 })
 export class PlaylistResultsComponent implements OnInit {
 
-  public playlists$!: Observable<readonly PlaylistResult[]>;
+  public playlists$!: Observable<ReadonlyArray<PlaylistResult>>
 
   constructor(
     private router: Router,

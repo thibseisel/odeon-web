@@ -1,15 +1,15 @@
-import { NgModule } from "@angular/core";
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { FlexLayoutModule } from "@angular/flex-layout";
-import { MatFormFieldModule } from "@angular/material/form-field";
-import { MatInputModule } from "@angular/material/input";
-import { MatListModule } from "@angular/material/list";
-import { MatDividerModule } from "@angular/material/divider";
-import { MatCardModule } from "@angular/material/card";
-import { MatProgressBarModule } from "@angular/material/progress-bar";
-import { MatToolbarModule } from "@angular/material/toolbar";
-import { MatRippleModule } from '@angular/material/core';
-import { MatButtonModule } from "@angular/material/button";
+import { NgModule } from "@angular/core"
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations"
+import { FlexLayoutModule } from "@angular/flex-layout"
+import { MatFormFieldModule } from "@angular/material/form-field"
+import { MatInputModule } from "@angular/material/input"
+import { MatListModule } from "@angular/material/list"
+import { MatDividerModule } from "@angular/material/divider"
+import { MatCardModule } from "@angular/material/card"
+import { MatProgressBarModule } from "@angular/material/progress-bar"
+import { MatToolbarModule } from "@angular/material/toolbar"
+import { MatRippleModule } from '@angular/material/core'
+import { MatButtonModule } from "@angular/material/button"
 
 /**
  * Groups imports of modules from @angular/material.

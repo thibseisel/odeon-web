@@ -1,7 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subject, Subscription } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
-import { Router, NavigationExtras, Params } from '@angular/router';
+import { Component, OnInit, OnDestroy } from '@angular/core'
+import { Subject, Subscription } from 'rxjs'
+import { debounceTime } from 'rxjs/operators'
+import { Router, NavigationExtras, Params } from '@angular/router'
 
 @Component({
   selector: 'app-playlist-home',
@@ -10,7 +10,7 @@ import { Router, NavigationExtras, Params } from '@angular/router';
 })
 export class PlaylistHomeComponent implements OnInit, OnDestroy {
   private readonly userQuery = new Subject<string>()
-  private subscription: Subscription | null = null
+  private subscription!: Subscription
 
   constructor(private router: Router) {}
 
@@ -33,7 +33,7 @@ export class PlaylistHomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.subscription?.unsubscribe()
+    this.subscription.unsubscribe()
     this.userQuery.complete()
   }
 }

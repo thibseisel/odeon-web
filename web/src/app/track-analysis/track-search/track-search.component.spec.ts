@@ -1,25 +1,25 @@
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { async, ComponentFixture, TestBed } from "@angular/core/testing"
 
-import { TrackSearchComponent } from "./track-search.component";
+import { TrackSearchComponent } from "./track-search.component"
 
 describe("TrackSearchComponent", () => {
-  let component: TrackSearchComponent;
-  let fixture: ComponentFixture<TrackSearchComponent>;
+  let component: TrackSearchComponent
+  let fixture: ComponentFixture<TrackSearchComponent>
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ TrackSearchComponent ]
     })
-    .compileComponents();
-  }));
+    .compileComponents()
+  }))
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TrackSearchComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(TrackSearchComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it("should create", () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})

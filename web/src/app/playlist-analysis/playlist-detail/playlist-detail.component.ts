@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { PlaylistStoreService } from '../playlist-store.service';
-import { ActivatedRoute, ParamMap } from '@angular/router';
-import { Observable, throwError, of } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
-import { Track } from 'src/app/track-analysis/track-models';
-import { PieSeries } from "./chart-data";
+import { Component, OnInit } from '@angular/core'
+import { PlaylistStoreService } from '../playlist-store.service'
+import { ActivatedRoute, ParamMap } from '@angular/router'
+import { Observable, throwError, of } from 'rxjs'
+import { switchMap } from 'rxjs/operators'
+import { Track } from 'src/app/track-analysis/track-models'
+import { PieSeries } from "./chart-data"
 
 @Component({
   selector: 'app-playlist-detail',
@@ -13,7 +13,7 @@ import { PieSeries } from "./chart-data";
 })
 export class PlaylistDetailComponent implements OnInit {
 
-  public tracks$!: Observable<readonly Track[]>
+  public tracks$!: Observable<ReadonlyArray<Track>>
 
   public pitchPieData$: Observable<PieSeries> = of([
     { name: "C", value: 12 },
@@ -52,5 +52,4 @@ export class PlaylistDetailComponent implements OnInit {
       })
     )
   }
-
 }
