@@ -3,18 +3,39 @@
     flex-flow: row wrap;
     margin-top: 16px;
 
-    .playlist-detail__info {
+    >.playlist-detail__info {
         flex: 1 1 100%;
         margin: 8px;
     }
 
-    .playlist-detail__tracks {
-        flex: 0 2 auto;
+    >.playlist-detail__tracks {
+        flex: 1 0 auto;
         margin: 8px;
     }
 
-    .playlist-detail__stats {
-        flex: 0 1 auto;
+    >.playlist-detail__stats {
+        flex: 3 0 auto;
         margin: 8px;
     }
+}
+
+.chart-container {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+}
+
+.pitch-chart {
+    position: relative;
+    flex: 2 auto;
+    max-width: 480px;
+    max-height: 320px;
+    fill: rgba($color: #FFFFFF, $alpha: 0.87);
+}
+
+.mode-chart {
+    position: relative;
+    flex: 1 auto;
+    max-width: 320px;
+    max-height: 320px;
 }

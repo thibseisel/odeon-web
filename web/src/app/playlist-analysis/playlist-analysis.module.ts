@@ -6,6 +6,7 @@ import { AppMaterialModule } from "../app-material.module";
 import { PlaylistHomeComponent } from './playlist-home/playlist-home.component';
 import { PlaylistResultsComponent } from './playlist-results/playlist-results.component';
 import { PlaylistDetailComponent } from './playlist-detail/playlist-detail.component';
+import { PieChartModule, BarChartModule } from '@swimlane/ngx-charts'
 
 const playlistRoutes: Routes = [
   {
@@ -30,7 +31,9 @@ const playlistRoutes: Routes = [
     CommonModule,
     RouterModule.forChild(playlistRoutes),
     HttpClientModule,
-    AppMaterialModule
+    AppMaterialModule,
+    BarChartModule,
+    PieChartModule
   ],
   exports: [
     RouterModule

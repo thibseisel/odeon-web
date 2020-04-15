@@ -9,6 +9,7 @@ import { MatCardModule } from "@angular/material/card";
 import { MatProgressBarModule } from "@angular/material/progress-bar";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatRippleModule } from '@angular/material/core';
+import { MatButtonModule } from "@angular/material/button";
 
 /**
  * Groups imports of modules from @angular/material.
@@ -29,7 +30,8 @@ import { MatRippleModule } from '@angular/material/core';
         MatCardModule,
         MatProgressBarModule,
         MatToolbarModule,
-        MatRippleModule
+        MatRippleModule,
+        MatButtonModule,
     ],
     exports: [
         BrowserAnimationsModule,
@@ -41,7 +43,8 @@ import { MatRippleModule } from '@angular/material/core';
         MatCardModule,
         MatProgressBarModule,
         MatToolbarModule,
-        MatRippleModule
+        MatRippleModule,
+        MatButtonModule,
     ]
 })
 export class AppMaterialModule { }

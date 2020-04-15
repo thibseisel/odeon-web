@@ -2,6 +2,7 @@
     <mat-card class="playlist-detail__info">
         <mat-card-title>Title</mat-card-title>
         <mat-card-subtitle>Description</mat-card-subtitle>
+        <a [href]="'/playlists'" mat-flat-button color="primary">View on Spotify</a>
     </mat-card>
     <mat-card class="playlist-detail__tracks">
         <mat-list>
@@ -14,6 +15,30 @@
         </mat-list>
     </mat-card>
     <mat-card class="playlist-detail__stats">
-    
+        <mat-card-title>Tone</mat-card-title>
+        <mat-card-content>
+            <div class="chart-container">
+                <div class="pitch-chart">
+                    <ngx-charts-bar-vertical
+                        [view]="[480, 320]"
+                        [results]="pitchPieData$ | async"
+                        xAxis="true"
+                        xAxisLabel="Key"
+                        rotateXAxisTicks="false"
+                        tooltipDisabled="true"
+                        scheme="ocean">
+                    </ngx-charts-bar-vertical>
+                </div>
+                <div class="mode-chart">
+                    <ngx-charts-pie-chart
+                        [view]="[320, 320]"
+                        [results]="modePieData$ | async"
+                        scheme="ocean"
+                        [legend]="true"
+                        legendPosition="below">
+                    </ngx-charts-pie-chart>
+                </div>
+            </div>
+        </mat-card-content>
     </mat-card>
 </section>
