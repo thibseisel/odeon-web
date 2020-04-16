@@ -117,12 +117,14 @@ export interface FeatureStats {
     /**
      * Distribution of pitch keys.
      * This is the number of occurences of each key in the whole playlist.
+     * Keys that are not represented in any track are not listed.
      */
-    readonly keys: Record<Pitch, number>
+    readonly keys: Map<Pitch, number>
 
     /**
      * Distribution of musical modes.
      * This is the number of occurences of each mode in the whole playlist.
+     * Modes that are not represented in any track are not listed.
      */
-    readonly modes: Record<MusicalMode, number>
+    readonly modes: Map<MusicalMode, number>
 }

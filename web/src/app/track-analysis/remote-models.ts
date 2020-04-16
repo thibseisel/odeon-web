@@ -70,6 +70,44 @@ export const enum Pitch {
 }
 
 /**
+ * For a given pitch key return a name suitable for display, for example `C`, `F#`, `Ab`.
+ *
+ * @param key The key whose name is to be retrieved, or `undefined` if not known.
+ * @returns The name of the provided key as a string.
+ * If the passed key is `undefined` `"?"` is returned.
+ */
+export function keyDisplayName(key: Pitch | undefined): string {
+    switch (key) {
+        case Pitch.C:
+          return "C"
+        case Pitch.D_FLAT:
+          return "Db"
+        case Pitch.D:
+          return "D"
+        case Pitch.E_FLAT:
+          return "Eb"
+        case Pitch.E:
+          return "E"
+        case Pitch.F:
+          return "F"
+        case Pitch.F_SHARP:
+          return "F#"
+        case Pitch.G:
+          return "G"
+        case Pitch.A_FLAT:
+          return "Ab"
+        case Pitch.A:
+          return "A"
+        case Pitch.B_FLAT:
+          return "Bb"
+        case Pitch.B:
+          return "B"
+        default:
+          return "?"
+      }
+}
+
+/**
  * Enumeration of musical modalities.
  */
 export const enum MusicalMode {

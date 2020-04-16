@@ -116,41 +116,25 @@ function combineToPlaylist(playlist: RemotePlaylist, tracks: Array<RemoteTrack>,
   }
 }
 
-function countKeyOccurences(features: Array<AudioFeature>): Record<Pitch, number> {
-  const occurencesPerKey: Record<Pitch, number> = {
-    [Pitch.C]: 0,
-    [Pitch.D_FLAT]: 0,
-    [Pitch.D]: 0,
-    [Pitch.E_FLAT]: 0,
-    [Pitch.E]: 0,
-    [Pitch.F]: 0,
-    [Pitch.F_SHARP]: 0,
-    [Pitch.G]: 0,
-    [Pitch.A_FLAT]: 0,
-    [Pitch.A]: 0,
-    [Pitch.B_FLAT]: 0,
-    [Pitch.B]: 0
-  }
+function countKeyOccurences(features: Array<AudioFeature>): Map<Pitch, number> {
+  const occurencesPerKey = new Map<Pitch, number>()
 
   for (const feature of features) {
     if (feature.key) {
-      const currentCountForKey = occurencesPerKey[feature.key]
-      occurencesPerKey[feature.key] = currentCountForKey + 1
+      const currentCountForKey = occurencesPerKey.get(feature.key) ?? 0
+      occurencesPerKey.set(feature.key, currentCountForKey + 1)
     }
   }
 
   return occurencesPerKey
 }
 
-function countModeOccurences(features: Array<AudioFeature>): Record<MusicalMode, number> {
-  const occurencesPerMode: Record<MusicalMode, number> = {
-    [MusicalMode.MINOR]: 0,
-    [MusicalMode.MAJOR]: 0
-  }
+function countModeOccurences(features: Array<AudioFeature>): Map<MusicalMode, number> {
+  const occurencesPerMode = new Map<MusicalMode, number>()
 
   for (const feature of features) {
-    const currentCountForMode = occurencesPerMode[feature.mode]
-    occurencesPerMode[feature.mode] = currentCountForMode
+    const currentCountForMode = occurencesPerMode.get(feature.mode) ?? 0
+    occurencesPerMode.set(feature.mode, currentCountForMode + 1)
   }
 
   return occurencesPerMode

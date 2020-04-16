@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core'
+import { Component } from '@angular/core'
 import { PlaylistStoreService } from '../playlist-store.service'
 import { ActivatedRoute, ParamMap } from '@angular/router'
-import { Observable, throwError, of } from 'rxjs'
-import { switchMap } from 'rxjs/operators'
-import { PieSeries } from "./chart-data"
+import { Observable, throwError } from 'rxjs'
+import { switchMap, shareReplay, map } from 'rxjs/operators'
+import { PieSeries, BarSeries } from "./chart-data"
 import { Playlist } from "../playlist-models"
+import { keyDisplayName, MusicalMode } from "src/app/track-analysis/remote-models"
 
 @Component({
   selector: 'app-playlist-detail',
@@ -26,26 +27,35 @@ export class PlaylistDetailComponent {
       } else {
         return throwError("Playlist id is mandatory, but none is specified.")
       }
+    }),
+    shareReplay(1)
+  )
+
+  public pitchChartData$: Observable<BarSeries> = this.playlist$.pipe(
+    map(playlist => {
+      const chartData: BarSeries = []
+      for (const [key, count] of playlist.stats.keys) {
+        chartData.push({
+          name: keyDisplayName(key),
+          value: count
+        })
+      }
+
+      return chartData
     })
   )
 
-  public pitchPieData$: Observable<PieSeries> = of([
-    { name: "C", value: 12 },
-    { name: "Db", value: 0 },
-    { name: "D", value: 7 },
-    { name: "Eb", value: 2 },
-    { name: "E", value: 16 },
-    { name: "F", value: 8 },
-    { name: "F#", value: 1 },
-    { name: "G", value: 18 },
-    { name: "Ab", value: 5 },
-    { name: "A", value: 15 },
-    { name: "Bb", value: 7 },
-    { name: "B", value: 9 }
-  ])
+  public modePieData$: Observable<PieSeries> = this.playlist$.pipe(
+    map(playlist => {
+      const chartData: PieSeries = []
+      for (const [mode, count] of playlist.stats.modes) {
+        chartData.push({
+          name: (mode === MusicalMode.MAJOR) ? "Major" : "minor",
+          value: count
+        })
+      }
 
-  public modePieData$: Observable<PieSeries> = of([
-    { name: "Major", value: 58 },
-    { name: "minor", value: 42 }
-  ])
+      return chartData
+    })
+  )
 }
