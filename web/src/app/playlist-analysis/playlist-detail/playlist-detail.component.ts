@@ -3,9 +3,9 @@ import { PlaylistStoreService } from '../playlist-store.service'
 import { ActivatedRoute, ParamMap } from '@angular/router'
 import { Observable, throwError } from 'rxjs'
 import { switchMap, shareReplay, map } from 'rxjs/operators'
-import { PieSeries, BarSeries } from "./chart-data"
 import { Playlist } from "../playlist-models"
 import { keyDisplayName, MusicalMode } from "src/app/track-analysis/remote-models"
+import { SingleSeries, DataItem } from "@swimlane/ngx-charts"
 
 @Component({
   selector: 'app-playlist-detail',
@@ -31,9 +31,9 @@ export class PlaylistDetailComponent {
     shareReplay(1)
   )
 
-  public pitchChartData$: Observable<BarSeries> = this.playlist$.pipe(
+  public pitchChartData$: Observable<SingleSeries> = this.playlist$.pipe(
     map(playlist => {
-      const chartData: BarSeries = []
+      const chartData = Array<DataItem>()
       for (const [key, count] of playlist.stats.keys) {
         chartData.push({
           name: keyDisplayName(key),
@@ -45,9 +45,9 @@ export class PlaylistDetailComponent {
     })
   )
 
-  public modePieData$: Observable<PieSeries> = this.playlist$.pipe(
+  public modePieData$: Observable<SingleSeries> = this.playlist$.pipe(
     map(playlist => {
-      const chartData: PieSeries = []
+      const chartData = Array<DataItem>()
       for (const [mode, count] of playlist.stats.modes) {
         chartData.push({
           name: (mode === MusicalMode.MAJOR) ? "Major" : "minor",
