@@ -3,7 +3,7 @@ import { PlaylistStoreService } from '../playlist-store.service'
 import { ActivatedRoute, ParamMap } from '@angular/router'
 import { Observable, throwError } from 'rxjs'
 import { switchMap, shareReplay, map } from 'rxjs/operators'
-import { Playlist } from "../playlist-models"
+import { Playlist, FeatureStats, DistributionRange } from "../playlist-models"
 import { keyDisplayName, MusicalMode } from "src/app/track-analysis/remote-models"
 import { SingleSeries, DataItem } from "@swimlane/ngx-charts"
 
@@ -58,4 +58,23 @@ export class PlaylistDetailComponent {
       return chartData
     })
   )
+
+  public tempoChartData$: Observable<SingleSeries> = this.featureChartData(it => it.tempo)
+  public energyChartData$: Observable<SingleSeries> = this.featureChartData(it => it.energy)
+  public danceabilityChartData$: Observable<SingleSeries> = this.featureChartData(it => it.danceability)
+  public valenceChartData$: Observable<SingleSeries> = this.featureChartData(it => it.valence)
+
+  private featureChartData(selector: (stats: FeatureStats) => ReadonlyArray<DistributionRange>): Observable<SingleSeries> {
+    return this.playlist$.pipe(
+      map(playlist => {
+        const ranges = [...selector(playlist.stats)]
+        ranges.sort((a, b) => a.endExclusive - b.endExclusive)
+
+        return ranges.map<DataItem>(dist => ({
+          name: `[${dist.start} ; ${dist.endExclusive}[`,
+          value: dist.count
+        }))
+      })
+    )
+  }
 }

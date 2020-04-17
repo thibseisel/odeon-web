@@ -119,12 +119,60 @@ export interface FeatureStats {
      * This is the number of occurences of each key in the whole playlist.
      * Keys that are not represented in any track are not listed.
      */
-    readonly keys: Map<Pitch, number>
+    readonly keys: ReadonlyMap<Pitch, number>
 
     /**
      * Distribution of musical modes.
      * This is the number of occurences of each mode in the whole playlist.
      * Modes that are not represented in any track are not listed.
      */
-    readonly modes: Map<MusicalMode, number>
+    readonly modes: ReadonlyMap<MusicalMode, number>
+
+    /**
+     * Distribution of the "tempo" audio feature.
+     * Each element of this array represents the number of tracks whose tempo is within a given range.
+     */
+    readonly tempo: ReadonlyArray<DistributionRange>
+
+    /**
+     * Distribution of the "energy" audio feature.
+     * Each element of this array represents the number of tracks whose energy is within a given range.
+     */
+    readonly energy: ReadonlyArray<DistributionRange>
+
+    /**
+     * Distribution of the "danceability" audio feature.
+     * Each element of this array represents the number of tracks whose danceability factor is within a given range.
+     */
+    readonly danceability: ReadonlyArray<DistributionRange>
+
+    /**
+     * Distribution of the "valence" audio feature.
+     * Each element of this array represents the number of tracks whose valence is within a given range.
+     */
+    readonly valence: ReadonlyArray<DistributionRange>
+}
+
+/**
+ * The number of elements from a source statistical serie whose a specific value
+ * is within a range defined by `[start ; endExclusive[`.
+ * This represents both the range of values and the number of occurences.
+ */
+export interface DistributionRange {
+
+    /**
+     * The number of elements whose specific value falls between this category's range,
+     * i.e. `start <= value < endExclusive`.
+     */
+    readonly count: number
+
+    /**
+     * The lower bound of the range defined by this category.
+     */
+    readonly start: number
+
+    /**
+     * The exclusive upper bound of the range defined by this category.
+     */
+    readonly endExclusive: number
 }

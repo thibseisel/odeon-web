@@ -5,7 +5,8 @@ import { Observable, of, zip } from "rxjs"
 import { RemotePlaylist } from "./remote-playlist"
 import { catchError, concatMap, map } from "rxjs/operators"
 import { RemoteTrack, AudioFeature, ImageSpec, Pitch, MusicalMode } from "../track-analysis/remote-models"
-import { PlaylistResult, Playlist } from "./playlist-models"
+import { PlaylistResult, Playlist, DistributionRange } from "./playlist-models"
+import { Mutable } from "../language"
 
 @Injectable({
   providedIn: 'root'
@@ -111,7 +112,11 @@ function combineToPlaylist(playlist: RemotePlaylist, tracks: Array<RemoteTrack>,
     })),
     stats: {
       keys: countKeyOccurences(features),
-      modes: countModeOccurences(features)
+      modes: countModeOccurences(features),
+      tempo: eachInRange(features, 10, it => it.tempo),
+      energy: eachInRange(features, 0.1, it => it.energy),
+      danceability: eachInRange(features, 0.1, it => it.danceability),
+      valence: eachInRange(features, 0.1, it => it.valence)
     }
   }
 }
@@ -138,4 +143,31 @@ function countModeOccurences(features: Array<AudioFeature>): Map<MusicalMode, nu
   }
 
   return occurencesPerMode
+}
+
+function eachInRange(
+  source: Array<AudioFeature>,
+  rangeWidth: number,
+  selector: (item: AudioFeature) => number
+): ReadonlyArray<DistributionRange> {
+
+  const categories = Array<Mutable<DistributionRange>>()
+
+  for (const el of source) {
+    const feature = selector(el)
+    const categoryIndex = Math.floor(feature / rangeWidth)
+
+    const category = categories[categoryIndex]
+    if (category) {
+      category.count++
+    } else {
+      categories[categoryIndex] = {
+        start: categoryIndex * rangeWidth,
+        endExclusive: (categoryIndex + 1) * rangeWidth,
+        count: 1
+      }
+    }
+  }
+
+  return categories
 }
