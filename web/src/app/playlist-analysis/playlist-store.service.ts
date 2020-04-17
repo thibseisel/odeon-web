@@ -113,10 +113,10 @@ function combineToPlaylist(playlist: RemotePlaylist, tracks: Array<RemoteTrack>,
     stats: {
       keys: countKeyOccurences(features),
       modes: countModeOccurences(features),
-      tempo: eachInRange(features, 10, it => it.tempo),
-      energy: eachInRange(features, 0.1, it => it.energy),
-      danceability: eachInRange(features, 0.1, it => it.danceability),
-      valence: eachInRange(features, 0.1, it => it.valence)
+      tempo: groupByTempoRange(features, it => it.tempo),
+      energy: groupByPercentRange(features, it => it.energy),
+      danceability: groupByPercentRange(features, it => it.danceability),
+      valence: groupByPercentRange(features, it => it.valence)
     }
   }
 }
@@ -145,29 +145,72 @@ function countModeOccurences(features: Array<AudioFeature>): Map<MusicalMode, nu
   return occurencesPerMode
 }
 
-function eachInRange(
+function groupByTempoRange(
   source: Array<AudioFeature>,
-  rangeWidth: number,
   selector: (item: AudioFeature) => number
 ): ReadonlyArray<DistributionRange> {
 
   const categories = Array<Mutable<DistributionRange>>()
+  const step = 10
 
   for (const el of source) {
     const feature = selector(el)
-    const categoryIndex = Math.floor(feature / rangeWidth)
+    const categoryIndex = Math.floor(feature / step)
 
     const category = categories[categoryIndex]
     if (category) {
       category.count++
     } else {
       categories[categoryIndex] = {
-        start: categoryIndex * rangeWidth,
-        endExclusive: (categoryIndex + 1) * rangeWidth,
+        start: categoryIndex * step,
+        endExclusive: (categoryIndex + 1) * step,
         count: 1
       }
     }
   }
 
+  for (let index = 0; index < categories.length; index++) {
+    if (!categories[index]) {
+      categories[index] = {
+        start: index * step,
+        endExclusive: (index + 1) * step,
+        count: 0
+      }
+    }
+  }
+
   return categories
+}
+
+const MIN_PERCENT = 0.0
+const MAX_PERCENT = 1.0
+
+const PERCENT_CATEGORY_COUNT = 10
+
+function groupByPercentRange(
+  source: ReadonlyArray<AudioFeature>,
+  selector: (feature: AudioFeature) => number
+): ReadonlyArray<DistributionRange> {
+
+  const ranges = Array<Mutable<DistributionRange>>()
+  const step = 1.0 / PERCENT_CATEGORY_COUNT
+
+  for (let lowerBound = MIN_PERCENT; lowerBound < (MAX_PERCENT - step); lowerBound += step) {
+    ranges.push({
+      start: lowerBound,
+      endExclusive: lowerBound + step,
+      count: 0
+    })
+  }
+
+  for (const feature of source) {
+    const value = selector(feature)
+    const clampedValue = (value < MIN_PERCENT) ? MIN_PERCENT : (value > MAX_PERCENT) ? MAX_PERCENT : value
+    const rangeIndex = Math.floor(clampedValue / step)
+
+    const matchingRange = ranges[rangeIndex]
+    matchingRange.count++
+  }
+
+  return ranges
 }

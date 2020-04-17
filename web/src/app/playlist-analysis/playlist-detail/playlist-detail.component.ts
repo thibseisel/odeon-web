@@ -59,19 +59,22 @@ export class PlaylistDetailComponent {
     })
   )
 
-  public tempoChartData$: Observable<SingleSeries> = this.featureChartData(it => it.tempo)
-  public energyChartData$: Observable<SingleSeries> = this.featureChartData(it => it.energy)
-  public danceabilityChartData$: Observable<SingleSeries> = this.featureChartData(it => it.danceability)
-  public valenceChartData$: Observable<SingleSeries> = this.featureChartData(it => it.valence)
+  public tempoChartData$: Observable<SingleSeries> = this.featureChartData(0, it => it.tempo)
+  public energyChartData$: Observable<SingleSeries> = this.featureChartData(1, it => it.energy)
+  public danceabilityChartData$: Observable<SingleSeries> = this.featureChartData(1, it => it.danceability)
+  public valenceChartData$: Observable<SingleSeries> = this.featureChartData(1, it => it.valence)
 
-  private featureChartData(selector: (stats: FeatureStats) => ReadonlyArray<DistributionRange>): Observable<SingleSeries> {
+  private featureChartData(
+    decimalDigits: number,
+    selector: (stats: FeatureStats) => ReadonlyArray<DistributionRange>
+  ): Observable<SingleSeries> {
     return this.playlist$.pipe(
       map(playlist => {
         const ranges = [...selector(playlist.stats)]
         ranges.sort((a, b) => a.endExclusive - b.endExclusive)
 
         return ranges.map<DataItem>(dist => ({
-          name: `[${dist.start} ; ${dist.endExclusive}[`,
+          name: `${dist.start.toFixed(decimalDigits)} - ${dist.endExclusive.toFixed(decimalDigits)}`,
           value: dist.count
         }))
       })

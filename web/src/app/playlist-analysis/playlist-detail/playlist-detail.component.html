@@ -24,7 +24,7 @@
         <mat-card-title>Tone</mat-card-title>
         <mat-card-content>
             <div class="chart-container">
-                <div class="pitch-chart">
+                <div class="chart chart--white-axis">
                     <ngx-charts-bar-vertical
                         [view]="[480, 320]"
                         [results]="pitchChartData$ | async"
@@ -35,7 +35,7 @@
                         scheme="ocean">
                     </ngx-charts-bar-vertical>
                 </div>
-                <div class="mode-chart">
+                <div class="chart">
                     <ngx-charts-pie-chart
                         [view]="[320, 320]"
                         [results]="modePieData$ | async"
@@ -44,6 +44,50 @@
                         [legend]="true"
                         legendPosition="below">
                     </ngx-charts-pie-chart>
+                </div>
+            </div>
+            <div class="chart-container">
+                <div class="chart chart--white-axis">
+                    <ngx-charts-bar-vertical
+                        [view]="[640, 320]"
+                        [results]="tempoChartData$ | async"
+                        xAxis="true"
+                        xAxisLabel="Tempo"
+                        scheme="ocean">
+                    </ngx-charts-bar-vertical>
+                </div>
+            </div>
+            <div class="chart-container">
+                <div class="chart chart--white-axis">
+                    <ngx-charts-bar-vertical
+                        [view]="[640, 320]"
+                        [results]="energyChartData$ | async"
+                        xAxis="true"
+                        xAxisLabel="Tempo"
+                        scheme="ocean">
+                    </ngx-charts-bar-vertical>
+                </div>
+            </div>
+            <div class="chart-container">
+                <div class="chart chart--white-axis">
+                    <ngx-charts-bar-vertical
+                        [view]="[640, 320]"
+                        [results]="danceabilityChartData$ | async"
+                        xAxis="true"
+                        xAxisLabel="Tempo"
+                        scheme="ocean">
+                    </ngx-charts-bar-vertical>
+                </div>
+            </div>
+            <div class="chart-container">
+                <div class="chart chart--white-axis">
+                    <ngx-charts-bar-vertical
+                        [view]="[640, 320]"
+                        [results]="valenceChartData$ | async"
+                        xAxis="true"
+                        xAxisLabel="Tempo"
+                        scheme="ocean">
+                    </ngx-charts-bar-vertical>
                 </div>
             </div>
         </mat-card-content>

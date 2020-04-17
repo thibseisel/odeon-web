@@ -22,20 +22,14 @@
 .chart-container {
     display: flex;
     flex-flow: row wrap;
+    align-items: center;
     justify-content: space-around;
 }
 
-.pitch-chart {
-    position: relative;
-    flex: 2 auto;
-    max-width: 480px;
-    max-height: 320px;
-    fill: rgba($color: #FFFFFF, $alpha: 0.87);
-}
-
-.mode-chart {
-    position: relative;
+.chart {
     flex: 1 auto;
-    max-width: 320px;
-    max-height: 320px;
+
+    &.chart--white-axis {
+        fill: rgba($color: #FFFFFF, $alpha: 0.87);
+    }
 }
