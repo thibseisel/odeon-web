@@ -1,10 +1,10 @@
 <div class="dashboard-content" fxLayout="row" fxLayoutGap="16px">
-    <mat-card fxFlex="33" class="search-card">
-        <app-track-search [state]="results$ | async" (onquery)="submitQuery($event)"
-            (ontrackselected)="loadTrackDetail($event)">
-        </app-track-search>
-    </mat-card>
-    <section fxFlex="66">
-        <app-track-detail [track]="track$ | async"></app-track-detail>
-    </section>
+  <mat-card fxFlex="33" class="search-card">
+    <app-track-search [state]="results$ | async" (onquery)="submitQuery($event)"
+      (ontrackselected)="loadTrackDetail($event)">
+    </app-track-search>
+  </mat-card>
+  <section fxFlex="66">
+    <app-track-detail [track]="track$ | async"></app-track-detail>
+  </section>
 </div>

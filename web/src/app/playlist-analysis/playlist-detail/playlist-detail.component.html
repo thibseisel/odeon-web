@@ -1,95 +1,68 @@
 <section class="playlist-detail" *ngIf="playlist$ | async as playlist">
-    <mat-card class="playlist-detail__info">
-        <mat-card-header>
-            <mat-card-title>{{ playlist.name }}</mat-card-title>
-            <mat-card-subtitle>{{ playlist.description }}</mat-card-subtitle>
-        </mat-card-header>
-        <a [href]="playlist.link" target="_blank" mat-flat-button color="primary">View on Spotify</a>
-    </mat-card>
+  <mat-card class="playlist-detail__info">
+    <mat-card-header>
+      <mat-card-title>{{ playlist.name }}</mat-card-title>
+      <mat-card-subtitle>{{ playlist.description }}</mat-card-subtitle>
+    </mat-card-header>
+    <a [href]="playlist.link" target="_blank" mat-flat-button color="primary">View on Spotify</a>
+  </mat-card>
 
-    <mat-card class="playlist-detail__tracks">
-        <mat-card-title>{{ playlist.tracks.length }} Tracks</mat-card-title>
-        <mat-card-content>
-            <mat-list>
-                <mat-list-item *ngFor="let track of playlist.tracks; last as last">
-                    <img mat-list-avatar [src]="track.artworkUrl" />
-                    <h3 mat-line>{{ track.name }}</h3>
-                    <p mat-line>{{ track.artist }}</p>
-                    <mat-divider *ngIf="!last"></mat-divider>
-                </mat-list-item>
-            </mat-list>
-        </mat-card-content>
-    </mat-card>
-    <mat-card class="playlist-detail__stats">
-        <mat-card-title>Tone</mat-card-title>
-        <mat-card-content>
-            <div class="chart-container">
-                <div class="chart chart--white-axis">
-                    <ngx-charts-bar-vertical
-                        [view]="[480, 320]"
-                        [results]="pitchChartData$ | async"
-                        xAxis="true"
-                        xAxisLabel="Key"
-                        rotateXAxisTicks="false"
-                        tooltipDisabled="true"
-                        scheme="ocean">
-                    </ngx-charts-bar-vertical>
-                </div>
-                <div class="chart">
-                    <ngx-charts-pie-chart
-                        [view]="[320, 320]"
-                        [results]="modePieData$ | async"
-                        [doughnut]="true"
-                        scheme="ocean"
-                        [legend]="true"
-                        legendPosition="below">
-                    </ngx-charts-pie-chart>
-                </div>
-            </div>
-            <div class="chart-container">
-                <div class="chart chart--white-axis">
-                    <ngx-charts-bar-vertical
-                        [view]="[640, 320]"
-                        [results]="tempoChartData$ | async"
-                        xAxis="true"
-                        xAxisLabel="Tempo"
-                        scheme="ocean">
-                    </ngx-charts-bar-vertical>
-                </div>
-            </div>
-            <div class="chart-container">
-                <div class="chart chart--white-axis">
-                    <ngx-charts-bar-vertical
-                        [view]="[640, 320]"
-                        [results]="energyChartData$ | async"
-                        xAxis="true"
-                        xAxisLabel="Tempo"
-                        scheme="ocean">
-                    </ngx-charts-bar-vertical>
-                </div>
-            </div>
-            <div class="chart-container">
-                <div class="chart chart--white-axis">
-                    <ngx-charts-bar-vertical
-                        [view]="[640, 320]"
-                        [results]="danceabilityChartData$ | async"
-                        xAxis="true"
-                        xAxisLabel="Tempo"
-                        scheme="ocean">
-                    </ngx-charts-bar-vertical>
-                </div>
-            </div>
-            <div class="chart-container">
-                <div class="chart chart--white-axis">
-                    <ngx-charts-bar-vertical
-                        [view]="[640, 320]"
-                        [results]="valenceChartData$ | async"
-                        xAxis="true"
-                        xAxisLabel="Tempo"
-                        scheme="ocean">
-                    </ngx-charts-bar-vertical>
-                </div>
-            </div>
-        </mat-card-content>
-    </mat-card>
+  <mat-card class="playlist-detail__tracks">
+    <mat-card-title>{{ playlist.tracks.length }} Tracks</mat-card-title>
+    <mat-card-content>
+      <mat-list>
+        <mat-list-item *ngFor="let track of playlist.tracks; last as last">
+          <img mat-list-avatar [src]="track.artworkUrl" />
+          <h3 mat-line>{{ track.name }}</h3>
+          <p mat-line>{{ track.artist }}</p>
+          <mat-divider *ngIf="!last"></mat-divider>
+        </mat-list-item>
+      </mat-list>
+    </mat-card-content>
+  </mat-card>
+  <mat-card class="playlist-detail__stats">
+    <mat-card-title>Tone</mat-card-title>
+    <mat-card-content>
+      <div class="chart-container">
+        <div class="chart chart--white-axis">
+          <ngx-charts-bar-vertical [view]="[480, 320]" [results]="pitchChartData$ | async" xAxis="true" xAxisLabel="Key"
+            rotateXAxisTicks="false" tooltipDisabled="true" scheme="ocean">
+          </ngx-charts-bar-vertical>
+        </div>
+        <div class="chart">
+          <ngx-charts-pie-chart [view]="[320, 320]" [results]="modePieData$ | async" [doughnut]="true" scheme="ocean"
+            [legend]="true" legendPosition="below">
+          </ngx-charts-pie-chart>
+        </div>
+      </div>
+      <div class="chart-container">
+        <div class="chart chart--white-axis">
+          <ngx-charts-bar-vertical [view]="[640, 320]" [results]="tempoChartData$ | async" xAxis="true"
+            xAxisLabel="Tempo" scheme="ocean">
+          </ngx-charts-bar-vertical>
+        </div>
+      </div>
+      <div class="chart-container">
+        <div class="chart chart--white-axis">
+          <ngx-charts-bar-vertical [view]="[640, 320]" [results]="energyChartData$ | async" xAxis="true"
+            xAxisLabel="Tempo" scheme="ocean">
+          </ngx-charts-bar-vertical>
+        </div>
+      </div>
+      <div class="chart-container">
+        <div class="chart chart--white-axis">
+          <ngx-charts-bar-vertical [view]="[640, 320]" [results]="danceabilityChartData$ | async" xAxis="true"
+            xAxisLabel="Tempo" scheme="ocean">
+          </ngx-charts-bar-vertical>
+        </div>
+      </div>
+      <div class="chart-container">
+        <div class="chart chart--white-axis">
+          <ngx-charts-bar-vertical [view]="[640, 320]" [results]="valenceChartData$ | async" xAxis="true"
+            xAxisLabel="Tempo" scheme="ocean">
+          </ngx-charts-bar-vertical>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
 </section>

@@ -1,16 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { 
-    height: 100%;
+html, body {
+  height: 100%;
 }
 
 body {
-    margin: 0;
-    font-family: Roboto, "Helvetica Neue", sans-serif; 
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
 /* Apply the same padding on top and bottom of lists (8dp as per Material Design specs). */
 mat-list, mat-action-list {
-    padding-top: 8px;
-    padding-bottom: 8px;
+  padding-top: 8px;
+  padding-bottom: 8px;
 }

@@ -12,7 +12,7 @@ export class PlaylistHomeComponent implements OnInit, OnDestroy {
   private readonly userQuery = new Subject<string>()
   private subscription!: Subscription
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) { }
 
   ngOnInit() {
     this.subscription = this.userQuery.pipe(debounceTime(300))

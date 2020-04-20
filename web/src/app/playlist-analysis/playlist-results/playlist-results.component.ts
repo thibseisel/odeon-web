@@ -19,7 +19,7 @@ export class PlaylistResultsComponent implements OnInit {
     private router: Router,
     private currentRoute: ActivatedRoute,
     private service: PlaylistStoreService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.playlists$ = this.currentRoute.queryParamMap.pipe(

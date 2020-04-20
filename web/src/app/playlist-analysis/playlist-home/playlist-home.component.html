@@ -1,12 +1,9 @@
 <mat-toolbar>
-    <mat-form-field appearance="standard" class="toolbar-search">
-        <input #input matInput
-            type="search"
-            placeholder="Name of a Spotify playlist"
-            (keyup)="updateQuery(input.value)" />
-    </mat-form-field>
+  <mat-form-field appearance="standard" class="toolbar-search">
+    <input #input matInput type="search" placeholder="Name of a Spotify playlist" (keyup)="updateQuery(input.value)" />
+  </mat-form-field>
 </mat-toolbar>
 
 <div class="container">
-    <router-outlet></router-outlet>
+  <router-outlet></router-outlet>
 </div>
