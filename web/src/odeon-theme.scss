@@ -5,7 +5,7 @@
 // Plus imports for other components in your app.
 
 // Define a custom typography config.
-// This is to override the font-family as well as the healines and body levels.
+// This is to override the font-family as well as the headlines and body levels.
 // This currently uses all defaults.
 $odeon-typo-config: mat-typography-config();
 @include odeon-cartridge-typography($odeon-typo-config);

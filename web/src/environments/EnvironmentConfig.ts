@@ -1,10 +1,10 @@
 /**
- * Configuration accross environments.
+ * Configuration across environments.
  */
 export interface EnvironmentConfig {
 
   /**
-   * Whether this targets the production environmnent.
+   * Whether this targets the production environment.
    */
   production: boolean
 

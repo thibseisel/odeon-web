@@ -6,7 +6,7 @@ import { concatMap, retryWhen } from "rxjs/operators"
  *
  * This function implements an exponential back-off policy:
  * when the `predicate` function first returns `true`, a new attempt is made after waiting `retryDelay` milliseconds.
- * Subsequent attempts delay resubscription by `attempts^2 * retryDelay` milliseconds.
+ * Subsequent attempts delay re-subscription by `attempts^2 * retryDelay` milliseconds.
  * Returning `false` in the `predicate` function results in the returned observable re-throwing the source error.
  *
  * @param retryDelay The time delay to wait between retries, in milliseconds.

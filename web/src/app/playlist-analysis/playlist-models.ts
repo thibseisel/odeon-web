@@ -116,14 +116,14 @@ export interface FeatureStats {
 
   /**
    * Distribution of pitch keys.
-   * This is the number of occurences of each key in the whole playlist.
+   * This is the number of occurrences of each key in the whole playlist.
    * Keys that are not represented in any track are not listed.
    */
   readonly keys: ReadonlyMap<Pitch, number>
 
   /**
    * Distribution of musical modes.
-   * This is the number of occurences of each mode in the whole playlist.
+   * This is the number of occurrences of each mode in the whole playlist.
    * Modes that are not represented in any track are not listed.
    */
   readonly modes: ReadonlyMap<MusicalMode, number>
@@ -154,9 +154,9 @@ export interface FeatureStats {
 }
 
 /**
- * The number of elements from a source statistical serie whose a specific value
+ * The number of elements from a source statistical series whose a specific value
  * is within a range defined by `[start ; endExclusive[`.
- * This represents both the range of values and the number of occurences.
+ * This represents both the range of values and the number of occurrences.
  */
 export interface DistributionRange {
 
