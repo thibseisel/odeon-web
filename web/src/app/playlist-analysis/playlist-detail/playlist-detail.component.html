@@ -121,6 +121,64 @@
         </div>
       </mat-card-content>
     </mat-card>
+
+    <mat-card class="playlist-detail__card">
+      <mat-card-title>Atmosphere</mat-card-title>
+
+      <mat-card-content>
+        <div class="chart-container">
+          <div class="chart chart--white-axis">
+            <ngx-charts-bar-vertical
+              [view]="[640, 320]"
+              [results]="acousticnessChartData$ | async"
+              xAxis="true"
+              showXAxisLabel="true"
+              xAxisLabel="Acousticness"
+              scheme="ocean">
+            </ngx-charts-bar-vertical>
+          </div>
+        </div>
+
+        <div class="chart-container">
+          <div class="chart chart--white-axis">
+            <ngx-charts-bar-vertical
+              [view]="[640, 320]"
+              [results]="livenessChartData$ | async"
+              xAxis="true"
+              showXAxisLabel="true"
+              xAxisLabel="Liveness"
+              scheme="ocean">
+            </ngx-charts-bar-vertical>
+          </div>
+        </div>
+
+        <div class="chart-container">
+          <div class="chart chart--white-axis">
+            <ngx-charts-bar-vertical
+              [view]="[640, 320]"
+              [results]="instrumentalnessChartData$ | async"
+              xAxis="true"
+              showXAxisLabel="true"
+              xAxisLabel="Instrumentalness"
+              scheme="ocean">
+            </ngx-charts-bar-vertical>
+          </div>
+        </div>
+
+        <div class="chart-container">
+          <div class="chart chart--white-axis">
+            <ngx-charts-bar-vertical
+              [view]="[640, 320]"
+              [results]="speechinessChartData$ | async"
+              xAxis="true"
+              showXAxisLabel="true"
+              xAxisLabel="Speechiness"
+              scheme="ocean">
+            </ngx-charts-bar-vertical>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
   </div>
 
 </section>

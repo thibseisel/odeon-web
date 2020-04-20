@@ -151,6 +151,26 @@ export interface FeatureStats {
    * Each element of this array represents the number of tracks whose valence is within a given range.
    */
   readonly valence: ReadonlyArray<DistributionRange>
+
+  /**
+   * Distribution of the likeliness of tracks to be acoustic.
+   */
+  readonly acousticness: ReadonlyArray<DistributionRange>
+
+  /**
+   * Distribution of the likeliness of tracks to be performed live.
+   */
+  readonly liveness: ReadonlyArray<DistributionRange>
+
+  /**
+   * Distribution of the likeliness of tracks not having any lyrics.
+   */
+  readonly instrumentalness: ReadonlyArray<DistributionRange>
+
+  /**
+   * Distribution of the likeliness of tracks mostly made of speech.
+   */
+  readonly speechiness: ReadonlyArray<DistributionRange>
 }
 
 /**

@@ -63,6 +63,10 @@ export class PlaylistDetailComponent {
   public energyChartData$: Observable<SingleSeries> = this.featureChartData(1, it => it.energy)
   public danceabilityChartData$: Observable<SingleSeries> = this.featureChartData(1, it => it.danceability)
   public valenceChartData$: Observable<SingleSeries> = this.featureChartData(1, it => it.valence)
+  public acousticnessChartData$: Observable<SingleSeries> = this.featureChartData(1, it => it.acousticness)
+  public livenessChartData$: Observable<SingleSeries> = this.featureChartData(1, it => it.liveness)
+  public instrumentalnessChartData$: Observable<SingleSeries> = this.featureChartData(1, it => it.instrumentalness)
+  public speechinessChartData$: Observable<SingleSeries> = this.featureChartData(1, it => it.speechiness)
 
   private featureChartData(
     decimalDigits: number,

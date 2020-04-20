@@ -120,7 +120,11 @@ function combineToPlaylist(playlist: RemotePlaylist, tracks: Array<RemoteTrack>,
       tempo: groupByRange(features, it => it.tempo, MIN_TEMPO, MAX_TEMPO, TEMPO_STEP),
       energy: groupByPercentRange(features, it => it.energy),
       danceability: groupByPercentRange(features, it => it.danceability),
-      valence: groupByPercentRange(features, it => it.valence)
+      valence: groupByPercentRange(features, it => it.valence),
+      acousticness: groupByPercentRange(features, it => it.acousticness),
+      instrumentalness: groupByPercentRange(features, it => it.instrumentalness),
+      liveness: groupByPercentRange(features, it => it.liveness),
+      speechiness: groupByPercentRange(features, it => it.speechiness)
     }
   }
 }
