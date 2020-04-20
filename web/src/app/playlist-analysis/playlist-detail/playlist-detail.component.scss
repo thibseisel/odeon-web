@@ -4,19 +4,20 @@
   margin-top: 16px;
 
   > .playlist-detail__info {
-    flex: 1 1 100%;
-    margin: 8px;
+    flex: 1 100%;
   }
 
   > .playlist-detail__tracks {
     flex: 1 0 auto;
-    margin: 8px;
   }
 
   > .playlist-detail__stats {
     flex: 3 0 auto;
-    margin: 8px;
   }
+}
+
+.playlist-detail__card {
+  margin: 8px;
 }
 
 .chart-container {
@@ -27,7 +28,8 @@
 }
 
 .chart {
-  flex: 1 auto;
+  flex: 0 auto;
+  margin: 16px;
 
   &.chart--white-axis {
     fill: rgba($color: #ffffff, $alpha: 0.87);
