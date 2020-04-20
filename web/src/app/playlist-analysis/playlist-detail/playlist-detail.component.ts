@@ -70,8 +70,7 @@ export class PlaylistDetailComponent {
   ): Observable<SingleSeries> {
     return this.playlist$.pipe(
       map(playlist => {
-        const ranges = [...selector(playlist.stats)]
-        ranges.sort((a, b) => a.endExclusive - b.endExclusive)
+        const ranges = selector(playlist.stats)
 
         return ranges.map<DataItem>(dist => ({
           name: `${dist.start.toFixed(decimalDigits)} - ${dist.endExclusive.toFixed(decimalDigits)}`,
