@@ -10,7 +10,7 @@ import org.springframework.web.server.ResponseStatusException
 
 @RestController
 @RequestMapping("/api")
-class AudioMetadataController(
+internal class AudioMetadataController(
     private val service: SpotifyService
 ) {
     private val logger = LoggerFactory.getLogger(AudioMetadataController::class.java)
@@ -68,6 +68,27 @@ class AudioMetadataController(
         @PathVariable("id") trackId: String
     ): SpotifyAudioAnalysis = service.findAudioAnalysis(trackId)
         ?: throw ResponseStatusException(HttpStatus.NOT_FOUND)
+
+    @GetMapping("/playlists")
+    suspend fun searchPlaylists(
+        @RequestParam("name") query: String
+    ): List<Playlist> {
+        TODO("Fetch playlists from the search service.")
+    }
+
+    @GetMapping("/playlists/{id}")
+    suspend fun getPlaylist(
+        @PathVariable("id") playlistId: String
+    ): Playlist {
+        TODO("Fetch a single playlist from the service")
+    }
+
+    @GetMapping("/playlists/{id}/tracks")
+    suspend fun getPlaylistTracks(
+        @PathVariable("id") playlistId: String
+    ): List<SpotifyTrack> {
+        TODO("Fetch playlist tracks from the service and map them to SpotifyTrack")
+    }
 
     @ExceptionHandler
     fun handle(httpException: ResponseStatusException): ResponseEntity<ErrorPayload> {
