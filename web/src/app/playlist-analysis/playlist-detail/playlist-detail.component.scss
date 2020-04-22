@@ -4,15 +4,17 @@
   margin-top: 16px;
 
   > .playlist-detail__info {
-    flex: 1 100%;
+    flex: 2 100%;
   }
 
   > .playlist-detail__tracks {
-    flex: 1 0 auto;
+    flex: 1 0;
   }
 
   > .playlist-detail__stats {
-    flex: 3 0 auto;
+    flex: 1 0 auto;
+    display: flex;
+    flex-flow: column nowrap;
   }
 }
 
@@ -20,18 +22,38 @@
   margin: 8px;
 }
 
-.chart-container {
+/* Container for charts that are part of the same card. */
+.card-charts {
   display: flex;
   flex-flow: row wrap;
-  align-items: center;
-  justify-content: space-around;
+  justify-content: center;
+  align-content: space-around;
 }
 
+/* Style applied to a div containing ngx-charts-* as direct children.
+ *
+ * Due to how ngx-charts not having an intrinsic width and height, it is note possible to lay them out in a flexbox.
+ * We used a workaround involving "position: relative" and "position: absolute" so that charts does not participate directly in flex layout.
+ */
 .chart {
-  flex: 0 auto;
+  position: relative;
+  overflow: hidden;
+
+  max-width: 640px;
+  height: 320px;
   margin: 16px;
+
+  flex: 1 1 256px;
 
   &.chart--white-axis {
     fill: rgba($color: #ffffff, $alpha: 0.87);
+  }
+
+  > * {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
   }
 }

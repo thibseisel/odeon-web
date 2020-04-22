@@ -28,156 +28,128 @@
     <mat-card class="playlist-detail__card">
       <mat-card-title>Tone</mat-card-title>
 
-      <mat-card-content>
-        <div class="chart-container">
-          <div class="chart chart--white-axis">
+      <div class="card-charts">
+          <div id="pitch-chart" class="chart chart--white-axis">
             <ngx-charts-bar-vertical
-              [view]="[480, 320]"
               [results]="pitchChartData$ | async"
-              xAxis="true"
-              showXAxisLabel="true"
+              [xAxis]="true"
+              [showXAxisLabel]="true"
               xAxisLabel="Key"
-              rotateXAxisTicks="false"
-              tooltipDisabled="true"
+              [rotateXAxisTicks]="false"
+              [tooltipDisabled]="true"
               scheme="ocean">
             </ngx-charts-bar-vertical>
           </div>
 
-          <div class="chart">
-            <ngx-charts-pie-chart
-              [view]="[320, 320]"
-              [results]="modePieData$ | async"
-              [doughnut]="true"
-              [legend]="true"
-              legendTitle="Modality"
-              legendPosition="below"
-              scheme="ocean">
-            </ngx-charts-pie-chart>
-          </div>
+        <div id="mode-pie" class="chart">
+          <ngx-charts-pie-chart
+            [results]="modePieData$ | async"
+            [doughnut]="true"
+            [legend]="true"
+            legendTitle="Modality"
+            legendPosition="below"
+            scheme="ocean">
+          </ngx-charts-pie-chart>
         </div>
-      </mat-card-content>
+      </div>
     </mat-card>
 
     <mat-card class="playlist-detail__card">
       <mat-card-title>Rhythm</mat-card-title>
 
-      <mat-card-content>
-        <div class="chart-container">
-          <div class="chart chart--white-axis">
-            <ngx-charts-bar-vertical
-              [view]="[640, 320]"
-              [results]="tempoChartData$ | async"
-              xAxis="true"
-              showXAxisLabel="true"
-              xAxisLabel="Tempo"
-              scheme="ocean">
-            </ngx-charts-bar-vertical>
-          </div>
+      <div class="card-charts">
+        <div class="chart chart--white-axis">
+          <ngx-charts-bar-vertical
+            [results]="tempoChartData$ | async"
+            [xAxis]="true"
+            [showXAxisLabel]="true"
+            xAxisLabel="Tempo (BPM)"
+            scheme="ocean">
+          </ngx-charts-bar-vertical>
         </div>
-      </mat-card-content>
+      </div>
     </mat-card>
 
     <mat-card class="playlist-detail__card">
       <mat-card-title>Emotion</mat-card-title>
 
-      <mat-card-content>
-        <div class="chart-container">
-          <div class="chart chart--white-axis">
-            <ngx-charts-bar-vertical
-              [view]="[640, 320]"
-              [results]="energyChartData$ | async"
-              xAxis="true"
-              showXAxisLabel="true"
-              xAxisLabel="Energy"
-              scheme="ocean">
-            </ngx-charts-bar-vertical>
-          </div>
+      <div class="card-charts">
+        <div class="chart chart--white-axis">
+          <ngx-charts-bar-vertical
+            [results]="energyChartData$ | async"
+            [xAxis]="true"
+            [showXAxisLabel]="true"
+            xAxisLabel="Energy"
+            scheme="ocean">
+          </ngx-charts-bar-vertical>
         </div>
 
-        <div class="chart-container">
-          <div class="chart chart--white-axis">
-            <ngx-charts-bar-vertical
-              [view]="[640, 320]"
-              [results]="danceabilityChartData$ | async"
-              xAxis="true"
-              showXAxisLabel="true"
-              xAxisLabel="Danceability"
-              scheme="ocean">
-            </ngx-charts-bar-vertical>
-          </div>
+        <div class="chart chart--white-axis">
+          <ngx-charts-bar-vertical
+            [results]="danceabilityChartData$ | async"
+            [xAxis]="true"
+            [showXAxisLabel]="true"
+            xAxisLabel="Danceability"
+            scheme="ocean">
+          </ngx-charts-bar-vertical>
         </div>
 
-        <div class="chart-container">
-          <div class="chart chart--white-axis">
-            <ngx-charts-bar-vertical
-              [view]="[640, 320]"
-              [results]="valenceChartData$ | async"
-              showXAxisLabel="true"
-              xAxis="true"
-              xAxisLabel="Valence"
-              scheme="ocean">
-            </ngx-charts-bar-vertical>
-          </div>
+        <div class="chart chart--white-axis">
+          <ngx-charts-bar-vertical
+            [results]="valenceChartData$ | async"
+            [xAxis]="true"
+            [showXAxisLabel]="true"
+            xAxisLabel="Valence"
+            scheme="ocean">
+          </ngx-charts-bar-vertical>
         </div>
-      </mat-card-content>
+      </div>
     </mat-card>
 
     <mat-card class="playlist-detail__card">
       <mat-card-title>Atmosphere</mat-card-title>
 
-      <mat-card-content>
-        <div class="chart-container">
-          <div class="chart chart--white-axis">
-            <ngx-charts-bar-vertical
-              [view]="[640, 320]"
-              [results]="acousticnessChartData$ | async"
-              xAxis="true"
-              showXAxisLabel="true"
-              xAxisLabel="Acousticness"
-              scheme="ocean">
-            </ngx-charts-bar-vertical>
-          </div>
+      <div class="card-charts">
+        <div class="chart chart--white-axis">
+          <ngx-charts-bar-vertical
+            [results]="acousticnessChartData$ | async"
+            [xAxis]="true"
+            [showXAxisLabel]="true"
+            xAxisLabel="Acousticness"
+            scheme="ocean">
+          </ngx-charts-bar-vertical>
         </div>
 
-        <div class="chart-container">
-          <div class="chart chart--white-axis">
-            <ngx-charts-bar-vertical
-              [view]="[640, 320]"
-              [results]="livenessChartData$ | async"
-              xAxis="true"
-              showXAxisLabel="true"
-              xAxisLabel="Liveness"
-              scheme="ocean">
-            </ngx-charts-bar-vertical>
-          </div>
+        <div class="chart chart--white-axis">
+          <ngx-charts-bar-vertical
+            [results]="livenessChartData$ | async"
+            [xAxis]="true"
+            [showXAxisLabel]="true"
+            xAxisLabel="Liveness"
+            scheme="ocean">
+          </ngx-charts-bar-vertical>
         </div>
 
-        <div class="chart-container">
-          <div class="chart chart--white-axis">
-            <ngx-charts-bar-vertical
-              [view]="[640, 320]"
-              [results]="instrumentalnessChartData$ | async"
-              xAxis="true"
-              showXAxisLabel="true"
-              xAxisLabel="Instrumentalness"
-              scheme="ocean">
-            </ngx-charts-bar-vertical>
-          </div>
+        <div class="chart chart--white-axis">
+          <ngx-charts-bar-vertical
+            [results]="instrumentalnessChartData$ | async"
+            [xAxis]="true"
+            [showXAxisLabel]="true"
+            xAxisLabel="Instrumentalness"
+            scheme="ocean">
+          </ngx-charts-bar-vertical>
         </div>
 
-        <div class="chart-container">
-          <div class="chart chart--white-axis">
-            <ngx-charts-bar-vertical
-              [view]="[640, 320]"
-              [results]="speechinessChartData$ | async"
-              xAxis="true"
-              showXAxisLabel="true"
-              xAxisLabel="Speechiness"
-              scheme="ocean">
-            </ngx-charts-bar-vertical>
-          </div>
+        <div class="chart chart--white-axis">
+          <ngx-charts-bar-vertical
+            [results]="speechinessChartData$ | async"
+            [xAxis]="true"
+            [showXAxisLabel]="true"
+            xAxisLabel="Speechiness"
+            scheme="ocean">
+          </ngx-charts-bar-vertical>
         </div>
-      </mat-card-content>
+      </div>
     </mat-card>
   </div>
 
