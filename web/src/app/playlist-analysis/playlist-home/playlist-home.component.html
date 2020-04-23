@@ -1,6 +1,8 @@
 <mat-toolbar>
   <mat-form-field appearance="standard" class="toolbar-search">
-    <input #input matInput type="search" placeholder="Name of a Spotify playlist" (keyup)="updateQuery(input.value)" />
+    <input #input matInput type="search" placeholder="Name of a Spotify playlist"
+      [value]="userQuery$ | async"
+      (keyup)="updateQuery(input.value)" />
   </mat-form-field>
 </mat-toolbar>
 

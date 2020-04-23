@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core'
-import { Subject, Subscription } from 'rxjs'
-import { debounceTime } from 'rxjs/operators'
-import { Router, NavigationExtras, Params } from '@angular/router'
+import { Subject, Subscription, Observable, merge } from 'rxjs'
+import { debounceTime, map, distinctUntilChanged } from 'rxjs/operators'
+import { Router, NavigationExtras, ActivatedRoute } from '@angular/router'
 
 @Component({
   selector: 'app-playlist-home',
@@ -9,14 +9,28 @@ import { Router, NavigationExtras, Params } from '@angular/router'
   styleUrls: ['./playlist-home.component.scss']
 })
 export class PlaylistHomeComponent implements OnInit, OnDestroy {
-  private readonly userQuery = new Subject<string>()
-  private subscription!: Subscription
+  private readonly queryOutput = new Subject<string>()
+  private readonly subscriptions = new Subscription()
 
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router,
+    private currentRoute: ActivatedRoute
+  ) { }
+
+  public readonly userQuery$: Observable<string> = merge(
+    this.queryOutput,
+    this.currentRoute.queryParamMap.pipe(
+      map(queryParams => queryParams.get("name") ?? "")
+    )
+  )
 
   ngOnInit() {
-    this.subscription = this.userQuery.pipe(debounceTime(300))
-      .subscribe((query) => this.updatePlaylistResults(query))
+    const querySubscription = this.queryOutput.pipe(
+      debounceTime(300),
+      distinctUntilChanged()
+    ).subscribe(query => this.updatePlaylistResults(query))
+
+    this.subscriptions.add(querySubscription)
   }
 
   private updatePlaylistResults(query: string) {
@@ -29,11 +43,11 @@ export class PlaylistHomeComponent implements OnInit, OnDestroy {
   }
 
   public updateQuery(playlistQuery: string) {
-    this.userQuery.next(playlistQuery.trim())
+    this.queryOutput.next(playlistQuery.trim())
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe()
-    this.userQuery.complete()
+    this.subscriptions.unsubscribe()
+    this.queryOutput.complete()
   }
 }
