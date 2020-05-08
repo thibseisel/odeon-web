@@ -4,9 +4,9 @@ import { environment } from "@config/environment"
 import { Observable, of, zip } from "rxjs"
 import { RemotePlaylist } from "@playlist/remote-playlist"
 import { catchError, concatMap, map } from "rxjs/operators"
-import { RemoteTrack, AudioFeature, ImageSpec, Pitch, MusicalMode } from "@track/remote-models"
+import { RemoteTrack, AudioFeature, ImageSpec, Pitch, MusicalMode } from "@shared/remote-models"
 import { PlaylistResult, Playlist, DistributionRange } from "@playlist/playlist-models"
-import { Mutable } from "../language"
+import { Mutable } from "@shared/language"
 
 @Injectable({
   providedIn: 'root'

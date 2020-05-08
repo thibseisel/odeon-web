@@ -4,6 +4,7 @@
     "baseUrl": "src",
     "paths": {
       "@config/*": ["environments/*"],
+      "@shared/*": ["app/shared/*"],
       "@track/*": ["app/track-analysis/*"],
       "@playlist/*": ["app/playlist-analysis/*"]
     },

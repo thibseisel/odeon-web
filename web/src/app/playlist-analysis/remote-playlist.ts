@@ -1,4 +1,4 @@
-import { ImageSpec } from "@track/remote-models"
+import { ImageSpec } from "@shared/remote-models"
 
 export interface RemotePlaylist {
 

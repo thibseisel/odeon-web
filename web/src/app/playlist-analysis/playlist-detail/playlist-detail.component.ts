@@ -4,7 +4,7 @@ import { ActivatedRoute, ParamMap } from '@angular/router'
 import { Observable, throwError } from 'rxjs'
 import { switchMap, shareReplay, map } from 'rxjs/operators'
 import { Playlist, FeatureStats, DistributionRange } from "@playlist/playlist-models"
-import { keyDisplayName, MusicalMode } from "app/track-analysis/remote-models"
+import { keyDisplayName, MusicalMode } from "@shared/remote-models"
 import { SingleSeries, DataItem } from "@swimlane/ngx-charts"
 
 @Component({

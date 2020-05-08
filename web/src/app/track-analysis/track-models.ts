@@ -1,4 +1,4 @@
-import { AudioFeature } from "@track/remote-models"
+import { AudioFeature } from "@shared/remote-models"
 
 export interface SearchResult {
     readonly id: string
