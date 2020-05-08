@@ -1,9 +1,9 @@
 import { Component } from "@angular/core"
-import { Observable, Subject, BehaviorSubject } from "rxjs"
-import { map, scan, startWith, switchMap, tap, debounceTime } from "rxjs/operators"
-import { TrackMetadataService } from "../track-metadata.service"
-import { SearchResult, Track } from "../track-models"
-import { SearchState } from "../track-search/track-search.component"
+import { Observable, Subject } from "rxjs"
+import { map, scan, startWith, switchMap, debounceTime } from "rxjs/operators"
+import { TrackMetadataService } from "@track/track-metadata.service"
+import { SearchResult, Track } from "@track/track-models"
+import { SearchState } from "@track/track-search/track-search.component"
 
 @Component({
   selector: "app-dashboard",

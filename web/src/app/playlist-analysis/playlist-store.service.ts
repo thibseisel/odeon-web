@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core'
 import { HttpClient, HttpParams } from "@angular/common/http"
-import { environment } from "src/environments/environment"
+import { environment } from "@config/environment"
 import { Observable, of, zip } from "rxjs"
-import { RemotePlaylist } from "./remote-playlist"
+import { RemotePlaylist } from "@playlist/remote-playlist"
 import { catchError, concatMap, map } from "rxjs/operators"
-import { RemoteTrack, AudioFeature, ImageSpec, Pitch, MusicalMode } from "../track-analysis/remote-models"
-import { PlaylistResult, Playlist, DistributionRange } from "./playlist-models"
+import { RemoteTrack, AudioFeature, ImageSpec, Pitch, MusicalMode } from "@track/remote-models"
+import { PlaylistResult, Playlist, DistributionRange } from "@playlist/playlist-models"
 import { Mutable } from "../language"
 
 @Injectable({

@@ -2,10 +2,10 @@ import { HttpClient, HttpErrorResponse, HttpParams } from "@angular/common/http"
 import { Injectable } from "@angular/core"
 import { MonoTypeOperatorFunction, Observable, of, zip } from "rxjs"
 import { catchError, map } from "rxjs/operators"
-import { environment } from "../../environments/environment"
-import { AudioFeature, ImageSpec, RemoteTrack } from "./remote-models"
+import { environment } from "@config/environment"
+import { AudioFeature, ImageSpec, RemoteTrack } from "@track/remote-models"
 import { retryAfter } from "./rx-operators"
-import { SearchResult, Track } from "./track-models"
+import { SearchResult, Track } from "@track/track-models"
 
 @Injectable({
   providedIn: "root"

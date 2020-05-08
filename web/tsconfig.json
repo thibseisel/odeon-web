@@ -1,7 +1,12 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
+    "baseUrl": "src",
+    "paths": {
+      "@config/*": ["environments/*"],
+      "@track/*": ["app/track-analysis/*"],
+      "@playlist/*": ["app/playlist-analysis/*"]
+    },
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
