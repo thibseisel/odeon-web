@@ -6,6 +6,14 @@ import { DashboardComponent } from "@track/dashboard/dashboard.component"
 import { OdeonCartridgeComponent } from "@track/odeon-cartridge/odeon-cartridge.component"
 import { AppMaterialModule } from "@shared/app-material.module"
 import { HttpClientModule } from "@angular/common/http"
+import { Routes, RouterModule } from '@angular/router'
+
+const trackRoutes: Routes = [
+  {
+    path: "tracks",
+    component: DashboardComponent
+  }
+]
 
 @NgModule({
   declarations: [
@@ -16,6 +24,7 @@ import { HttpClientModule } from "@angular/common/http"
   ],
   imports: [
     CommonModule,
+    RouterModule.forChild(trackRoutes),
     HttpClientModule,
     AppMaterialModule
   ]
