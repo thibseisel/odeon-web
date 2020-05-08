@@ -11,40 +11,30 @@ import { MatToolbarModule } from "@angular/material/toolbar"
 import { MatRippleModule } from '@angular/material/core'
 import { MatButtonModule } from "@angular/material/button"
 
+const modules = [
+  BrowserAnimationsModule,
+  FlexLayoutModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatListModule,
+  MatDividerModule,
+  MatCardModule,
+  MatProgressBarModule,
+  MatToolbarModule,
+  MatRippleModule,
+  MatButtonModule,
+]
+
 /**
  * Groups imports of modules from @angular/material.
  *
- * All modules imported here should also be exported.
+ * All modules imported here should are also exported.
  * This prevents from filling the main app module with imports for each component.
  * Also, should we use another Material Design library,
  * all declarations required for Angular Material to work are listed in this only file.
  */
 @NgModule({
-    imports: [
-        BrowserAnimationsModule,
-        FlexLayoutModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatListModule,
-        MatDividerModule,
-        MatCardModule,
-        MatProgressBarModule,
-        MatToolbarModule,
-        MatRippleModule,
-        MatButtonModule,
-    ],
-    exports: [
-        BrowserAnimationsModule,
-        FlexLayoutModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatListModule,
-        MatDividerModule,
-        MatCardModule,
-        MatProgressBarModule,
-        MatToolbarModule,
-        MatRippleModule,
-        MatButtonModule,
-    ]
+    imports: modules,
+    exports: modules
 })
 export class AppMaterialModule { }
