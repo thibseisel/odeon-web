@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from "@angular/core"
+import { SearchResult } from "@track/track-models"
 import { Subject } from "rxjs"
 import { debounceTime, distinctUntilChanged } from "rxjs/operators"
-import { SearchResult } from "@track/track-models"
 
 @Component({
   selector: "app-track-search",

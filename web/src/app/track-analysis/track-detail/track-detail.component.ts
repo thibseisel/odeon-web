@@ -1,6 +1,6 @@
 import { Component, Input } from "@angular/core"
+import { keyDisplayName, MusicalMode } from "@shared/remote-models"
 import { Track } from "@track/track-models"
-import { MusicalMode, keyDisplayName } from "@shared/remote-models"
 
 @Component({
   selector: "app-track-detail",

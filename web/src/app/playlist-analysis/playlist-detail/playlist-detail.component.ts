@@ -1,11 +1,11 @@
 import { Component } from '@angular/core'
-import { PlaylistStoreService } from '@playlist/playlist-store.service'
 import { ActivatedRoute, ParamMap } from '@angular/router'
-import { Observable, throwError } from 'rxjs'
-import { switchMap, shareReplay, map } from 'rxjs/operators'
-import { Playlist, FeatureStats, DistributionRange } from "@playlist/playlist-models"
+import { DistributionRange, FeatureStats, Playlist } from "@playlist/playlist-models"
+import { PlaylistStoreService } from '@playlist/playlist-store.service'
 import { keyDisplayName, MusicalMode } from "@shared/remote-models"
-import { SingleSeries, DataItem } from "@swimlane/ngx-charts"
+import { DataItem, SingleSeries } from "@swimlane/ngx-charts"
+import { Observable, throwError } from 'rxjs'
+import { map, shareReplay, switchMap } from 'rxjs/operators'
 
 @Component({
   selector: 'app-playlist-detail',

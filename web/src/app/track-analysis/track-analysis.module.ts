@@ -1,12 +1,12 @@
-import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
-import { TrackSearchComponent } from "@track/track-search/track-search.component"
-import { TrackDetailComponent } from "@track/track-detail/track-detail.component"
+import { HttpClientModule } from "@angular/common/http"
+import { NgModule } from '@angular/core'
+import { RouterModule, Routes } from '@angular/router'
+import { AppMaterialModule } from "@shared/app-material.module"
 import { DashboardComponent } from "@track/dashboard/dashboard.component"
 import { OdeonCartridgeComponent } from "@track/odeon-cartridge/odeon-cartridge.component"
-import { AppMaterialModule } from "@shared/app-material.module"
-import { HttpClientModule } from "@angular/common/http"
-import { Routes, RouterModule } from '@angular/router'
+import { TrackDetailComponent } from "@track/track-detail/track-detail.component"
+import { TrackSearchComponent } from "@track/track-search/track-search.component"
 
 const trackRoutes: Routes = [
   {

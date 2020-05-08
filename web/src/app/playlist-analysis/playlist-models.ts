@@ -1,4 +1,4 @@
-import { Pitch, ImageSpec, MusicalMode } from "@shared/remote-models"
+import { ImageSpec, MusicalMode, Pitch } from "@shared/remote-models"
 
 /**
  * Basic information on a playlist returned as a search result.

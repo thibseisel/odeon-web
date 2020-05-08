@@ -1,12 +1,12 @@
-import { Injectable } from '@angular/core'
 import { HttpClient, HttpParams } from "@angular/common/http"
+import { Injectable } from '@angular/core'
 import { environment } from "@config/environment"
-import { Observable, of, zip } from "rxjs"
+import { DistributionRange, Playlist, PlaylistResult } from "@playlist/playlist-models"
 import { RemotePlaylist } from "@playlist/remote-playlist"
-import { catchError, concatMap, map } from "rxjs/operators"
-import { RemoteTrack, AudioFeature, ImageSpec, Pitch, MusicalMode } from "@shared/remote-models"
-import { PlaylistResult, Playlist, DistributionRange } from "@playlist/playlist-models"
 import { Mutable } from "@shared/language"
+import { AudioFeature, ImageSpec, MusicalMode, Pitch, RemoteTrack } from "@shared/remote-models"
+import { Observable, of, zip } from "rxjs"
+import { catchError, concatMap, map } from "rxjs/operators"
 
 @Injectable({
   providedIn: 'root'

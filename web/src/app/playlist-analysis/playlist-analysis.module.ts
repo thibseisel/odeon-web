@@ -1,12 +1,12 @@
-import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
-import { RouterModule, Routes } from '@angular/router'
 import { HttpClientModule } from "@angular/common/http"
-import { AppMaterialModule } from "@shared/app-material.module"
+import { NgModule } from '@angular/core'
+import { RouterModule, Routes } from '@angular/router'
+import { PlaylistDetailComponent } from '@playlist/playlist-detail/playlist-detail.component'
 import { PlaylistHomeComponent } from '@playlist/playlist-home/playlist-home.component'
 import { PlaylistResultsComponent } from '@playlist/playlist-results/playlist-results.component'
-import { PlaylistDetailComponent } from '@playlist/playlist-detail/playlist-detail.component'
-import { PieChartModule, BarChartModule } from '@swimlane/ngx-charts'
+import { AppMaterialModule } from "@shared/app-material.module"
+import { BarChartModule, PieChartModule } from '@swimlane/ngx-charts'
 
 const playlistRoutes: Routes = [
   {

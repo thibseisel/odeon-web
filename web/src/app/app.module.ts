@@ -1,10 +1,10 @@
 import { NgModule } from "@angular/core"
 import { BrowserModule } from "@angular/platform-browser"
-import { AppMaterialModule } from "@shared/app-material.module"
-import { AppComponent } from "./app.component"
-import { TrackAnalysisModule } from "@track/track-analysis.module"
-import { PlaylistAnalysisModule } from "@playlist/playlist-analysis.module"
 import { RouterModule, Routes } from '@angular/router'
+import { PlaylistAnalysisModule } from "@playlist/playlist-analysis.module"
+import { AppMaterialModule } from "@shared/app-material.module"
+import { TrackAnalysisModule } from "@track/track-analysis.module"
+import { AppComponent } from "./app.component"
 
 const appRoutes: Routes = [
   {

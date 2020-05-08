@@ -1,7 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core'
-import { Subject, Subscription, Observable, merge } from 'rxjs'
-import { debounceTime, map, distinctUntilChanged } from 'rxjs/operators'
-import { Router, NavigationExtras, ActivatedRoute } from '@angular/router'
+import { Component, OnDestroy, OnInit } from '@angular/core'
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router'
+import { merge, Observable, Subject, Subscription } from 'rxjs'
+import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators'
 
 @Component({
   selector: 'app-playlist-home',
