@@ -5,7 +5,7 @@ import { RouterModule, Routes } from '@angular/router'
 import { PlaylistDetailComponent } from '@playlist/playlist-detail/playlist-detail.component'
 import { PlaylistHomeComponent } from '@playlist/playlist-home/playlist-home.component'
 import { PlaylistResultsComponent } from '@playlist/playlist-results/playlist-results.component'
-import { AppMaterialModule } from "@shared/app-material.module"
+import { AppSharedModule } from '@shared/app-shared.module'
 import { BarChartModule, PieChartModule } from '@swimlane/ngx-charts'
 
 const playlistRoutes: Routes = [
@@ -31,9 +31,9 @@ const playlistRoutes: Routes = [
     CommonModule,
     RouterModule.forChild(playlistRoutes),
     HttpClientModule,
-    AppMaterialModule,
+    AppSharedModule,
     BarChartModule,
-    PieChartModule
+    PieChartModule,
   ],
   exports: [
     RouterModule

@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common'
 import { HttpClientModule } from "@angular/common/http"
 import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
-import { AppMaterialModule } from "@shared/app-material.module"
+import { AppSharedModule } from '@shared/app-shared.module'
 import { DashboardComponent } from "@track/dashboard/dashboard.component"
 import { OdeonCartridgeComponent } from "@track/odeon-cartridge/odeon-cartridge.component"
 import { TrackDetailComponent } from "@track/track-detail/track-detail.component"
@@ -20,13 +20,13 @@ const trackRoutes: Routes = [
     DashboardComponent,
     TrackSearchComponent,
     TrackDetailComponent,
-    OdeonCartridgeComponent
+    OdeonCartridgeComponent,
   ],
   imports: [
     CommonModule,
     RouterModule.forChild(trackRoutes),
     HttpClientModule,
-    AppMaterialModule
+    AppSharedModule,
   ]
 })
 export class TrackAnalysisModule { }
