@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing"
 
-import { TrackMetadataComponent } from "./track-metadata.component"
+import { DashboardComponent } from "./dashboard.component"
 
-describe("TrackMetadataComponent", () => {
-  let component: TrackMetadataComponent
-  let fixture: ComponentFixture<TrackMetadataComponent>
+describe("DashboardComponent", () => {
+  let component: DashboardComponent
+  let fixture: ComponentFixture<DashboardComponent>
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TrackMetadataComponent ]
+      declarations: [ DashboardComponent ]
     })
     .compileComponents()
   }))
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TrackMetadataComponent)
+    fixture = TestBed.createComponent(DashboardComponent)
     component = fixture.componentInstance
     fixture.detectChanges()
   })
