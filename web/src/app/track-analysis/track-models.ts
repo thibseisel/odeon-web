@@ -1,11 +1,11 @@
-import { AudioFeature } from "@shared/remote-models"
+import { AudioFeature, ImageSpec } from "@shared/remote-models"
 
 export interface SearchResult {
     readonly id: string
     readonly title: string
     readonly album: string
     readonly artist: string
-    readonly artwork_url?: string
+    readonly artworks: ReadonlyArray<ImageSpec>
 }
 
 export interface Track {

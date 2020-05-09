@@ -521,7 +521,23 @@
       "title": "Uprising",
       "artist": "Muse",
       "album": "The Resistance",
-      "artwork_url": "https://i.scdn.co/image/ab67616d00004851b6d4566db0d12894a1a3b7a2",
+      "artworks": [
+        {
+          "height": 640,
+          "url": "https://i.scdn.co/image/ab67616d0000b273b6d4566db0d12894a1a3b7a2",
+          "width": 640
+        },
+        {
+          "height": 300,
+          "url": "https://i.scdn.co/image/ab67616d00001e02b6d4566db0d12894a1a3b7a2",
+          "width": 300
+        },
+        {
+          "height": 64,
+          "url": "https://i.scdn.co/image/ab67616d00004851b6d4566db0d12894a1a3b7a2",
+          "width": 64
+        }
+      ],
       "type": "track"
     },
     {
@@ -529,7 +545,23 @@
       "title": "Madness",
       "artist": "Muse",
       "album": "The 2nd Law",
-      "artwork_url": "https://i.scdn.co/image/ab67616d00004851fc192c54d1823a04ffb6c8c9",
+      "artworks": [
+        {
+          "height": 640,
+          "url": "https://i.scdn.co/image/ab67616d0000b273fc192c54d1823a04ffb6c8c9",
+          "width": 640
+        },
+        {
+          "height": 300,
+          "url": "https://i.scdn.co/image/ab67616d00001e02fc192c54d1823a04ffb6c8c9",
+          "width": 300
+        },
+        {
+          "height": 64,
+          "url": "https://i.scdn.co/image/ab67616d00004851fc192c54d1823a04ffb6c8c9",
+          "width": 64
+        }
+      ],
       "type": "track"
     },
     {
@@ -537,7 +569,23 @@
       "title": "Supermassive Black Hole",
       "artist": "Muse",
       "album": "Black Holes and Revelations",
-      "artwork_url": "https://i.scdn.co/image/ab67616d0000485128933b808bfb4cbbd0385400",
+      "artworks": [
+        {
+          "height": 640,
+          "url": "https://i.scdn.co/image/ab67616d0000b27328933b808bfb4cbbd0385400",
+          "width": 640
+        },
+        {
+          "height": 300,
+          "url": "https://i.scdn.co/image/ab67616d00001e0228933b808bfb4cbbd0385400",
+          "width": 300
+        },
+        {
+          "height": 64,
+          "url": "https://i.scdn.co/image/ab67616d0000485128933b808bfb4cbbd0385400",
+          "width": 64
+        }
+      ],
       "type": "track"
     },
     {
@@ -545,7 +593,23 @@
       "title": "Starlight",
       "artist": "Muse",
       "album": "Black Holes and Revelations",
-      "artwork_url": "https://i.scdn.co/image/ab67616d0000485128933b808bfb4cbbd0385400",
+      "artworks": [
+        {
+          "height": 640,
+          "url": "https://i.scdn.co/image/ab67616d0000b27328933b808bfb4cbbd0385400",
+          "width": 640
+        },
+        {
+          "height": 300,
+          "url": "https://i.scdn.co/image/ab67616d00001e0228933b808bfb4cbbd0385400",
+          "width": 300
+        },
+        {
+          "height": 64,
+          "url": "https://i.scdn.co/image/ab67616d0000485128933b808bfb4cbbd0385400",
+          "width": 64
+        }
+      ],
       "type": "track"
     },
     {
@@ -553,7 +617,23 @@
       "title": "Knights of Cydonia",
       "artist": "Muse",
       "album": "Black Holes and Revelations",
-      "artwork_url": "https://i.scdn.co/image/ab67616d0000485128933b808bfb4cbbd0385400",
+      "artworks": [
+        {
+          "height": 640,
+          "url": "https://i.scdn.co/image/ab67616d0000b27328933b808bfb4cbbd0385400",
+          "width": 640
+        },
+        {
+          "height": 300,
+          "url": "https://i.scdn.co/image/ab67616d00001e0228933b808bfb4cbbd0385400",
+          "width": 300
+        },
+        {
+          "height": 64,
+          "url": "https://i.scdn.co/image/ab67616d0000485128933b808bfb4cbbd0385400",
+          "width": 64
+        }
+      ],
       "type": "track"
     },
     {
@@ -561,7 +641,23 @@
       "title": "Hysteria",
       "artist": "Muse",
       "album": "Absolution",
-      "artwork_url": "https://i.scdn.co/image/ab67616d000048518cb690f962092fd44bbe2bf4",
+      "artworks": [
+        {
+          "height": 640,
+          "url": "https://i.scdn.co/image/ab67616d0000b2738cb690f962092fd44bbe2bf4",
+          "width": 640
+        },
+        {
+          "height": 300,
+          "url": "https://i.scdn.co/image/ab67616d00001e028cb690f962092fd44bbe2bf4",
+          "width": 300
+        },
+        {
+          "height": 64,
+          "url": "https://i.scdn.co/image/ab67616d000048518cb690f962092fd44bbe2bf4",
+          "width": 64
+        }
+      ],
       "type": "track"
     },
     {
@@ -569,7 +665,23 @@
       "title": "Psycho",
       "artist": "Muse",
       "album": "Drones",
-      "artwork_url": "https://i.scdn.co/image/ab67616d00004851808846f0223d97d5963c420d",
+      "artworks": [
+        {
+          "height": 640,
+          "url": "https://i.scdn.co/image/ab67616d0000b273808846f0223d97d5963c420d",
+          "width": 640
+        },
+        {
+          "height": 300,
+          "url": "https://i.scdn.co/image/ab67616d00001e02808846f0223d97d5963c420d",
+          "width": 300
+        },
+        {
+          "height": 64,
+          "url": "https://i.scdn.co/image/ab67616d00004851808846f0223d97d5963c420d",
+          "width": 64
+        }
+      ],
       "type": "track"
     },
     {
@@ -577,7 +689,23 @@
       "title": "Pressure",
       "artist": "Muse",
       "album": "Simulation Theory (Super Deluxe)",
-      "artwork_url": "https://i.scdn.co/image/ab67616d000048514cb163c1d111f77307c842b6",
+      "artworks": [
+        {
+          "height": 640,
+          "url": "https://i.scdn.co/image/ab67616d0000b2734cb163c1d111f77307c842b6",
+          "width": 640
+        },
+        {
+          "height": 300,
+          "url": "https://i.scdn.co/image/ab67616d00001e024cb163c1d111f77307c842b6",
+          "width": 300
+        },
+        {
+          "height": 64,
+          "url": "https://i.scdn.co/image/ab67616d000048514cb163c1d111f77307c842b6",
+          "width": 64
+        }
+      ],
       "type": "track"
     }
   ]

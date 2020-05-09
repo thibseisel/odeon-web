@@ -1,6 +1,7 @@
 package com.github.thibseisel.music
 
 import com.fasterxml.jackson.annotation.JsonProperty
+import com.github.thibseisel.music.spotify.SpotifyImage
 
 data class SearchResult(
 
@@ -16,6 +17,6 @@ data class SearchResult(
     @JsonProperty("album")
     val album: String,
 
-    @JsonProperty("artwork_url")
-    val artworkUrl: String?
+    @JsonProperty("artworks")
+    val artworks: List<SpotifyImage>
 )

@@ -26,7 +26,7 @@ internal class AudioMetadataController(
                 title = track.name,
                 artist = track.artists.first().name,
                 album = album.name,
-                artworkUrl = album.images.minBy { (it.width ?: 0) * (it.height ?: 0) }?.url
+                artworks = album.images
             )
         }
     }

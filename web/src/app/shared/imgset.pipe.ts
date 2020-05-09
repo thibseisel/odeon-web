@@ -10,7 +10,10 @@ export class ImgSetPipe implements PipeTransform {
 
   transform(value: ReadonlyArray<ImageSpec>): string | undefined {
     if (value.length > 0) {
-      return value.map(image => {
+      const images = [...value]
+      images.sort(byDescendingWidth)
+
+      return images.map(image => {
         if (image.width) {
           return `${image.url} ${image.width}w`
         } else {
@@ -22,4 +25,10 @@ export class ImgSetPipe implements PipeTransform {
       return undefined
     }
   }
+}
+
+function byDescendingWidth(a: ImageSpec, b: ImageSpec): number {
+  const aWidth = a.width ?? 0
+  const bWidth = b.width ?? 0
+  return aWidth - bWidth
 }

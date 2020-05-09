@@ -30,7 +30,7 @@ describe("The Srcset pipe", () => {
       height: 320
     }]
 
-    expect(pipe.transform(images)).toBe("https://domain.xyz/other.png 640w,https://domain.xyz/image.png 320w")
+    expect(pipe.transform(images)).toBe("https://domain.xyz/image.png 320w,https://domain.xyz/other.png 640w")
   })
 
   it("should workaround ImageSpec with unknown width", () => {
