@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component } from '@angular/core'
 import { ActivatedRoute, ParamMap, Router } from '@angular/router'
 import { PlaylistResult } from "@playlist/playlist-models"
 import { PlaylistStoreService } from '@playlist/playlist-store.service'
@@ -11,9 +11,7 @@ import { switchMap } from 'rxjs/operators'
   templateUrl: './playlist-results.component.html',
   styleUrls: ['./playlist-results.component.scss']
 })
-export class PlaylistResultsComponent implements OnInit {
-
-  public playlists$!: Observable<ReadonlyArray<PlaylistResult>>
+export class PlaylistResultsComponent {
 
   constructor(
     private router: Router,
@@ -21,18 +19,20 @@ export class PlaylistResultsComponent implements OnInit {
     private service: PlaylistStoreService
   ) { }
 
-  ngOnInit() {
-    this.playlists$ = this.currentRoute.queryParamMap.pipe(
-      switchMap((params: ParamMap) => {
-        const query = params.get("name")
-        if (query) {
-          return this.service.searchPlaylists(query)
-        } else {
-          return EMPTY
-        }
-      })
-    )
-  }
+  /**
+   * An asynchronous set of playlists whose name matches the user-provided search query.
+   * That list is reloaded whenever the query changes.
+   */
+  public playlists$: Observable<ReadonlyArray<PlaylistResult>> = this.currentRoute.queryParamMap.pipe(
+    switchMap((params: ParamMap) => {
+      const query = params.get("name")
+      if (query) {
+        return this.service.searchPlaylists(query)
+      } else {
+        return EMPTY
+      }
+    })
+  )
 
   public select(playlist: RemotePlaylist) {
     this.router.navigate(["/playlists", playlist.id])
