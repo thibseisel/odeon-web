@@ -2,7 +2,6 @@ package com.github.thibseisel.music
 
 import com.github.thibseisel.music.client.SpotifyService
 import com.github.thibseisel.music.spotify.*
-import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -13,7 +12,6 @@ import org.springframework.web.server.ResponseStatusException
 internal class AudioMetadataController(
     private val service: SpotifyService
 ) {
-    private val logger = LoggerFactory.getLogger(AudioMetadataController::class.java)
 
     @GetMapping("/search")
     suspend fun searchTrack(
@@ -88,19 +86,5 @@ internal class AudioMetadataController(
         @PathVariable("id") playlistId: String
     ): List<SpotifyTrack> {
         TODO("Fetch playlist tracks from the service and map them to SpotifyTrack")
-    }
-
-    @ExceptionHandler
-    fun handle(httpException: ResponseStatusException): ResponseEntity<ErrorPayload> {
-        val errorStatus = httpException.status
-        val errorPayload = ErrorPayload(errorStatus, httpException.reason ?: errorStatus.reasonPhrase)
-        return ResponseEntity.status(errorStatus).body(errorPayload)
-    }
-
-    @ExceptionHandler
-    fun handleUnexpected(exception: Exception): ResponseEntity<ErrorPayload> {
-        logger.error("An unexpected error occurred", exception)
-        val payload = ErrorPayload(HttpStatus.INTERNAL_SERVER_ERROR, "An unexpected error occurred")
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(payload)
     }
 }
