@@ -12,6 +12,7 @@ interface SpotifyService {
     suspend fun findArtist(id: String): FullSpotifyArtist?
     suspend fun findAlbum(id: String): FullSpotifyAlbum?
     suspend fun findTrack(id: String): FullSpotifyTrack?
+    suspend fun getSeveralTracks(ids: List<String>): List<FullSpotifyTrack?>
     suspend fun findAudioFeature(trackId: String): SpotifyAudioFeature?
     suspend fun getSeveralAudioFeatures(trackIds: List<String>): List<SpotifyAudioFeature?>
     suspend fun findAudioAnalysis(trackId: String): SpotifyAudioAnalysis?

@@ -3,7 +3,6 @@ package com.github.thibseisel.music
 import com.github.thibseisel.music.client.SpotifyService
 import com.github.thibseisel.music.spotify.*
 import org.springframework.http.HttpStatus
-import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.server.ResponseStatusException
 
@@ -32,6 +31,17 @@ internal class AudioMetadataController(
         }
     }
 
+    @GetMapping("/tracks")
+    suspend fun getSeveralTracks(
+        @RequestParam("ids") ids: List<String>
+    ): List<FullSpotifyTrack?> = service.getSeveralTracks(ids)
+
+    @GetMapping("/tracks/{id}")
+    suspend fun getTrack(
+        @PathVariable("id") id: String
+    ): FullSpotifyTrack = service.findTrack(id)
+        ?: throw ResponseStatusException(HttpStatus.NOT_FOUND)
+
     @GetMapping("/artists/{id}")
     suspend fun getArtist(
         @PathVariable("id") id: String
@@ -42,12 +52,6 @@ internal class AudioMetadataController(
     suspend fun getAlbum(
         @PathVariable("id") id: String
     ) : FullSpotifyAlbum = service.findAlbum(id)
-        ?: throw ResponseStatusException(HttpStatus.NOT_FOUND)
-
-    @GetMapping("/tracks/{id}")
-    suspend fun getTrack(
-        @PathVariable("id") id: String
-    ): FullSpotifyTrack = service.findTrack(id)
         ?: throw ResponseStatusException(HttpStatus.NOT_FOUND)
 
     @GetMapping("/audio-features/{id}")

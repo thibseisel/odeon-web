@@ -49,16 +49,19 @@ internal class SpotifyServiceImpl(
     override suspend fun findAudioFeature(trackId: String): SpotifyAudioFeature? =
         findEntity("/audio-features/{id}", trackId)
 
-    private suspend inline fun <reified T : SpotifyEntity> findEntity(endpoint: String, id: String): T? {
+    override suspend fun getSeveralTracks(ids: List<String>): List<FullSpotifyTrack?> {
         try {
-            return http.get()
-                .uri(endpoint, id)
+            val wrapper = http.get()
+                .uri {
+                    it.path("/tracks")
+                    it.queryParam("ids", ids.joinToString(","))
+                    it.build()
+                }
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
-                .awaitBody()
+                .awaitBody<JsonWrapper<FullSpotifyTrack?>>()
+            return wrapper.data
 
-        } catch (entityNotFound: WebClientResponseException.NotFound) {
-            return null
         } catch (genericFailure: WebClientResponseException) {
             handleSpotifyFailure(genericFailure)
         }
@@ -86,6 +89,21 @@ internal class SpotifyServiceImpl(
         try {
             return http.get()
                 .uri("/audio-analysis/{id}", trackId)
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .awaitBody()
+
+        } catch (entityNotFound: WebClientResponseException.NotFound) {
+            return null
+        } catch (genericFailure: WebClientResponseException) {
+            handleSpotifyFailure(genericFailure)
+        }
+    }
+
+    private suspend inline fun <reified T : SpotifyEntity> findEntity(endpoint: String, id: String): T? {
+        try {
+            return http.get()
+                .uri(endpoint, id)
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
                 .awaitBody()
