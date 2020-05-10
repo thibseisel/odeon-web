@@ -2,7 +2,10 @@ package com.github.thibseisel.music.client
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.github.thibseisel.music.spotify.*
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.reactive.awaitSingle
+import kotlinx.coroutines.reactor.mono
+import org.springframework.http.HttpHeaders
 import org.springframework.http.MediaType
 import org.springframework.stereotype.Component
 import org.springframework.web.reactive.function.client.*
@@ -10,9 +13,13 @@ import reactor.core.publisher.Mono
 
 @Component
 internal class SpotifyServiceImpl(
-    private val http: WebClient,
+    http: WebClient,
     private val mapper: ObjectMapper
 ) : SpotifyService {
+
+    private val http: WebClient = http.mutate()
+        .filter(RetryAutomaticallyAfterTooManyRequests())
+        .build()
 
     override suspend fun search(query: String, offset: Int, limit: Int): List<SpotifyTrack> {
         return search("track", query, offset, limit).tracks?.items
@@ -122,5 +129,28 @@ internal class SpotifyServiceImpl(
     private fun handleSpotifyFailure(httpException: WebClientResponseException): Nothing {
         val errorPayload = mapper.readValue(httpException.responseBodyAsString, SpotifyError::class.java)
         throw SpotifyService.ApiException(httpException.statusCode, errorPayload.message)
+    }
+
+    /**
+     * Filters Spotify API responses to retry requests automatically after some delay
+     * when receiving an HTTP 429 (Too Many Requests).
+     */
+    private class RetryAutomaticallyAfterTooManyRequests : ExchangeFilterFunction {
+        override fun filter(request: ClientRequest, next: ExchangeFunction): Mono<ClientResponse> = mono {
+            var response: ClientResponse? = null
+
+            do {
+                try {
+                    response = next.exchange(request).awaitSingle()
+                } catch (tooManyRequests: WebClientResponseException.TooManyRequests) {
+                    val retryAfterSeconds = tooManyRequests.headers.getFirst(HttpHeaders.RETRY_AFTER)
+                        ?.toLongOrNull()
+                        ?: throw tooManyRequests
+
+                    delay(retryAfterSeconds + 1L)
+                }
+            } while (response == null)
+            return@mono response
+        }
     }
 }
