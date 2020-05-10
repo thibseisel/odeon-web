@@ -40,7 +40,7 @@ internal class SpotifyPlaylist @JsonCreator constructor(
      * Information about the tracks of the playlist.
      */
     @JsonProperty("tracks")
-    val tracks: Paging<SpotifyTrack>,
+    val tracks: PartialPaging,
 
     /**
      * Images for the playlist.

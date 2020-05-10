@@ -5,9 +5,8 @@ import com.github.thibseisel.music.spotify.*
 import kotlinx.coroutines.reactive.awaitSingle
 import org.springframework.http.MediaType
 import org.springframework.stereotype.Component
-import org.springframework.web.reactive.function.client.WebClient
-import org.springframework.web.reactive.function.client.WebClientResponseException
-import org.springframework.web.reactive.function.client.awaitBody
+import org.springframework.web.reactive.function.client.*
+import reactor.core.publisher.Mono
 
 @Component
 internal class SpotifyServiceImpl(
@@ -16,25 +15,8 @@ internal class SpotifyServiceImpl(
 ) : SpotifyService {
 
     override suspend fun search(query: String, offset: Int, limit: Int): List<SpotifyTrack> {
-        try {
-            val searchResults = http.get()
-                .uri {
-                    it.path("/search")
-                    it.queryParam("type", "track")
-                    it.queryParam("q", query)
-                    it.queryParam("offset", offset.toString())
-                    it.queryParam("limit", limit.toString())
-                    it.build()
-                }
-                .accept(MediaType.APPLICATION_JSON)
-                .retrieve()
-                .awaitBody<SpotifySearchResult>()
-
-            return searchResults.tracks.items
-
-        } catch (genericFailure: WebClientResponseException) {
-            handleSpotifyFailure(genericFailure)
-        }
+        return search("track", query, offset, limit).tracks?.items
+            ?: error("\"tracks\" property of SpotifySearchResult should be present when searching tracks.")
     }
 
     override suspend fun findArtist(id: String): FullSpotifyArtist? =
@@ -89,7 +71,40 @@ internal class SpotifyServiceImpl(
         return findEntity("/audio-analysis/{id}", trackId, SpotifyAudioAnalysis::class.java)
     }
 
-    private suspend inline fun <reified T : SpotifyEntity> findEntity(endpoint: String, id: String): T? {
+    override suspend fun searchPlaylists(name: String, offset: Int, limit: Int): List<SpotifyPlaylist> {
+        return search("playlist", name, offset, limit).playlists?.items
+            ?: error("\"playlists\" property of SpotifySearchResult should be present when searching playlists.")
+    }
+
+    private suspend fun search(entityType: String, query: String, offset: Int, limit: Int): SpotifySearchResult {
+        try {
+            return http.get()
+                .uri {
+                    it.path("/search")
+                    it.queryParam("type", entityType)
+                    it.queryParam("q", query)
+                    it.queryParam("offset", offset.toString())
+                    it.queryParam("limit", limit.toString())
+                    it.build()
+                }
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .awaitBody()
+
+        } catch (genericFailure: WebClientResponseException) {
+            handleSpotifyFailure(genericFailure)
+        }
+    }
+
+    override suspend fun findPlaylist(id: String): SpotifyPlaylist? {
+        return findEntity("playlists", id, SpotifyPlaylist::class.java)
+    }
+
+    override suspend fun getPlaylistTracks(playlistId: String): List<SpotifyTrack>? {
+        TODO("Not yet implemented")
+    }
+
+    private suspend fun <T : Any> findEntity(endpoint: String, id: String, entityType: Class<T>): T? {
         try {
             return http.get()
                 .uri(endpoint, id)

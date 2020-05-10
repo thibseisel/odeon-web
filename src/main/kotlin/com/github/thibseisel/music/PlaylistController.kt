@@ -1,5 +1,6 @@
 package com.github.thibseisel.music
 
+import com.github.thibseisel.music.client.SpotifyService
 import com.github.thibseisel.music.spotify.SpotifyTrack
 import org.springframework.web.bind.annotation.*
 
@@ -8,13 +9,26 @@ import org.springframework.web.bind.annotation.*
  */
 @RestController
 @RequestMapping("/api/playlists")
-internal class PlaylistController {
+internal class PlaylistController(
+    private val service: SpotifyService
+) {
 
     @GetMapping
     suspend fun searchPlaylists(
         @RequestParam("name") query: String
     ): List<Playlist> {
-        TODO("Fetch playlists from the search service.")
+        val spotifyPlaylists = service.searchPlaylists(query, 0, 10)
+        return spotifyPlaylists.map {
+            Playlist(
+                id = it.id,
+                name = it.name,
+                description = it.description,
+                size = it.tracks.total,
+                owner = it.owner.name ?: "Unknown",
+                link = it.externalUrls["spotify"].orEmpty(),
+                images = it.images
+            )
+        }
     }
 
     @GetMapping("/{id}")

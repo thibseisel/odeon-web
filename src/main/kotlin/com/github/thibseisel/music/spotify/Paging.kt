@@ -45,5 +45,18 @@ class Paging<out T> @JsonCreator constructor(
      * The maximum number of items available to return.
      */
     @JsonProperty("total")
+    total: Int
+
+) : PartialPaging(total)
+
+/**
+ * Reduced portion of a [Paging] object that does not contain any item.
+ */
+open class PartialPaging(
+
+    /**
+     * The maximum number of items available to return.
+     */
+    @JsonProperty("total")
     val total: Int
 )

@@ -7,7 +7,7 @@ import org.springframework.http.HttpStatus
 /**
  * Main entry point for retrieving music metadata from the Spotify API.
  */
-interface SpotifyService {
+internal interface SpotifyService {
     suspend fun search(query: String, offset: Int, limit: Int): List<SpotifyTrack>
     suspend fun findArtist(id: String): FullSpotifyArtist?
     suspend fun findAlbum(id: String): FullSpotifyAlbum?
@@ -16,6 +16,10 @@ interface SpotifyService {
     suspend fun findAudioFeature(trackId: String): SpotifyAudioFeature?
     suspend fun getSeveralAudioFeatures(trackIds: List<String>): List<SpotifyAudioFeature?>
     suspend fun findAudioAnalysis(trackId: String): SpotifyAudioAnalysis?
+
+    suspend fun searchPlaylists(name: String, offset: Int, limit: Int): List<SpotifyPlaylist>
+    suspend fun findPlaylist(id: String): SpotifyPlaylist?
+    suspend fun getPlaylistTracks(playlistId: String): List<SpotifyTrack>?
 
     /**
      * Throw when a Spotify API HTTP call failed.

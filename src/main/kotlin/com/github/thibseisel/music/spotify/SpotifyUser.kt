@@ -24,5 +24,5 @@ internal class SpotifyUser @JsonCreator constructor(
      * The user's profile image.
      */
     @JsonProperty("images")
-    val images: List<SpotifyImage>
+    val images: List<SpotifyImage>?
 )
