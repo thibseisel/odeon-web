@@ -14,7 +14,7 @@
       <mat-card-content>
         <mat-list>
           <mat-list-item *ngFor="let track of playlist.tracks; last as last">
-            <img mat-list-avatar [src]="track.artworkUrl" />
+            <img mat-list-avatar [src]="track.artworkUrl" alt="Playlist artwork" />
             <h3 mat-line>{{ track.name }}</h3>
             <p mat-line>{{ track.artist }}</p>
             <mat-divider *ngIf="!last"></mat-divider>
