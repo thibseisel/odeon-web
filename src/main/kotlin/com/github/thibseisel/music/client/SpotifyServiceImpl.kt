@@ -2,7 +2,7 @@ package com.github.thibseisel.music.client
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.github.thibseisel.music.spotify.*
-import com.github.thibseisel.music.spotify.SpotifyAudioAnalysis
+import kotlinx.coroutines.reactive.awaitSingle
 import org.springframework.http.MediaType
 import org.springframework.stereotype.Component
 import org.springframework.web.reactive.function.client.WebClient
@@ -38,16 +38,16 @@ internal class SpotifyServiceImpl(
     }
 
     override suspend fun findArtist(id: String): FullSpotifyArtist? =
-        findEntity("/artists/{id}", id)
+        findEntity("/artists/{id}", id, FullSpotifyArtist::class.java)
 
     override suspend fun findAlbum(id: String): FullSpotifyAlbum? =
-        findEntity("/albums/{id}", id)
+        findEntity("/albums/{id}", id, FullSpotifyAlbum::class.java)
 
     override suspend fun findTrack(id: String): FullSpotifyTrack? =
-        findEntity("/tracks/{id}", id)
+        findEntity("/tracks/{id}", id, FullSpotifyTrack::class.java)
 
     override suspend fun findAudioFeature(trackId: String): SpotifyAudioFeature? =
-        findEntity("/audio-features/{id}", trackId)
+        findEntity("/audio-features/{id}", trackId, SpotifyAudioFeature::class.java)
 
     override suspend fun getSeveralTracks(ids: List<String>): List<FullSpotifyTrack?> {
         try {
@@ -86,18 +86,7 @@ internal class SpotifyServiceImpl(
     }
 
     override suspend fun findAudioAnalysis(trackId: String): SpotifyAudioAnalysis? {
-        try {
-            return http.get()
-                .uri("/audio-analysis/{id}", trackId)
-                .accept(MediaType.APPLICATION_JSON)
-                .retrieve()
-                .awaitBody()
-
-        } catch (entityNotFound: WebClientResponseException.NotFound) {
-            return null
-        } catch (genericFailure: WebClientResponseException) {
-            handleSpotifyFailure(genericFailure)
-        }
+        return findEntity("/audio-analysis/{id}", trackId, SpotifyAudioAnalysis::class.java)
     }
 
     private suspend inline fun <reified T : SpotifyEntity> findEntity(endpoint: String, id: String): T? {
@@ -106,8 +95,8 @@ internal class SpotifyServiceImpl(
                 .uri(endpoint, id)
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
-                .awaitBody()
-
+                .bodyToMono(entityType)
+                .awaitSingle()
         } catch (entityNotFound: WebClientResponseException.NotFound) {
             return null
         } catch (genericFailure: WebClientResponseException) {
