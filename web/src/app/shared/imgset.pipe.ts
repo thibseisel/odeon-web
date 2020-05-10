@@ -19,7 +19,7 @@ export class ImgSetPipe implements PipeTransform {
         } else {
           return `${image.url} 1x`
         }
-      }).join()
+      }).join(", ")
 
     } else {
       return undefined

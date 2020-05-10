@@ -32,7 +32,7 @@ export interface Track {
      * Popularity score, from 0 to 100.
      */
     readonly popularity: number
-    readonly artworkUrl?: string
+    readonly artworks: ReadonlyArray<ImageSpec>
 
     readonly features: AudioFeature
 }

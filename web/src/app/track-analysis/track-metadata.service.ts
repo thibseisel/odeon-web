@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse, HttpParams } from "@angular/common/http"
 import { Injectable } from "@angular/core"
 import { environment } from "@config/environment"
-import { AudioFeature, ImageSpec, RemoteTrack } from "@shared/remote-models"
+import { AudioFeature, RemoteTrack } from "@shared/remote-models"
 import { retryAfter } from "@shared/rx-operators"
 import { SearchResult, Track } from "@track/track-models"
 import { MonoTypeOperatorFunction, Observable, of, zip } from "rxjs"
@@ -66,8 +66,6 @@ export class TrackMetadataService {
 }
 
 function combineToTrack(track: RemoteTrack, feature: AudioFeature): Track {
-  const largestArtwork = findLargestImageIn(track.album.images)
-
   return {
     id: track.id,
     name: track.name,
@@ -76,28 +74,8 @@ function combineToTrack(track: RemoteTrack, feature: AudioFeature): Track {
     trackNo: track.track_number,
     duration: track.duration,
     popularity: track.popularity,
-    artworkUrl: largestArtwork?.url,
+    artworks: track.album.images,
     features: feature
-  }
-}
-
-function findLargestImageIn(images: Array<ImageSpec>): ImageSpec | undefined {
-  function area(image: ImageSpec): number {
-    if (image.width && image.height) {
-      return image.width * image.height
-    } else {
-      return 0
-    }
-  }
-
-  if (images.length > 0) {
-    return images.reduce((largest, image) => {
-      const largestArea = area(largest)
-      const imageArea = area(image)
-      return (imageArea > largestArea) ? image : largest
-    })
-  } else {
-    return undefined
   }
 }
 

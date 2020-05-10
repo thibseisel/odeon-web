@@ -1,7 +1,7 @@
 <mat-card *ngIf="track">
 
   <div class="info-header">
-    <img class="info-header__artwork" [src]="track!.artworkUrl" />
+    <img class="info-header__artwork" [srcset]="track!.artworks | imgset" />
     <div class="info-header__metadata">
       <h1 class="info-header__title">{{ track!.name }}</h1>
       <p class="info-header__subtitle mat-body-2">{{ track!.artist }}</p>
