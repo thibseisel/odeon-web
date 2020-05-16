@@ -13,7 +13,7 @@
       <mat-card-title>{{ playlist.tracks.length }} Tracks</mat-card-title>
       <mat-card-content>
         <mat-list>
-          <mat-list-item *ngFor="let track of playlist.tracks; last as last">
+          <mat-list-item *ngFor="let track of playlist.tracks; last as last; trackBy: trackByTrackId">
             <img mat-list-avatar [src]="track.artworkUrl" alt="Playlist artwork" />
             <h3 mat-line>{{ track.name }}</h3>
             <p mat-line>{{ track.artist }}</p>

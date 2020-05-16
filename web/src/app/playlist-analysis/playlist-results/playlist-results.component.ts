@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import { Component, TrackByFunction } from '@angular/core'
 import { ActivatedRoute, ParamMap, Router } from '@angular/router'
 import { PlaylistResult } from "@playlist/playlist-models"
 import { PlaylistStoreService } from '@playlist/playlist-store.service'
@@ -33,6 +33,8 @@ export class PlaylistResultsComponent {
       }
     })
   )
+
+  public readonly trackByPlaylistId: TrackByFunction<PlaylistResult> = (_, playlist) => playlist.id
 
   public select(playlist: RemotePlaylist) {
     this.router.navigate(["/playlists", playlist.id])

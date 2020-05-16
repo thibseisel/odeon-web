@@ -1,5 +1,5 @@
 <div class="playlist-grid">
-  <div class="playlist-grid__item" *ngFor="let playlist of playlists$ | async">
+  <div class="playlist-grid__item" *ngFor="let playlist of playlists$ | async; trackBy: trackByPlaylistId">
     <mat-card mat-ripple (click)="select(playlist)">
       <mat-card-title-group>
         <mat-card-title>{{ playlist.name }}</mat-card-title>

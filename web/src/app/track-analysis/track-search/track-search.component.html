@@ -6,7 +6,7 @@
   </mat-form-field>
   <mat-progress-bar mode="indeterminate" [class.search-progress--hidden]="!state?.loading"></mat-progress-bar>
   <mat-action-list class="result-list">
-    <mat-list-item *ngFor="let track of state?.results; last as last" (click)="select(track)">
+    <mat-list-item *ngFor="let track of state?.results; last as last; trackBy: trackByTrackId" (click)="select(track)">
       <img matListAvatar [srcset]="track.artworks | imgset" sizes="40px" [alt]="track.album" />
       <h3 matLine>{{ track.title }}</h3>
       <p matLine>{{ track.artist }}</p>

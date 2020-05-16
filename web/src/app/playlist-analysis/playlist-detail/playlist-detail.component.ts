@@ -1,6 +1,6 @@
-import { Component } from '@angular/core'
+import { Component, TrackByFunction } from '@angular/core'
 import { ActivatedRoute, ParamMap } from '@angular/router'
-import { DistributionRange, FeatureStats, Playlist } from "@playlist/playlist-models"
+import { DistributionRange, FeatureStats, Playlist, PlaylistTrack } from "@playlist/playlist-models"
 import { PlaylistStoreService } from '@playlist/playlist-store.service'
 import { keyDisplayName, MusicalMode } from "@shared/remote-models"
 import { DataItem, SingleSeries } from "@swimlane/ngx-charts"
@@ -67,6 +67,8 @@ export class PlaylistDetailComponent {
   public livenessChartData$: Observable<SingleSeries> = this.featureChartData(1, it => it.liveness)
   public instrumentalnessChartData$: Observable<SingleSeries> = this.featureChartData(1, it => it.instrumentalness)
   public speechinessChartData$: Observable<SingleSeries> = this.featureChartData(1, it => it.speechiness)
+
+  public readonly trackByTrackId: TrackByFunction<PlaylistTrack> = (_, track) => track.id
 
   private featureChartData(
     decimalDigits: number,

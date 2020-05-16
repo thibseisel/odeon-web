@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from "@angular/core"
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, TrackByFunction } from "@angular/core"
 import { SearchResult } from "@track/track-models"
 import { Subject } from "rxjs"
 import { debounceTime, distinctUntilChanged } from "rxjs/operators"
@@ -26,6 +26,8 @@ export class TrackSearchComponent implements OnInit, OnDestroy {
    * Notify when a result has been selected in the result list.
    */
   @Output() readonly ontrackselected = new EventEmitter<SearchResult>()
+
+  public readonly trackByTrackId: TrackByFunction<SearchResult> = (_, track) => track.id
 
   ngOnInit() {
     this.textChanges
