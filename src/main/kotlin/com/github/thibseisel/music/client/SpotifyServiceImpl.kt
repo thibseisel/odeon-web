@@ -39,6 +39,8 @@ internal class SpotifyServiceImpl(
         findEntity("/audio-features/{id}", trackId, SpotifyAudioFeature::class.java)
 
     override suspend fun getSeveralTracks(ids: List<String>): List<FullSpotifyTrack?> {
+        require(ids.size <= 50) { "At most 50 tracks could be queried at once" }
+
         try {
             val wrapper = http.get()
                 .uri {
@@ -57,6 +59,8 @@ internal class SpotifyServiceImpl(
     }
 
     override suspend fun getSeveralAudioFeatures(trackIds: List<String>): List<SpotifyAudioFeature?> {
+        require(trackIds.size <= 100) { "At most 100 audio features could be queried at once" }
+
         try {
             val wrapper = http.get()
                 .uri {
