@@ -8,7 +8,7 @@ import org.springframework.http.HttpStatus
  * Main entry point for retrieving music metadata from the Spotify API.
  */
 internal interface SpotifyService {
-    suspend fun search(query: String, offset: Int, limit: Int): List<SpotifyTrack>
+    suspend fun searchTracks(query: String, offset: Int, limit: Int): List<SpotifyTrack>
     suspend fun findArtist(id: String): FullSpotifyArtist?
     suspend fun findAlbum(id: String): FullSpotifyAlbum?
     suspend fun findTrack(id: String): FullSpotifyTrack?

@@ -21,7 +21,7 @@ internal class SpotifyServiceImpl(
         .filter(RetryAutomaticallyAfterTooManyRequests())
         .build()
 
-    override suspend fun search(query: String, offset: Int, limit: Int): List<SpotifyTrack> {
+    override suspend fun searchTracks(query: String, offset: Int, limit: Int): List<SpotifyTrack> {
         return search("track", query, offset, limit).tracks?.items
             ?: error("\"tracks\" property of SpotifySearchResult should be present when searching tracks.")
     }

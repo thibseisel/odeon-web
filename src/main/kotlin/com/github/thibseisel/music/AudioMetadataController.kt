@@ -18,7 +18,7 @@ internal class AudioMetadataController(
         @RequestParam("offset", defaultValue = "0") offset: Int,
         @RequestParam("limit", defaultValue = "10") limit: Int
     ): List<SearchResult> {
-        val trackResults = service.search(query, offset, limit)
+        val trackResults = service.searchTracks(query, offset, limit)
         return trackResults.map { track ->
             val album = track.album
             SearchResult(
