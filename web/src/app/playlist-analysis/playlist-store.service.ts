@@ -5,7 +5,7 @@ import { DistributionRange, Playlist, PlaylistResult } from "@playlist/playlist-
 import { RemotePlaylist } from "@playlist/remote-playlist"
 import { Mutable } from "@shared/language"
 import { AudioFeature, ImageSpec, MusicalMode, Pitch, RemoteTrack } from "@shared/remote-models"
-import { Observable, of, zip } from "rxjs"
+import { Observable, of, forkJoin } from "rxjs"
 import { catchError, concatMap, map } from "rxjs/operators"
 
 @Injectable({
@@ -59,11 +59,11 @@ export class PlaylistStoreService {
         const syncTracks: Observable<Array<RemoteTrack>> = of(tracks)
         const asyncFeatures = this.http.get<Array<AudioFeature>>(severalFeaturesUrl, { params: httpParams })
 
-        return zip(syncTracks, asyncFeatures)
+        return forkJoin([syncTracks, asyncFeatures])
       })
     )
 
-    return zip(asyncPlaylist, asyncFeaturedTracks).pipe(
+    return forkJoin([asyncPlaylist, asyncFeaturedTracks]).pipe(
       map(([playlist, [tracks, features]]) => combineToPlaylist(playlist, tracks, features))
     )
   }

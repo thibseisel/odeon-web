@@ -4,7 +4,7 @@ import { environment } from "@config/environment"
 import { AudioFeature, RemoteTrack } from "@shared/remote-models"
 import { retryAfter } from "@shared/rx-operators"
 import { SearchResult, Track } from "@track/track-models"
-import { MonoTypeOperatorFunction, Observable, of, zip } from "rxjs"
+import { MonoTypeOperatorFunction, Observable, of, forkJoin } from "rxjs"
 import { catchError, map } from "rxjs/operators"
 
 @Injectable({
@@ -55,7 +55,7 @@ export class TrackMetadataService {
     const asyncTrack = this.http.get<RemoteTrack>(trackUrl).pipe(retryOnNetworkOrServerError())
     const asyncFeature = this.http.get<AudioFeature>(featureUrl).pipe(retryOnNetworkOrServerError())
 
-    return zip(asyncTrack, asyncFeature).pipe(
+    return forkJoin([asyncTrack, asyncFeature]).pipe(
       map(([track, feature]) => combineToTrack(track, feature)),
       catchError((httpError) => {
         console.error(`Loading track detail failed for id=${trackId}`, httpError)
