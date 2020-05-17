@@ -104,11 +104,39 @@ internal class SpotifyServiceImpl(
     }
 
     override suspend fun findPlaylist(id: String): SpotifyPlaylist? {
-        return findEntity("playlists", id, SpotifyPlaylist::class.java)
+        return findEntity("/playlists/{id}", id, SpotifyPlaylist::class.java)
     }
 
     override suspend fun getPlaylistTracks(playlistId: String): List<SpotifyTrack>? {
-        TODO("Not yet implemented")
+        try {
+            val tracks = mutableListOf<SpotifyTrack>()
+            var hasNextPage: Boolean
+            var offset = 0
+
+            do {
+                val pageOfTracks = http.get()
+                    .uri {
+                        it.path("/playlists/{id}/tracks")
+                        it.queryParam("offset", offset)
+                        it.build(playlistId)
+                    }
+                    .accept(MediaType.APPLICATION_JSON)
+                    .retrieve()
+                    .awaitBody<Paging<SpotifyPlaylistTrack>>()
+
+                pageOfTracks.items.mapTo(tracks, SpotifyPlaylistTrack::track)
+                hasNextPage = pageOfTracks.next != null
+                offset = pageOfTracks.offset + pageOfTracks.limit
+
+            } while (hasNextPage)
+
+            return tracks
+
+        } catch (playlistNotFound: WebClientResponseException.NotFound) {
+            return null
+        } catch (genericFailure: WebClientResponseException) {
+            handleSpotifyFailure(genericFailure)
+        }
     }
 
     private suspend fun <T : Any> findEntity(endpoint: String, id: String, entityType: Class<T>): T? {

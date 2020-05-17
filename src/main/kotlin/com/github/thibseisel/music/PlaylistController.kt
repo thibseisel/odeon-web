@@ -1,8 +1,11 @@
 package com.github.thibseisel.music
 
 import com.github.thibseisel.music.client.SpotifyService
+import com.github.thibseisel.music.spotify.SpotifyPlaylist
 import com.github.thibseisel.music.spotify.SpotifyTrack
+import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
+import org.springframework.web.server.ResponseStatusException
 
 /**
  * Describe the REST API for fetching playlists information from Spotify.
@@ -18,30 +21,29 @@ internal class PlaylistController(
         @RequestParam("name") query: String
     ): List<Playlist> {
         val spotifyPlaylists = service.searchPlaylists(query, 0, 10)
-        return spotifyPlaylists.map {
-            Playlist(
-                id = it.id,
-                name = it.name,
-                description = it.description,
-                size = it.tracks.total,
-                owner = it.owner.name ?: "Unknown",
-                link = it.externalUrls["spotify"].orEmpty(),
-                images = it.images
-            )
-        }
+        return spotifyPlaylists.map { it.asModel() }
     }
 
     @GetMapping("/{id}")
     suspend fun getPlaylistDetail(
         @PathVariable("id") playlistId: String
-    ): Playlist {
-        TODO("Fetch a single playlist from the service")
-    }
+    ): Playlist = service.findPlaylist(playlistId)
+        ?.asModel()
+        ?: throw ResponseStatusException(HttpStatus.NOT_FOUND)
 
     @GetMapping("/{id}/tracks")
     suspend fun getPlaylistTracks(
         @PathVariable("id") playlistId: String
-    ): List<SpotifyTrack> {
-        TODO("Fetch playlist tracks from the service and map them to SpotifyTrack")
-    }
+    ): List<SpotifyTrack> = service.getPlaylistTracks(playlistId)
+        ?: throw ResponseStatusException(HttpStatus.NOT_FOUND)
+
+    private fun SpotifyPlaylist.asModel(): Playlist = Playlist(
+        id = id,
+        name = name,
+        description = description,
+        size = tracks.total,
+        owner = owner.name ?: "Unknown",
+        link = externalUrls["spotify"].orEmpty(),
+        images = images
+    )
 }
