@@ -11,6 +11,10 @@ const appRoutes: Routes = [
     path: "",
     redirectTo: "tracks",
     pathMatch: "full"
+  },
+  {
+    path: "**",
+    redirectTo: "tracks"
   }
 ]
 
