@@ -5,22 +5,21 @@ import com.github.thibseisel.music.spotify.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.reactive.awaitSingle
 import kotlinx.coroutines.reactor.mono
+import org.springframework.core.ParameterizedTypeReference
 import org.springframework.http.HttpHeaders
 import org.springframework.http.MediaType
 import org.springframework.stereotype.Component
 import org.springframework.web.reactive.function.client.*
 import reactor.core.publisher.Mono
 
+private const val MAX_SEVERAL_TRACKS = 50
+private const val MAX_SEVERAL_FEATURES = 100
+
 @Component
 internal class SpotifyServiceImpl(
     http: WebClient,
     private val mapper: ObjectMapper
 ) : SpotifyService {
-
-    private companion object {
-        const val MAX_SEVERAL_TRACKS = 50
-        const val MAX_SEVERAL_FEATURES = 100
-    }
 
     private val http: WebClient = http.mutate()
         .filter(RetryAutomaticallyAfterTooManyRequests())
@@ -135,26 +134,36 @@ internal class SpotifyServiceImpl(
         }
     }
 
-    private fun CoroutineScope.getSeveralTracksAsync(ids: List<String>) = async {
-        require(ids.size <= MAX_SEVERAL_TRACKS) {
-            "At most $MAX_SEVERAL_TRACKS tracks could be queried at once"
-        }
-
+    private suspend fun <T : Any> findSeveralEntities(
+        endpoint: String,
+        ids: List<String>,
+        typeToken: ParameterizedTypeReference<JsonWrapper<T>>
+    ): List<T?> {
         try {
             val wrapper = http.get()
                 .uri {
-                    it.path("/tracks")
+                    it.path(endpoint)
                     it.queryParam("ids", ids.joinToString(","))
                     it.build()
                 }
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
-                .awaitBody<JsonWrapper<FullSpotifyTrack?>>()
-            wrapper.data
+                .bodyToMono(typeToken)
+                .awaitSingle()
+            return wrapper.data
 
         } catch (genericFailure: WebClientResponseException) {
             handleSpotifyFailure(genericFailure)
         }
+    }
+
+    private fun CoroutineScope.getSeveralTracksAsync(ids: List<String>) = async {
+        require(ids.size <= MAX_SEVERAL_TRACKS) {
+            "At most $MAX_SEVERAL_TRACKS tracks could be queried at once"
+        }
+
+        val trackTypeToken = object : ParameterizedTypeReference<JsonWrapper<FullSpotifyTrack>>() {}
+        findSeveralEntities("/tracks", ids, trackTypeToken)
     }
 
     private fun CoroutineScope.getSeveralAudioFeaturesAsync(trackIds: List<String>) = async {
@@ -162,21 +171,8 @@ internal class SpotifyServiceImpl(
             "At most $MAX_SEVERAL_FEATURES audio features could be queried at once"
         }
 
-        try {
-            val wrapper = http.get()
-                .uri {
-                    it.path("/audio-features")
-                    it.queryParam("ids", trackIds.joinToString(","))
-                    it.build()
-                }
-                .accept(MediaType.APPLICATION_JSON)
-                .retrieve()
-                .awaitBody<JsonWrapper<SpotifyAudioFeature?>>()
-            return@async wrapper.data
-
-        } catch (genericFailure: WebClientResponseException) {
-            handleSpotifyFailure(genericFailure)
-        }
+        val featureTypeToken = object : ParameterizedTypeReference<JsonWrapper<SpotifyAudioFeature>>() {}
+        findSeveralEntities("/audio-features", trackIds, featureTypeToken)
     }
 
     private fun handleSpotifyFailure(httpException: WebClientResponseException): Nothing {
