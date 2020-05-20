@@ -179,7 +179,7 @@ internal class SpotifyServiceImpl(
                         ?.toLongOrNull()
                         ?: throw tooManyRequests
 
-                    delay(retryAfterSeconds + 1L)
+                    delay((retryAfterSeconds + 1L) * 1000L)
                 }
             } while (response == null)
             return@mono response
