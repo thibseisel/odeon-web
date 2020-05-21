@@ -1,11 +1,12 @@
 import { Component, TrackByFunction } from '@angular/core'
 import { ActivatedRoute, ParamMap } from '@angular/router'
-import { DistributionRange, FeatureStats, Playlist, PlaylistTrack } from "@playlist/playlist-models"
+import { Playlist, PlaylistTrack } from "@playlist/playlist-models"
 import { PlaylistStoreService } from '@playlist/playlist-store.service'
-import { keyDisplayName, MusicalMode } from "@shared/remote-models"
-import { DataItem, SingleSeries } from "@swimlane/ngx-charts"
+import { keyDisplayName, MusicalMode, Pitch } from "@shared/remote-models"
+import { DataItem, SingleSeries, PieChartComponent } from "@swimlane/ngx-charts"
 import { Observable, throwError } from 'rxjs'
 import { map, shareReplay, switchMap } from 'rxjs/operators'
+import { FeatureDistribution, DistributionRange } from '@playlist/remote-playlist'
 
 @Component({
   selector: 'app-playlist-detail',
@@ -34,11 +35,16 @@ export class PlaylistDetailComponent {
   public pitchChartData$: Observable<SingleSeries> = this.playlist$.pipe(
     map(playlist => {
       const chartData = Array<DataItem>()
-      for (const [key, count] of playlist.stats.keys) {
-        chartData.push({
-          name: keyDisplayName(key),
-          value: count
-        })
+      const keyDistribution = playlist.stats.keys
+
+      for (const key in keyDistribution) {
+        if (keyDistribution.hasOwnProperty(key)) {
+          const pitch = Number(key) as Pitch
+          chartData.push({
+            name: keyDisplayName(pitch),
+            value: keyDistribution[pitch]
+          })
+        }
       }
 
       return chartData
@@ -48,11 +54,16 @@ export class PlaylistDetailComponent {
   public modePieData$: Observable<SingleSeries> = this.playlist$.pipe(
     map(playlist => {
       const chartData = Array<DataItem>()
-      for (const [mode, count] of playlist.stats.modes) {
-        chartData.push({
-          name: (mode === MusicalMode.MAJOR) ? "Major" : "minor",
-          value: count
-        })
+      const modeDistribution = playlist.stats.modes
+
+      for (const key in modeDistribution) {
+        if (modeDistribution.hasOwnProperty(key)) {
+          const mode = Number(key) as MusicalMode
+          chartData.push({
+            name: (mode === MusicalMode.MAJOR) ? "Major" : "minor",
+            value: modeDistribution[mode]
+          })
+        }
       }
 
       return chartData
@@ -72,7 +83,7 @@ export class PlaylistDetailComponent {
 
   private featureChartData(
     decimalDigits: number,
-    selector: (stats: FeatureStats) => ReadonlyArray<DistributionRange>
+    selector: (stats: FeatureDistribution) => ReadonlyArray<DistributionRange>
   ): Observable<SingleSeries> {
     return this.playlist$.pipe(
       map(playlist => {
