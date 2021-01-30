@@ -48,7 +48,7 @@ fun isRunningOnWindows(): Boolean {
 	return osName.contains("Windows", ignoreCase = true)
 }
 
-val webDir = "$rootDir/web"
+val webDir = "$rootDir/webclient"
 
 val requireNpm by tasks.registering(Exec::class) {
 	description = "Checks that NPM (Node Package Manager) is installed."
