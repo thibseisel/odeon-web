@@ -27,7 +27,7 @@ const appRoutes: Routes = [
     AppMaterialModule,
     TrackAnalysisModule,
     PlaylistAnalysisModule,
-    RouterModule.forRoot(appRoutes),
+    RouterModule.forRoot(appRoutes, { relativeLinkResolution: 'legacy' }),
   ],
   providers: [],
   bootstrap: [AppComponent]
