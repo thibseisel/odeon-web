@@ -21,9 +21,6 @@ plugins {
     kotlin("plugin.spring") version "1.4.21"
 }
 
-group = "com.github.thibseisel.music"
-version = "0.0.1-SNAPSHOT"
-
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-webflux")
     implementation("org.springframework.boot:spring-boot-starter-oauth2-client")

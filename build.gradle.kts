@@ -14,6 +14,9 @@
  * limitations under the License.
  */
 allprojects {
+    group = "com.github.thibseisel.music"
+    version = "0.1.0"
+
     repositories {
         mavenCentral()
     }
