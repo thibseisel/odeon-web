@@ -1,0 +1,14 @@
+# IDE-specific files
+.idea
+.vscode
+
+# Build outputs
+build
+dist
+out-tsc
+
+# Git history
+**/.git
+
+# Don't copy node_modules because they've already been installed
+node_modules

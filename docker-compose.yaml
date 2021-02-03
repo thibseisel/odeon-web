@@ -1,0 +1,10 @@
+services:
+  webclient:
+    container_name: webclient
+    build:
+      context: ./webclient
+      dockerfile: ./docker/Dockerfile
+    ports:
+    - "4200:4200"
+    volumes:
+    - ./webclient:/app
