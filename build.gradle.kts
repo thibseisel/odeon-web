@@ -21,3 +21,15 @@ allprojects {
         mavenCentral()
     }
 }
+
+tasks.register<Delete>("clean") {
+    delete(buildDir)
+}
+
+tasks.register<Copy>("stage") {
+    val server = project(":server")
+    dependsOn("clean", ":server:bootJar")
+
+    from("${server.buildDir}/libs")
+    into("$buildDir/libs")
+}
