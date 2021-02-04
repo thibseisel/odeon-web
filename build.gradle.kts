@@ -14,7 +14,9 @@
  * limitations under the License.
  */
 plugins {
-    kotlin("jvm") version "1.4.21" apply false
+    val kotlin = "1.4.21"
+    kotlin("jvm") version kotlin apply false
+    kotlin("plugin.serialization") version kotlin apply false
 }
 
 allprojects {

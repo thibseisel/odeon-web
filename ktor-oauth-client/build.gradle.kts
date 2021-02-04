@@ -27,12 +27,10 @@ dependencies {
     val kotest = properties["version.kotest"]
 
     implementation(platform(kotlin("bom")))
-    implementation(project(":ktor-oauth-client"))
 
+    implementation("io.ktor:ktor-client-core:$ktor")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$serialization")
-    implementation("io.ktor:ktor-client-cio:$ktor")
-    implementation("io.ktor:ktor-client-serialization:$ktor")
 
     testImplementation("io.ktor:ktor-client-mock:$ktor")
     testImplementation("io.kotest:kotest-runner-junit5:$kotest")
@@ -40,10 +38,15 @@ dependencies {
     testImplementation("io.kotest:kotest-assertions-ktor:$kotest")
 }
 
+kotlin {
+    explicitApi()
+}
+
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
     kotlinOptions {
         jvmTarget = "1.8"
         freeCompilerArgs = freeCompilerArgs + arrayOf(
+            "-progressive",
             "-Xopt-in=kotlin.RequiresOptIn",
             "-Xopt-in=kotlin.time.ExperimentalTime"
         )

@@ -14,8 +14,13 @@
  * limitations under the License.
  */
 
-rootProject.name = "odeon-web"
-include(":webclient")
-include(":server")
-include(":spotify-client")
-include(":ktor-oauth-client")
+package com.github.thibseisel.ktor.client.oauth
+
+import java.util.Base64
+
+/**
+ * Encodes this string using the Base64 encoding scheme.
+ */
+internal fun String.encodeToBase64(): String {
+    return Base64.getEncoder().encodeToString(toByteArray())
+}
