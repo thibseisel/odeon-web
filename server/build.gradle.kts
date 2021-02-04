@@ -64,3 +64,7 @@ tasks.bootJar {
     archiveBaseName.set(rootProject.name)
     dependsOn(copyAngular)
 }
+
+val runStage by tasks.registering(JavaExec::class) {
+    classpath = files(tasks.bootJar)
+}
