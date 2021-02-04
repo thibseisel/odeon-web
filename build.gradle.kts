@@ -13,6 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+plugins {
+    kotlin("jvm") version "1.4.21" apply false
+}
+
 allprojects {
     group = "com.github.thibseisel.music"
     version = "0.1.1"
