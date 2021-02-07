@@ -53,6 +53,7 @@ tasks.compileKotlin {
 }
 
 val copyAngular by tasks.registering(Copy::class) {
+    description = "Copy Angular build artifacts to server public resources"
     dependsOn(":webclient:build")
 
     val webclient = project(":webclient")
@@ -66,5 +67,8 @@ tasks.bootJar {
 }
 
 val runStage by tasks.registering(JavaExec::class) {
+    group = "application"
+    description = "Run prod application locally"
+
     classpath = files(tasks.bootJar)
 }

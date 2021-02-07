@@ -23,10 +23,16 @@ allprojects {
 }
 
 tasks.register<Delete>("clean") {
+    group = "clean"
+    description = "Delete the root build directory"
+
     delete(buildDir)
 }
 
-tasks.register<Copy>("stage") {
+val stage by tasks.registering(Copy::class) {
+    group = "build"
+    description = "Build executable for deployment to Heroku"
+
     val server = project(":server")
     dependsOn("clean", ":server:bootJar")
 
