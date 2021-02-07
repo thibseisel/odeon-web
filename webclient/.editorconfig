@@ -1,0 +1,3 @@
+# Different indentation for JS/TS files
+[*.{js, ts}]
+indent_size = 2
