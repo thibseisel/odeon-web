@@ -15,57 +15,58 @@
  */
 
 val requireNpm by tasks.registering(Exec::class) {
-  group = "angular"
-  description = "Checks that NPM (Node Package Manager) is installed."
+    group = "angular"
+    description = "Checks that NPM (Node Package Manager) is installed."
 
-  workingDir = projectDir
+    workingDir = projectDir
 
-  val detectionCommand = "npm -v"
-  if (isRunningOnWindows()) {
-    commandLine("cmd", "/C", detectionCommand)
-  } else {
-    commandLine("sh", "-c", detectionCommand)
-  }
+    val detectionCommand = "npm -v"
+    if (isRunningOnWindows()) {
+        commandLine("cmd", "/C", detectionCommand)
+    } else {
+        commandLine("sh", "-c", detectionCommand)
+    }
 }
 
 val installAngularDependencies by tasks.registering(Exec::class) {
-  group = "angular"
-  description = "Installs dependencies required to build the Angular front-end application via NPM."
-  dependsOn(requireNpm)
+    group = "angular"
+    description =
+        "Installs dependencies required to build the Angular front-end application via NPM."
+    dependsOn(requireNpm)
 
-  inputs.file("$projectDir/package.json")
-  inputs.file("$projectDir/package-lock.json")
-  outputs.dir("$projectDir/node_modules")
+    inputs.file("$projectDir/package.json")
+    inputs.file("$projectDir/package-lock.json")
+    outputs.dir("$projectDir/node_modules")
 
-  workingDir = projectDir
-  val installCommand = "npm install"
-  if (isRunningOnWindows()) {
-    commandLine("cmd", "/C", installCommand)
-  } else {
-    commandLine("sh", "-c", installCommand)
-  }
+    workingDir = projectDir
+    val installCommand = "npm install"
+    if (isRunningOnWindows()) {
+        commandLine("cmd", "/C", installCommand)
+    } else {
+        commandLine("sh", "-c", installCommand)
+    }
 }
 
 val build by tasks.registering(Exec::class) {
-  group = "angular"
-  description = "Builds the Angular front-end application with Angular CLI."
-  dependsOn(installAngularDependencies)
+    group = "angular"
+    description = "Builds the Angular front-end application with Angular CLI."
+    dependsOn(installAngularDependencies)
 
-  inputs.dir("$projectDir/src")
-  outputs.dir("$projectDir/dist")
+    inputs.dir("$projectDir/src")
+    outputs.dir("$projectDir/dist")
 
-  workingDir = projectDir
+    workingDir = projectDir
 
-  val buildCommand = "npm run build -- --prod"
-  if (isRunningOnWindows()) {
-    commandLine("cmd", "/C", buildCommand)
-  } else {
-    commandLine("sh", "-c", buildCommand)
-  }
+    val buildCommand = "npm run build -- --prod"
+    if (isRunningOnWindows()) {
+        commandLine("cmd", "/C", buildCommand)
+    } else {
+        commandLine("sh", "-c", buildCommand)
+    }
 }
 
 fun isRunningOnWindows(): Boolean {
-  val osName = System.getProperty("os.name")
-    ?: throw GradleException("Unable to detect current Operating System.")
-  return osName.contains("Windows", ignoreCase = true)
+    val osName = System.getProperty("os.name")
+        ?: throw GradleException("Unable to detect current Operating System.")
+    return osName.contains("Windows", ignoreCase = true)
 }

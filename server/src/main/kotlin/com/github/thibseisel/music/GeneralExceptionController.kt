@@ -3,7 +3,9 @@ package com.github.thibseisel.music
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.*
+import org.springframework.web.bind.annotation.ControllerAdvice
+import org.springframework.web.bind.annotation.ExceptionHandler
+import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.server.ResponseStatusException
 
 /**
@@ -22,7 +24,8 @@ internal class GeneralExceptionController {
     @ExceptionHandler
     fun handle(httpException: ResponseStatusException): ResponseEntity<ErrorPayload> {
         val errorStatus = httpException.status
-        val errorPayload = ErrorPayload(errorStatus, httpException.reason ?: errorStatus.reasonPhrase)
+        val errorPayload =
+            ErrorPayload(errorStatus, httpException.reason ?: errorStatus.reasonPhrase)
         return ResponseEntity.status(errorStatus).body(errorPayload)
     }
 

@@ -1,7 +1,6 @@
 package com.github.thibseisel.music.client
 
 import com.github.thibseisel.music.spotify.*
-import com.github.thibseisel.music.spotify.SpotifyAudioAnalysis
 import org.springframework.http.HttpStatus
 
 /**

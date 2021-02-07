@@ -96,7 +96,7 @@ class FullSpotifyAlbum @JsonCreator constructor(
 
     /**
      * A list of the genres used to classify the album.
-     * 
+     *
      * For example, `"Prog Rock"`, `"Post-Grunge"`.
      * If not yet classified, the list is empty.
      */

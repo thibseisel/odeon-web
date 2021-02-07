@@ -28,7 +28,10 @@ class SpotifyClientConfig {
         clientRegistrations: ReactiveClientRegistrationRepository,
         authorizedClients: ServerOAuth2AuthorizedClientRepository
     ): WebClient {
-        val oauth = ServerOAuth2AuthorizedClientExchangeFilterFunction(clientRegistrations, authorizedClients)
+        val oauth = ServerOAuth2AuthorizedClientExchangeFilterFunction(
+            clientRegistrations,
+            authorizedClients
+        )
         oauth.setDefaultOAuth2AuthorizedClient(true)
         oauth.setDefaultClientRegistrationId("spotify")
 

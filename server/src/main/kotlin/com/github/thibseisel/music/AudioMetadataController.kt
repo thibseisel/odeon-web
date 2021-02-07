@@ -45,13 +45,13 @@ internal class AudioMetadataController(
     @GetMapping("/artists/{id}")
     suspend fun getArtist(
         @PathVariable("id") id: String
-    ) : FullSpotifyArtist = service.findArtist(id)
+    ): FullSpotifyArtist = service.findArtist(id)
         ?: throw ResponseStatusException(HttpStatus.NOT_FOUND)
 
     @GetMapping("/albums/{id}")
     suspend fun getAlbum(
         @PathVariable("id") id: String
-    ) : FullSpotifyAlbum = service.findAlbum(id)
+    ): FullSpotifyAlbum = service.findAlbum(id)
         ?: throw ResponseStatusException(HttpStatus.NOT_FOUND)
 
     @GetMapping("/audio-features/{id}")

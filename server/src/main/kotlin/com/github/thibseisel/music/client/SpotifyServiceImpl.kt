@@ -42,28 +42,39 @@ internal class SpotifyServiceImpl(
     override suspend fun findAudioFeature(trackId: String): SpotifyAudioFeature? =
         findEntity("/audio-features/{id}", trackId, SpotifyAudioFeature::class.java)
 
-    override suspend fun getSeveralTracks(ids: List<String>): List<FullSpotifyTrack?> = coroutineScope {
-        ids.chunked(MAX_SEVERAL_TRACKS) { getSeveralTracksAsync(it) }
-            .awaitAll()
-            .flatten()
-    }
+    override suspend fun getSeveralTracks(ids: List<String>): List<FullSpotifyTrack?> =
+        coroutineScope {
+            ids.chunked(MAX_SEVERAL_TRACKS) { getSeveralTracksAsync(it) }
+                .awaitAll()
+                .flatten()
+        }
 
-    override suspend fun getSeveralAudioFeatures(trackIds: List<String>): List<SpotifyAudioFeature?> = coroutineScope {
-        trackIds.chunked(MAX_SEVERAL_FEATURES) { getSeveralAudioFeaturesAsync(it) }
-            .awaitAll()
-            .flatten()
-    }
+    override suspend fun getSeveralAudioFeatures(trackIds: List<String>): List<SpotifyAudioFeature?> =
+        coroutineScope {
+            trackIds.chunked(MAX_SEVERAL_FEATURES) { getSeveralAudioFeaturesAsync(it) }
+                .awaitAll()
+                .flatten()
+        }
 
     override suspend fun findAudioAnalysis(trackId: String): SpotifyAudioAnalysis? {
         return findEntity("/audio-analysis/{id}", trackId, SpotifyAudioAnalysis::class.java)
     }
 
-    override suspend fun searchPlaylists(name: String, offset: Int, limit: Int): List<SpotifyPlaylist> {
+    override suspend fun searchPlaylists(
+        name: String,
+        offset: Int,
+        limit: Int
+    ): List<SpotifyPlaylist> {
         return search("playlist", name, offset, limit).playlists?.items
             ?: error("\"playlists\" property of SpotifySearchResult should be present when searching playlists.")
     }
 
-    private suspend fun search(entityType: String, query: String, offset: Int, limit: Int): SpotifySearchResult {
+    private suspend fun search(
+        entityType: String,
+        query: String,
+        offset: Int,
+        limit: Int
+    ): SpotifySearchResult {
         try {
             return http.get()
                 .uri {
@@ -119,7 +130,11 @@ internal class SpotifyServiceImpl(
         }
     }
 
-    private suspend fun <T : Any> findEntity(endpoint: String, id: String, entityType: Class<T>): T? {
+    private suspend fun <T : Any> findEntity(
+        endpoint: String,
+        id: String,
+        entityType: Class<T>
+    ): T? {
         try {
             return http.get()
                 .uri(endpoint, id)
@@ -171,12 +186,14 @@ internal class SpotifyServiceImpl(
             "At most $MAX_SEVERAL_FEATURES audio features could be queried at once"
         }
 
-        val featureTypeToken = object : ParameterizedTypeReference<JsonWrapper<SpotifyAudioFeature>>() {}
+        val featureTypeToken =
+            object : ParameterizedTypeReference<JsonWrapper<SpotifyAudioFeature>>() {}
         findSeveralEntities("/audio-features", trackIds, featureTypeToken)
     }
 
     private fun handleSpotifyFailure(httpException: WebClientResponseException): Nothing {
-        val errorPayload = mapper.readValue(httpException.responseBodyAsString, SpotifyError::class.java)
+        val errorPayload =
+            mapper.readValue(httpException.responseBodyAsString, SpotifyError::class.java)
         throw SpotifyService.ApiException(httpException.statusCode, errorPayload.message)
     }
 
@@ -185,21 +202,23 @@ internal class SpotifyServiceImpl(
      * when receiving an HTTP 429 (Too Many Requests).
      */
     private class RetryAutomaticallyAfterTooManyRequests : ExchangeFilterFunction {
-        override fun filter(request: ClientRequest, next: ExchangeFunction): Mono<ClientResponse> = mono {
-            var response: ClientResponse? = null
+        override fun filter(request: ClientRequest, next: ExchangeFunction): Mono<ClientResponse> =
+            mono {
+                var response: ClientResponse? = null
 
-            do {
-                try {
-                    response = next.exchange(request).awaitSingle()
-                } catch (tooManyRequests: WebClientResponseException.TooManyRequests) {
-                    val retryAfterSeconds = tooManyRequests.headers.getFirst(HttpHeaders.RETRY_AFTER)
-                        ?.toLongOrNull()
-                        ?: throw tooManyRequests
+                do {
+                    try {
+                        response = next.exchange(request).awaitSingle()
+                    } catch (tooManyRequests: WebClientResponseException.TooManyRequests) {
+                        val retryAfterSeconds =
+                            tooManyRequests.headers.getFirst(HttpHeaders.RETRY_AFTER)
+                                ?.toLongOrNull()
+                                ?: throw tooManyRequests
 
-                    delay((retryAfterSeconds + 1L) * 1000L)
-                }
-            } while (response == null)
-            return@mono response
-        }
+                        delay((retryAfterSeconds + 1L) * 1000L)
+                    }
+                } while (response == null)
+                return@mono response
+            }
     }
 }

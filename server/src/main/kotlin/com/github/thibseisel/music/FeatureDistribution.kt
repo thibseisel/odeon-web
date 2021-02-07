@@ -64,4 +64,4 @@ internal class DistributionRange(
     @JsonProperty("endExclusive")
     val endExclusive: Float
 
-    )
+)
