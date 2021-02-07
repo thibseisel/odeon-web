@@ -15,7 +15,7 @@
  */
 allprojects {
     group = "com.github.thibseisel.music"
-    version = "0.1.0"
+    version = "0.1.1"
 
     repositories {
         mavenCentral()
