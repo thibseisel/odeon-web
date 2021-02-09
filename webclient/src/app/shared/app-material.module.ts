@@ -1,3 +1,4 @@
+import { LayoutModule } from "@angular/cdk/layout"
 import { NgModule } from "@angular/core"
 import { FlexLayoutModule } from "@angular/flex-layout"
 import { MatButtonModule } from "@angular/material/button"
@@ -23,6 +24,7 @@ const modules = [
   MatToolbarModule,
   MatRippleModule,
   MatButtonModule,
+  LayoutModule,
 ]
 
 /**
