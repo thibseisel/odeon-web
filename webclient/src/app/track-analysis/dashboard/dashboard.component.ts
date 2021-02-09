@@ -35,24 +35,20 @@ export class DashboardComponent {
     switchMap((id) => this.source.getTrackMetadata(id))
   )
 
-  constructor(private source: TrackMetadataService) { }
+  constructor(private readonly source: TrackMetadataService) { }
 
-  public submitQuery(userQuery: string) {
+  public submitQuery(userQuery: string): void {
     this.userQuery.next(userQuery)
   }
 
-  public loadTrackDetail(track: SearchResult) {
+  public loadTrackDetail(track: SearchResult): void {
     this.displayedTrackId.next(track.id)
   }
 
   private performTrackSearch(query: string): Observable<SearchState> {
-    function toSearchState(results: Array<SearchResult>): SearchState {
-      return { loading: false, results }
-    }
-
     const asyncResults = this.source.rawTrackSearch(query)
     return asyncResults.pipe(
-      map(toSearchState),
+      map((results): SearchState => ({ loading: false, results })),
       startWith({ loading: true }),
       debounceTime(300)
     )

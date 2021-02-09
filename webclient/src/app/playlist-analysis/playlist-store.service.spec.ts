@@ -1,8 +1,8 @@
-import { TestBed } from '@angular/core/testing'
+import { TestBed } from "@angular/core/testing"
 
-import { PlaylistStoreService } from './playlist-store.service'
+import { PlaylistStoreService } from "./playlist-store.service"
 
-describe('PlaylistStoreService', () => {
+describe("PlaylistStoreService", () => {
   let service: PlaylistStoreService
 
   beforeEach(() => {
@@ -10,7 +10,7 @@ describe('PlaylistStoreService', () => {
     service = TestBed.inject(PlaylistStoreService)
   })
 
-  it('should be created', () => {
+  it("should be created", () => {
     expect(service).toBeTruthy()
   })
 })

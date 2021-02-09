@@ -10,7 +10,7 @@ describe("TrackSearchComponent", () => {
     TestBed.configureTestingModule({
       declarations: [ TrackSearchComponent ]
     })
-    .compileComponents()
+      .compileComponents()
   }))
 
   beforeEach(() => {

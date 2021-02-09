@@ -36,7 +36,7 @@ export interface ImageSpec {
  * It contains key called `items` (whose value is an array of the requested objects)
  * along with other keys like previous, next and limit that can be useful in future calls.
  */
-export interface Paging<T extends object> {
+export interface Paging<T> {
   /** The requested data. */
   readonly items: Array<T>
   /** The maximum number of items in the response. */
@@ -78,32 +78,32 @@ export const enum Pitch {
  */
 export function keyDisplayName(key: Pitch | undefined): string {
   switch (key) {
-    case Pitch.C:
-      return "C"
-    case Pitch.D_FLAT:
-      return "Db"
-    case Pitch.D:
-      return "D"
-    case Pitch.E_FLAT:
-      return "Eb"
-    case Pitch.E:
-      return "E"
-    case Pitch.F:
-      return "F"
-    case Pitch.F_SHARP:
-      return "F#"
-    case Pitch.G:
-      return "G"
-    case Pitch.A_FLAT:
-      return "Ab"
-    case Pitch.A:
-      return "A"
-    case Pitch.B_FLAT:
-      return "Bb"
-    case Pitch.B:
-      return "B"
-    default:
-      return "?"
+  case Pitch.C:
+    return "C"
+  case Pitch.D_FLAT:
+    return "Db"
+  case Pitch.D:
+    return "D"
+  case Pitch.E_FLAT:
+    return "Eb"
+  case Pitch.E:
+    return "E"
+  case Pitch.F:
+    return "F"
+  case Pitch.F_SHARP:
+    return "F#"
+  case Pitch.G:
+    return "G"
+  case Pitch.A_FLAT:
+    return "Ab"
+  case Pitch.A:
+    return "A"
+  case Pitch.B_FLAT:
+    return "Bb"
+  case Pitch.B:
+    return "B"
+  default:
+    return "?"
   }
 }
 

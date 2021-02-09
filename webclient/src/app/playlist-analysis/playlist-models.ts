@@ -1,5 +1,5 @@
 import { ImageSpec } from "@shared/remote-models"
-import { FeatureDistribution } from './remote-playlist'
+import { FeatureDistribution } from "./remote-playlist"
 
 /**
  * Basic information on a playlist returned as a search result.

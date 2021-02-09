@@ -1,5 +1,5 @@
 import { HttpClient, HttpParams } from "@angular/common/http"
-import { Injectable } from '@angular/core'
+import { Injectable } from "@angular/core"
 import { environment } from "@config/environment"
 import { Playlist, PlaylistResult } from "@playlist/playlist-models"
 import { RemotePlaylist, FeatureDistribution } from "@playlist/remote-playlist"
@@ -8,13 +8,13 @@ import { Observable, of, forkJoin } from "rxjs"
 import { catchError, map } from "rxjs/operators"
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class PlaylistStoreService {
 
   private readonly baseUrl = environment.apiBase
 
-  constructor(private http: HttpClient) { }
+  constructor(private readonly http: HttpClient) { }
 
   /**
    * Lists playlists that match the provided `query`.
@@ -42,7 +42,9 @@ export class PlaylistStoreService {
 
   /**
    * Load details of a specific playlist, with its tracks and audio feature stats.
+   *
    * @param playlistId The unique identifier of the playlist to load from the remote-server.
+   * @returns An observable that emits the requested playlist.
    */
   public getPlaylistDetail(playlistId: string): Observable<Playlist> {
     const playlistUrl = `${this.baseUrl}/playlists/${playlistId}`

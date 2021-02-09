@@ -1,8 +1,8 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing"
 
-import { OdeonCartridgeComponent } from './odeon-cartridge.component'
+import { OdeonCartridgeComponent } from "./odeon-cartridge.component"
 
-describe('OdeonCartridgeComponent', () => {
+describe("OdeonCartridgeComponent", () => {
   let component: OdeonCartridgeComponent
   let fixture: ComponentFixture<OdeonCartridgeComponent>
 
@@ -10,7 +10,7 @@ describe('OdeonCartridgeComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ OdeonCartridgeComponent ]
     })
-    .compileComponents()
+      .compileComponents()
   }))
 
   beforeEach(() => {
@@ -19,7 +19,7 @@ describe('OdeonCartridgeComponent', () => {
     fixture.detectChanges()
   })
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy()
   })
 })

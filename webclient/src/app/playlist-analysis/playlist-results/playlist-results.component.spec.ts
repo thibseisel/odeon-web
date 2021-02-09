@@ -1,8 +1,8 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing"
 
-import { PlaylistResultsComponent } from './playlist-results.component'
+import { PlaylistResultsComponent } from "./playlist-results.component"
 
-describe('PlaylistResultsComponent', () => {
+describe("PlaylistResultsComponent", () => {
   let component: PlaylistResultsComponent
   let fixture: ComponentFixture<PlaylistResultsComponent>
 
@@ -10,7 +10,7 @@ describe('PlaylistResultsComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ PlaylistResultsComponent ]
     })
-    .compileComponents()
+      .compileComponents()
   }))
 
   beforeEach(() => {
@@ -19,7 +19,7 @@ describe('PlaylistResultsComponent', () => {
     fixture.detectChanges()
   })
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy()
   })
 })

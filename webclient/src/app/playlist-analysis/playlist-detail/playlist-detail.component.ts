@@ -1,23 +1,23 @@
-import { Component, TrackByFunction } from '@angular/core'
-import { ActivatedRoute, ParamMap } from '@angular/router'
+import { Component, TrackByFunction } from "@angular/core"
+import { ActivatedRoute, ParamMap } from "@angular/router"
 import { Playlist, PlaylistTrack } from "@playlist/playlist-models"
-import { PlaylistStoreService } from '@playlist/playlist-store.service'
+import { PlaylistStoreService } from "@playlist/playlist-store.service"
 import { keyDisplayName, MusicalMode, Pitch } from "@shared/remote-models"
-import { DataItem, SingleSeries, PieChartComponent } from "@swimlane/ngx-charts"
-import { Observable, throwError } from 'rxjs'
-import { map, shareReplay, switchMap } from 'rxjs/operators'
-import { FeatureDistribution, DistributionRange } from '@playlist/remote-playlist'
+import { DataItem, SingleSeries } from "@swimlane/ngx-charts"
+import { Observable, throwError } from "rxjs"
+import { map, shareReplay, switchMap } from "rxjs/operators"
+import { FeatureDistribution, DistributionRange } from "@playlist/remote-playlist"
 
 @Component({
-  selector: 'app-playlist-detail',
-  templateUrl: './playlist-detail.component.html',
+  selector: "app-playlist-detail",
+  templateUrl: "./playlist-detail.component.html",
   styleUrls: ["./playlist-detail.component.scss"]
 })
 export class PlaylistDetailComponent {
 
   constructor(
-    private service: PlaylistStoreService,
-    private currentRoute: ActivatedRoute
+    private readonly service: PlaylistStoreService,
+    private readonly currentRoute: ActivatedRoute
   ) { }
 
   public playlist$: Observable<Playlist> = this.currentRoute.paramMap.pipe(
@@ -38,7 +38,7 @@ export class PlaylistDetailComponent {
       const keyDistribution = playlist.stats.keys
 
       for (const key in keyDistribution) {
-        if (keyDistribution.hasOwnProperty(key)) {
+        if (Object.prototype.hasOwnProperty.call(keyDistribution, key)) {
           const pitch = Number(key) as Pitch
           chartData.push({
             name: keyDisplayName(pitch),
@@ -57,7 +57,7 @@ export class PlaylistDetailComponent {
       const modeDistribution = playlist.stats.modes
 
       for (const key in modeDistribution) {
-        if (modeDistribution.hasOwnProperty(key)) {
+        if (Object.prototype.hasOwnProperty.call(modeDistribution, key)) {
           const mode = Number(key) as MusicalMode
           chartData.push({
             name: (mode === MusicalMode.MAJOR) ? "Major" : "minor",

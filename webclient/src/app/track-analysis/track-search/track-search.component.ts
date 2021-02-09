@@ -29,7 +29,7 @@ export class TrackSearchComponent implements OnInit, OnDestroy {
 
   public readonly trackByTrackId: TrackByFunction<SearchResult> = (_, track) => track.id
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.textChanges
       .pipe(
         distinctUntilChanged(),
@@ -38,19 +38,19 @@ export class TrackSearchComponent implements OnInit, OnDestroy {
       .subscribe((query) => this.onquery.emit(query))
   }
 
-  public updateQuery(userQuery: string) {
+  public updateQuery(userQuery: string): void {
     this.textChanges.next(userQuery)
   }
 
-  public submitQuery(userQuery: string) {
+  public submitQuery(userQuery: string): void {
     this.onquery.emit(userQuery)
   }
 
-  public select(track: SearchResult) {
+  public select(track: SearchResult): void {
     this.ontrackselected.emit(track)
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.textChanges.complete()
   }
 }

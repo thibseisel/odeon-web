@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core"
 import { BrowserModule } from "@angular/platform-browser"
-import { RouterModule, Routes } from '@angular/router'
+import { RouterModule, Routes } from "@angular/router"
 import { PlaylistAnalysisModule } from "@playlist/playlist-analysis.module"
 import { AppMaterialModule } from "@shared/app-material.module"
 import { TrackAnalysisModule } from "@track/track-analysis.module"
@@ -27,7 +27,7 @@ const appRoutes: Routes = [
     AppMaterialModule,
     TrackAnalysisModule,
     PlaylistAnalysisModule,
-    RouterModule.forRoot(appRoutes, { relativeLinkResolution: 'legacy' }),
+    RouterModule.forRoot(appRoutes, { relativeLinkResolution: "legacy" }),
   ],
   providers: [],
   bootstrap: [AppComponent]

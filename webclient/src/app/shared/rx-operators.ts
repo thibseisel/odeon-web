@@ -15,14 +15,14 @@ import { concatMap, retryWhen } from "rxjs/operators"
  */
 export function retryAfter<T>(
   retryDelay: number,
-  predicate: (error: any, attempts: number) => boolean
+  predicate: (error: unknown, attempts: number) => boolean
 ): MonoTypeOperatorFunction<T> {
   if (retryDelay <= 0) {
     throw new Error("Retry delay should be strictly positive.")
   }
 
-  return retryWhen((errors: Observable<any>) => errors.pipe(
-    concatMap((error: any, index: number) => {
+  return retryWhen((errors: Observable<unknown>) => errors.pipe(
+    concatMap((error: unknown, index: number) => {
       if (predicate(error, index)) {
         return timer((2 ** index) * retryDelay)
       } else {

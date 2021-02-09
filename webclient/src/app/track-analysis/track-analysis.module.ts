@@ -1,8 +1,8 @@
-import { CommonModule } from '@angular/common'
+import { CommonModule } from "@angular/common"
 import { HttpClientModule } from "@angular/common/http"
-import { NgModule } from '@angular/core'
-import { RouterModule, Routes } from '@angular/router'
-import { AppSharedModule } from '@shared/app-shared.module'
+import { NgModule } from "@angular/core"
+import { RouterModule, Routes } from "@angular/router"
+import { AppSharedModule } from "@shared/app-shared.module"
 import { DashboardComponent } from "@track/dashboard/dashboard.component"
 import { OdeonCartridgeComponent } from "@track/odeon-cartridge/odeon-cartridge.component"
 import { TrackDetailComponent } from "@track/track-detail/track-detail.component"

@@ -2,7 +2,7 @@ import { NgModule } from "@angular/core"
 import { FlexLayoutModule } from "@angular/flex-layout"
 import { MatButtonModule } from "@angular/material/button"
 import { MatCardModule } from "@angular/material/card"
-import { MatRippleModule } from '@angular/material/core'
+import { MatRippleModule } from "@angular/material/core"
 import { MatDividerModule } from "@angular/material/divider"
 import { MatFormFieldModule } from "@angular/material/form-field"
 import { MatInputModule } from "@angular/material/input"
@@ -34,7 +34,7 @@ const modules = [
  * all declarations required for Angular Material to work are listed in this only file.
  */
 @NgModule({
-    imports: modules,
-    exports: modules
+  imports: modules,
+  exports: modules
 })
 export class AppMaterialModule { }

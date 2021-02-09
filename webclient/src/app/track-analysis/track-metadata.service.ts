@@ -17,7 +17,7 @@ export class TrackMetadataService {
    */
   private readonly baseUrl = environment.apiBase
 
-  constructor(private http: HttpClient) { }
+  constructor(private readonly http: HttpClient) { }
 
   /**
    * Lists tracks that match the provided query.
