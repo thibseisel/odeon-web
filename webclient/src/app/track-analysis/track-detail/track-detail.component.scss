@@ -35,11 +35,11 @@
     margin: 4px;
 
     &:first-child {
-      margin-left: 0px;
+      margin-left: 0;
     }
 
     &:last-child {
-      margin-right: 0px;
+      margin-right: 0;
     }
   }
 
@@ -81,13 +81,13 @@
   }
 }
 
-.ambiant-feature {
+.ambient-feature {
   display: inline-flex;
   flex-flow: row nowrap;
   align-items: center;
   min-height: 36px;
 
-  .ambiant-feature__label {
+  .ambient-feature__label {
     width: 128px;
     margin: 0 16px 0 0;
     white-space: nowrap;
@@ -96,7 +96,7 @@
     flex-grow: 1;
   }
 
-  .ambiant-feature__value {
+  .ambient-feature__value {
     width: 64px;
     margin-left: 16px;
     text-align: end;

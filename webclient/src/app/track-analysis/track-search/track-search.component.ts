@@ -20,12 +20,12 @@ export class TrackSearchComponent implements OnInit, OnDestroy {
   /**
    * Emits the user's search query whenever it has changed.
    */
-  @Output() readonly onquery = new EventEmitter<string>()
+  @Output() readonly query = new EventEmitter<string>()
 
   /**
    * Notify when a result has been selected in the result list.
    */
-  @Output() readonly ontrackselected = new EventEmitter<SearchResult>()
+  @Output() readonly selectTrack = new EventEmitter<SearchResult>()
 
   public readonly trackByTrackId: TrackByFunction<SearchResult> = (_, track) => track.id
 
@@ -35,7 +35,7 @@ export class TrackSearchComponent implements OnInit, OnDestroy {
         distinctUntilChanged(),
         debounceTime(500)
       )
-      .subscribe((query) => this.onquery.emit(query))
+      .subscribe((query) => this.query.emit(query))
   }
 
   public updateQuery(userQuery: string): void {
@@ -43,11 +43,11 @@ export class TrackSearchComponent implements OnInit, OnDestroy {
   }
 
   public submitQuery(userQuery: string): void {
-    this.onquery.emit(userQuery)
+    this.query.emit(userQuery)
   }
 
   public select(track: SearchResult): void {
-    this.ontrackselected.emit(track)
+    this.selectTrack.emit(track)
   }
 
   ngOnDestroy(): void {
