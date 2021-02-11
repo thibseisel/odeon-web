@@ -1,3 +1,16 @@
-# Different indentation for JS/TS files
-[*.{js, ts}]
+# VSCode EditorConfig plugin does not seem to understand grouping file extensions.
+# Overrides indent in Angular files.
+[*.js]
+indent_size = 2
+
+[*.ts]
+indent_size = 2
+
+[*.json]
+indent_size = 2
+
+[*.scss]
+indent_size = 2
+
+[*.html]
 indent_size = 2
