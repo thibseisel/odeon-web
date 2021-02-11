@@ -1,0 +1,22 @@
+<mat-card class="search-bar">
+  <div class="search-bar__inner">
+    <mat-icon class="search-bar__icon" aria-hidden="true">search</mat-icon>
+    <input
+      [formControl]="_searchInput"
+      id="spotify-search"
+      type="search"
+      class="search-bar__input"
+      placeholder="Search in Spotify"
+      aria-label="Search in Spotify"
+    />
+    <button
+      mat-icon-button
+      class="search-bar__icon"
+      aria-label="Clear search"
+      (click)="clearQuery()"
+    >
+      <mat-icon>clear</mat-icon>
+    </button>
+  </div>
+  <mat-progress-bar *ngIf="searchPending" mode="indeterminate"></mat-progress-bar>
+</mat-card>

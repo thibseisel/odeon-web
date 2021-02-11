@@ -1,10 +1,9 @@
-.dashboard-content {
-  padding: 16px;
+@use '~@material/layout-grid/variables';
+
+.search-bar-grid {
+  max-width: map-get(variables.$breakpoints, desktop);
 }
 
-.search-card {
-  position: sticky;
-  top: 0;
-  max-height: calc(100vh - 32px);
+.edge-to-edge {
   padding: 0;
 }

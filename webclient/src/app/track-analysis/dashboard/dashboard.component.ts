@@ -1,18 +1,18 @@
-import { Component } from "@angular/core"
-import { Observable, Subject } from "rxjs"
-import { map, scan, startWith, switchMap, debounceTime } from "rxjs/operators"
-import { TrackMetadataService } from "@track/track-metadata.service"
-import { SearchResult, Track } from "@track/track-models"
-import { SearchState } from "@track/track-search/track-search.component"
+import { Component, OnInit, TrackByFunction } from "@angular/core"
+import { SearchResult } from "@track/track-models"
+import { asyncScheduler, Subject } from "rxjs"
+import { debounceTime, distinctUntilChanged, throttleTime } from "rxjs/operators"
+import { DashboardStore } from "./dashboard.store"
 
 @Component({
   selector: "app-dashboard",
   templateUrl: "./dashboard.component.html",
-  styleUrls: ["./dashboard.component.scss"]
+  styleUrls: ["./dashboard.component.scss"],
+  providers: [DashboardStore]
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit {
+
   private readonly userQuery = new Subject<string>()
-  private readonly displayedTrackId = new Subject<string>()
 
   /**
    * The state of the search component over time.
@@ -20,37 +20,29 @@ export class DashboardComponent {
    *
    * Whenever the search query has changed an asynchronous search is performed,
    * displaying a progress indicator until results are available.
-   * If querying the results takes less than 300 milliseconds then the progress indicator is not shown.
+   * If querying the results takes less than 500 milliseconds then the progress indicator is not shown.
    */
-  public readonly results$: Observable<SearchState> = this.userQuery.pipe(
-    switchMap((query) => this.performTrackSearch(query)),
-    startWith({ loading: false, results: [] }),
-    scan((current: SearchState, next: SearchState) => ({
-      loading: next.loading,
-      results: next.results ?? current.results
-    } as SearchState))
+  readonly state$ = this.store.state$.pipe(
+    throttleTime(500, asyncScheduler, { leading: true, trailing: true })
   )
 
-  public readonly track$: Observable<Track | undefined> = this.displayedTrackId.pipe(
-    switchMap((id) => this.source.getTrackMetadata(id))
-  )
+  readonly trackId: TrackByFunction<SearchResult> = (_, result) => result.id
 
-  constructor(private readonly source: TrackMetadataService) { }
+  constructor(private readonly store: DashboardStore) { }
 
-  public submitQuery(userQuery: string): void {
+  ngOnInit(): void {
+    const restrictedQuery$ = this.userQuery.pipe(
+      distinctUntilChanged(),
+      debounceTime(200)
+    )
+    this.store.search(restrictedQuery$)
+  }
+
+  submitQuery(userQuery: string): void {
     this.userQuery.next(userQuery)
   }
 
-  public loadTrackDetail(track: SearchResult): void {
-    this.displayedTrackId.next(track.id)
-  }
-
-  private performTrackSearch(query: string): Observable<SearchState> {
-    const asyncResults = this.source.rawTrackSearch(query)
-    return asyncResults.pipe(
-      map((results): SearchState => ({ loading: false, results })),
-      startWith({ loading: true }),
-      debounceTime(300)
-    )
+  loadTrackDetail(track: SearchResult): void {
+    // TODO
   }
 }
