@@ -10,10 +10,8 @@ import { MatInputModule } from "@angular/material/input"
 import { MatListModule } from "@angular/material/list"
 import { MatProgressBarModule } from "@angular/material/progress-bar"
 import { MatToolbarModule } from "@angular/material/toolbar"
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations"
 
 const modules = [
-  BrowserAnimationsModule,
   LayoutModule,
   MatFormFieldModule,
   MatInputModule,

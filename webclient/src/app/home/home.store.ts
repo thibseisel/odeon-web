@@ -5,7 +5,7 @@ import { SearchResult } from "@track/track-models"
 import { EMPTY, Observable } from "rxjs"
 import { catchError, switchMap, tap } from "rxjs/operators"
 
-export interface DashboardState {
+export interface HomeState {
   /**
    * Whether a search is currently pending.
    */
@@ -20,7 +20,7 @@ export interface DashboardState {
 }
 
 @Injectable()
-export class DashboardStore extends ComponentStore<DashboardState> {
+export class HomeStore extends ComponentStore<HomeState> {
 
   constructor(
     private readonly metadataSource: TrackMetadataService

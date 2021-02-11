@@ -2,15 +2,15 @@ import { Component, OnInit, TrackByFunction } from "@angular/core"
 import { SearchResult } from "@track/track-models"
 import { asyncScheduler, Subject } from "rxjs"
 import { debounceTime, distinctUntilChanged, throttleTime } from "rxjs/operators"
-import { DashboardStore } from "./dashboard.store"
+import { HomeStore } from "./home.store"
 
 @Component({
-  selector: "app-dashboard",
-  templateUrl: "./dashboard.component.html",
-  styleUrls: ["./dashboard.component.scss"],
-  providers: [DashboardStore]
+  selector: "app-home",
+  templateUrl: "./home.component.html",
+  styleUrls: ["./home.component.scss"],
+  providers: [HomeStore]
 })
-export class DashboardComponent implements OnInit {
+export class HomeComponent implements OnInit {
 
   private readonly userQuery = new Subject<string>()
 
@@ -28,7 +28,7 @@ export class DashboardComponent implements OnInit {
 
   readonly trackId: TrackByFunction<SearchResult> = (_, result) => result.id
 
-  constructor(private readonly store: DashboardStore) { }
+  constructor(private readonly store: HomeStore) { }
 
   ngOnInit(): void {
     const restrictedQuery$ = this.userQuery.pipe(

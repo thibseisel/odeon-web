@@ -10,7 +10,7 @@ import { BarChartModule, PieChartModule } from "@swimlane/ngx-charts"
 
 const playlistRoutes: Routes = [
   {
-    path: "playlists",
+    path: "",
     component: PlaylistHomeComponent,
     children: [
       {
@@ -26,7 +26,11 @@ const playlistRoutes: Routes = [
 ]
 
 @NgModule({
-  declarations: [PlaylistHomeComponent, PlaylistResultsComponent, PlaylistDetailComponent],
+  declarations: [
+    PlaylistHomeComponent,
+    PlaylistResultsComponent,
+    PlaylistDetailComponent,
+  ],
   imports: [
     CommonModule,
     RouterModule.forChild(playlistRoutes),
