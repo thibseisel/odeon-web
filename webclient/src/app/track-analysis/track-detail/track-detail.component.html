@@ -1,35 +1,33 @@
 <ng-container *ngIf="track$ | async as track">
   <div class="mdc-layout-grid">
     <div class="mdc-layout-grid__inner">
-      <mat-card class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
-        <div class="info-header">
-          <img
-            class="info-header__artwork"
-            [srcset]="track.artworks | imgset"
-            [alt]="track.album"
-          />
-          <div class="info-header__metadata">
-            <h1 class="info-header__title">{{ track.name }}</h1>
-            <p class="info-header__subtitle mat-body-2">{{ track.artist }}</p>
-            <div class="info-header__cartridge-list">
-              <app-odeon-cartridge class="cartridge-list__item" color="primary-dark">
-                {{ track.features.time_signature }} beats
-              </app-odeon-cartridge>
-              <app-odeon-cartridge class="cartridge-list__item" color="primary">
-                {{ track.features.tempo | number: "1.0-0" }} BPM
-              </app-odeon-cartridge>
-              <app-odeon-cartridge class="cartridge-list__item" color="secondary">
-                {{ track.features.loudness | number: "1.1-2" }} dB
-              </app-odeon-cartridge>
-            </div>
-          </div>
-          <p class="info-header__tone mat-body-2">
-            {{ track.features.key | tone: track.features.mode }}
-          </p>
-        </div>
-
-        <mat-divider></mat-divider>
-
+      <mat-card class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8 about-card">
+        <mat-card-title>{{ track.name }}</mat-card-title>
+        <mat-card-subtitle class="mat-body-2">{{ track.artist }}</mat-card-subtitle>
+      </mat-card>
+      <mat-card class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2-phone">
+        <h4>Tone</h4>
+        <h1 class="text-primary">{{ track.features.key | tone: track.features.mode }}</h1>
+      </mat-card>
+      <mat-card class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2-phone">
+        <h4>Tempo</h4>
+        <h1 class="text-primary">{{ track.features.tempo | number: "1.0-0" }} BPM</h1>
+      </mat-card>
+      <div class="mdc-layout-grid__cell emotional-features">
+        <mat-card class="emotional-features__card">
+          <h4>Energy</h4>
+          <h1>{{ track.features.energy | percent }}</h1>
+        </mat-card>
+        <mat-card class="emotional-features__card">
+          <h4>Danceability</h4>
+          <h1>{{ track.features.danceability | percent }}</h1>
+        </mat-card>
+        <mat-card class="emotional-features__card">
+          <h4>Valence</h4>
+          <h1>{{ track.features.valence | percent }}</h1>
+        </mat-card>
+      </div>
+      <mat-card class="mdc-layout-grid__cell">
         <div class="feature-list">
           <div class="feature">
             <span class="feature__label mat-subheading-1">Energy</span>

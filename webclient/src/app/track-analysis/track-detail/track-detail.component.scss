@@ -1,3 +1,26 @@
+.about-card {
+}
+
+.emotional-features {
+  display: flex;
+  flex-flow: row;
+  align-items: flex-start;
+
+  .emotional-features__card {
+    flex: 1 0 0;
+    margin-left: 8px;
+    margin-right: 8px;
+
+    &:first-child {
+      margin-left: 0;
+    }
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+
 .info-header {
   display: flex;
   flex-flow: row nowrap;
