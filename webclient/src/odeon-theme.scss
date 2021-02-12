@@ -1,6 +1,7 @@
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
 @import "~@angular/material/theming";
+@import "./app/color-mixins.scss";
 @import "app/track-analysis/odeon-cartridge/odeon-cartridge.theme.scss";
 // Plus imports for other components in your app.
 
@@ -37,6 +38,7 @@ $odeon-dark-theme: mat-dark-theme((
 ));
 // Include theme styles for core and each component used in your app.
 @include angular-material-theme($odeon-web-theme);
+@include text-colors($odeon-web-theme);
 @include odeon-cartridge-theme($odeon-web-theme);
 
 /**
@@ -45,5 +47,6 @@ $odeon-dark-theme: mat-dark-theme((
  */
 .dark-theme-overlay {
   @include angular-material-color($odeon-dark-theme);
+  @include text-colors($odeon-dark-theme);
   @include odeon-cartridge-theme($odeon-dark-theme);
 }

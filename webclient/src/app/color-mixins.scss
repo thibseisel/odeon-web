@@ -1,0 +1,10 @@
+@import '@angular/material/theming';
+
+@mixin text-colors($theme) {
+  $config: mat-get-color-config($theme);
+  $primary-palette: map-get($config, primary);
+
+  .text-primary {
+    color: mat-color($primary-palette);
+  }
+}
