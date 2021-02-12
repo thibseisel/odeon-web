@@ -1,17 +1,26 @@
-import { Component, Input } from "@angular/core"
+import { ChangeDetectionStrategy, Component, Input } from "@angular/core"
 
 type CartridgeColorTheme = "default" | "primary" | "primary-dark" | "secondary"
 
 @Component({
   selector: "app-odeon-cartridge",
   templateUrl: "./odeon-cartridge.component.html",
-  styleUrls: ["./odeon-cartridge.component.scss"]
+  styleUrls: ["./odeon-cartridge.component.scss"],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class OdeonCartridgeComponent {
-  @Input() color: CartridgeColorTheme = "default"
+  @Input()
+  get color(): CartridgeColorTheme { return this._color }
+  set color(color: CartridgeColorTheme) {
+    this._color = color
+    this._backgroundClass = this.backgroundClassForTheme(color)
+  }
 
-  public get backgroundClass(): string {
-    switch (this.color) {
+  private _color: CartridgeColorTheme = "default"
+  _backgroundClass = ""
+
+  private backgroundClassForTheme(theme: CartridgeColorTheme): string {
+    switch (theme) {
     case "primary":
       return "cartridge--primary"
     case "secondary":

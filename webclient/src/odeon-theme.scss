@@ -37,7 +37,6 @@ $odeon-dark-theme: mat-dark-theme((
 ));
 // Include theme styles for core and each component used in your app.
 @include angular-material-theme($odeon-web-theme);
-
 @include odeon-cartridge-theme($odeon-web-theme);
 
 /**
@@ -46,4 +45,5 @@ $odeon-dark-theme: mat-dark-theme((
  */
 .dark-theme-overlay {
   @include angular-material-color($odeon-dark-theme);
+  @include odeon-cartridge-theme($odeon-dark-theme);
 }
