@@ -76,7 +76,7 @@ export const enum Pitch {
  * @returns The name of the provided key as a string.
  * If the passed key is `undefined` `"?"` is returned.
  */
-export function keyDisplayName(key: Pitch | undefined): string {
+export function keyDisplayName(key: Pitch | null | undefined): string {
   switch (key) {
   case Pitch.C:
     return "C"

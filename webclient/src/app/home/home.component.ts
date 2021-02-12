@@ -1,4 +1,5 @@
 import { Component, OnInit, TrackByFunction } from "@angular/core"
+import { Router } from "@angular/router"
 import { SearchResult } from "@track/track-models"
 import { asyncScheduler, Subject } from "rxjs"
 import { debounceTime, distinctUntilChanged, throttleTime } from "rxjs/operators"
@@ -28,7 +29,10 @@ export class HomeComponent implements OnInit {
 
   readonly trackId: TrackByFunction<SearchResult> = (_, result) => result.id
 
-  constructor(private readonly store: HomeStore) { }
+  constructor(
+    private readonly store: HomeStore,
+    private readonly router: Router,
+  ) { }
 
   ngOnInit(): void {
     const restrictedQuery$ = this.userQuery.pipe(
@@ -43,6 +47,6 @@ export class HomeComponent implements OnInit {
   }
 
   loadTrackDetail(track: SearchResult): void {
-    // TODO
+    void this.router.navigate(["tracks", track.id])
   }
 }

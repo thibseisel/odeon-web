@@ -2,9 +2,13 @@ import { CommonModule } from "@angular/common"
 import { NgModule } from "@angular/core"
 import { AppMaterialModule } from "./app-material.module"
 import { ImgSetPipe } from "./imgset.pipe"
+import { TonePipe } from "./tone.pipe"
 
 @NgModule({
-  declarations: [ImgSetPipe],
+  declarations: [
+    ImgSetPipe,
+    TonePipe,
+  ],
   imports: [
     CommonModule,
     AppMaterialModule,
@@ -12,6 +16,7 @@ import { ImgSetPipe } from "./imgset.pipe"
   exports: [
     AppMaterialModule,
     ImgSetPipe,
+    TonePipe,
   ]
 })
 export class AppSharedModule { }
