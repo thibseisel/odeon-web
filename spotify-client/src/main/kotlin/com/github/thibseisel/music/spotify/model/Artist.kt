@@ -80,6 +80,7 @@ class Artist(
     /**
      * Known external URLs for this artist.
      */
+    @SerialName("external_urls")
     val externalUrls: ExternalUrls
 
 ) : SpotifyEntity() {

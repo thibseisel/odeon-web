@@ -23,7 +23,7 @@ import kotlinx.serialization.Serializable
  * Metadata of an album from the Spotify API.
  */
 @Serializable
-class SimplifiedAlbum(
+data class SimplifiedAlbum(
     /**
      * The unique identifier of this album on Spotify servers.
      */
@@ -58,6 +58,7 @@ class SimplifiedAlbum(
     /**
      * Known external URLs for this album.
      */
+    @SerialName("external_urls")
     val externalUrls: ExternalUrls
 
 ) : SpotifyEntity() {
@@ -66,7 +67,7 @@ class SimplifiedAlbum(
 }
 
 @Serializable
-class Album(
+data class Album(
     /**
      * The unique identifier of this album on Spotify servers.
      */
@@ -118,6 +119,7 @@ class Album(
     /**
      * Known external URLs for this album.
      */
+    @SerialName("external_urls")
     val externalUrls: ExternalUrls
 
 ) : SpotifyEntity() {

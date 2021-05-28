@@ -23,7 +23,7 @@ import kotlinx.serialization.Serializable
  * Metadata of a track from the Spotify API.
  */
 @Serializable
-open class SimplifiedTrack(
+data class SimplifiedTrack(
     /**
      * The unique identifier of this track on Spotify servers.
      */
@@ -70,6 +70,7 @@ open class SimplifiedTrack(
     /**
      * Known external URLs for this track.
      */
+    @SerialName("external_urls")
     val externalUrls: ExternalUrls
 
 ) : SpotifyEntity() {
@@ -77,7 +78,7 @@ open class SimplifiedTrack(
 }
 
 @Serializable
-class Track(
+data class Track(
     /**
      * The unique identifier of this track on Spotify servers.
      */
@@ -146,6 +147,7 @@ class Track(
     /**
      * Known external URLs for this track.
      */
+    @SerialName("external_urls")
     val externalUrls: ExternalUrls
 
 ) : SpotifyEntity() {
