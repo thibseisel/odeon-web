@@ -16,6 +16,7 @@
 
 package com.github.thibseisel.ktor.client.oauth
 
+import com.github.thibseisel.ktor.client.oauth.OAuth2Client.ClientCredentialsConfig
 import io.ktor.client.HttpClient
 import io.ktor.client.call.receive
 import io.ktor.client.features.HttpClientFeature
@@ -128,7 +129,10 @@ public class OAuth2Client private constructor(
             }
         }
 
-        val authClient = HttpClient(scope.engine) { expectSuccess = false }
+        val authClient = HttpClient(scope.engine) {
+            expectSuccess = false
+            install(AutoRetry)
+        }
         val newToken = authClient.use { authenticate(it) }
         if (newToken != null) {
             this.token = TokenInfo(
